@@ -1,7 +1,7 @@
 {
   "name": "SpeelosToolbox_PTBR",
   "version_number": "1.1.6",
-  "website_url": "https://github.com/gabrielbarroso72/SpeelosToolbox_PTBR.git",
+  "website_url": "https://github.com/gabrielbarroso72/SpeelosToolbox-PTBR",
   "description": "Tradução para o Português do Brasil por Fox72. Apenas para o cliente (remover de servidores dedicados). Menu de trapaças clicável no jogo para Valheim (F6): itens, criaturas, mundo, personagem e exibições. Fork do SkToolbox do Skrip.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2350"
