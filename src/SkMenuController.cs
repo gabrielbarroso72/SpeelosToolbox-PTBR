@@ -106,13 +106,13 @@ namespace SkToolbox
                 switch (scope)
                 {
                     case SkScope.Client:
-                        return "<color=#8FB8D8>(client)</color>  <color=#9FB6CC>changes nothing for anyone else</color>";
+                        return "<color=#8FB8D8>(cliente)</color>  <color=#9FB6CC>não altera nada para mais ninguém</color>";
                     case SkScope.Server:
-                        return "<color=#E5A959>(server)</color>  <color=#9FB6CC>changes the world for everyone on it</color>";
+                        return "<color=#E5A959>(servidor)</color>  <color=#9FB6CC>altera o mundo para todos nele</color>";
                     case SkScope.Admin:
-                        return "<color=#E5A959>(server)</color>  <color=#9FB6CC>sent to the server, which needs you to be admin</color>";
+                        return "<color=#E5A959>(servidor)</color>  <color=#9FB6CC>enviado ao servidor; requer permissão de admin</color>";
                     case SkScope.HostOnly:
-                        return "<color=#E08585>(host only)</color>  <color=#9FB6CC>does nothing unless you are running the world</color>";
+                        return "<color=#E08585>(apenas anfitrião)</color>  <color=#9FB6CC>não faz nada a menos que você seja o anfitrião do mundo</color>";
                     default:
                         return "";
                 }
@@ -163,7 +163,7 @@ namespace SkToolbox
 
         public class SkFormAction
         {
-            public string Label = "Accept";
+            public string Label = "Aplicar";
             public Action<SkForm> Run;
         }
 
@@ -208,7 +208,7 @@ namespace SkToolbox
         {
             public string Title = "";
             public string Label = "";
-            public string Accept = "Save";
+            public string Accept = "Salvar";
             public string Value = "";
             public Action<string> OnAccept;
         }
@@ -253,7 +253,7 @@ namespace SkToolbox
         /// <summary>A checkbox drawn with the sliders, e.g. "Spawn tamed".</summary>
         public class SkMenuToggle
         {
-            public string Label = "Toggle";
+            public string Label = "Alternar";
             public Func<bool> Get;
             public Action<bool> Set;
         }
@@ -261,7 +261,7 @@ namespace SkToolbox
         /// <summary>A numeric slider drawn under the search box of a menu level, e.g. the Give Item quantity.</summary>
         public class SkMenuSlider
         {
-            public string Label = "Value";
+            public string Label = "Valor";
             public int Min = 1;
             public int Max = 100;
             public Func<int> Get;
@@ -335,7 +335,7 @@ namespace SkToolbox
         void Start()
         {
             SkMenuControllerStatus = Status.Loading;
-            SkUtilities.Logz(new string[] { "CONTROLLER", "NOTIFY" }, new string[] { "LOADING...", "WAITING FOR TOOLBOX." });
+            SkUtilities.Logz(new string[] { "CONTROLLER", "NOTIFY" }, new string[] { "CARREGANDO...", "AGUARDANDO CAIXA DE FERRAMENTAS." });
             SkModuleController = gameObject.AddComponent<SkModuleController>(); // Load our module controller
             ApplyToggleKey();
         }
@@ -437,7 +437,7 @@ namespace SkToolbox
                     if (SkModuleController.SkMainStatus == Status.Ready)
                     {
                         initialCheck = false;
-                        SkUtilities.Logz(new string[] { "CONTROLLER", "NOTIFY" }, new string[] { "READY. Press " + toggleKey + " to open the menu." });
+                        SkUtilities.Logz(new string[] { "CONTROLLER", "NOTIFY" }, new string[] { "PRONTO. Pressione " + toggleKey + " para abrir o menu." });
                     }
                 }
             }
@@ -553,7 +553,7 @@ namespace SkToolbox
             catch (Exception ex)
             {
                 SkUtilities.Logz(new string[] { "CONTROLLER", "ERROR" }, new string[] { "Error running menu item '" + item.ItemText + "': " + ex.Message }, LogType.Error);
-                SkCommandProcessor.Notify("That failed: " + ex.Message);
+                SkCommandProcessor.Notify("Falhou: " + ex.Message);
             }
             finally
             {
@@ -606,7 +606,7 @@ namespace SkToolbox
         {
             if (frames.Count <= 1) return;
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("< Back", styleBack, GUILayout.Width(80f)))
+            if (GUILayout.Button("< Voltar", styleBack, GUILayout.Width(80f)))
             {
                 pendingAction = PopFrame;
             }
@@ -629,7 +629,7 @@ namespace SkToolbox
             if (!CurrentFrameIsFilterable()) return;
             MenuFrame frame = frames[frames.Count - 1];
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Search", styleSmall, GUILayout.Width(52f));
+            GUILayout.Label("Buscar", styleSmall, GUILayout.Width(52f));
             frame.Filter = GUILayout.TextField(frame.Filter ?? "", styleFilter);
             if (GUILayout.Button("x", styleBack, GUILayout.Width(28f))) frame.Filter = "";
             GUILayout.EndHorizontal();
@@ -672,8 +672,8 @@ namespace SkToolbox
                     // carrying checkbox art for its on and off states, and this menu's flat styles have none, so
                     // the two states looked identical. This also matches the [ON]/[OFF] used elsewhere.
                     GUILayout.BeginHorizontal();
-                    string label = tg.Label + "   " + (was ? "<color=#7CFC00>[ON]</color>" : "<color=#FF8080>[OFF]</color>");
-                    bool clicked = GUILayout.Button(new GUIContent(label, tg.Label), styleBack, GUILayout.Width(190f));
+                    string label = tg.Label + "   " + (was ? "<color=#7CFC00>[LIGADO]</color>" : "<color=#FF8080>[DESLIGADO]</color>");
+                    bool clicked = GUILayout.Button(new GUIContent(label, tg.Label), styleBack, GUILayout.Width(250f));
                     if (Event.current.type == EventType.Repaint && was)
                     {
                         DrawOutline(GUILayoutUtility.GetLastRect(), OnColor, 2f);
@@ -691,7 +691,7 @@ namespace SkToolbox
             if (frames.Count == 0)
             {
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Pick a tab above.", styleTip);
+                GUILayout.Label("Escolha uma aba acima.", styleTip);
                 GUILayout.FlexibleSpace();
                 return;
             }
@@ -729,7 +729,7 @@ namespace SkToolbox
                     }
                 }
             }
-            if (shown == 0) GUILayout.Label("No matches.", styleTip);
+            if (shown == 0) GUILayout.Label("Nenhum resultado.", styleTip);
             GUILayout.EndScrollView();
         }
 
@@ -786,7 +786,7 @@ namespace SkToolbox
 
             if (shown.Count == 0)
             {
-                GUILayout.Label("No matches.", styleTip);
+                GUILayout.Label("Nenhum resultado.", styleTip);
                 GUILayout.EndScrollView();
                 return;
             }
@@ -856,7 +856,7 @@ namespace SkToolbox
             foreach (SkGridItem cell in shown)
             {
                 if (cell == null) continue;
-                string section = string.IsNullOrEmpty(cell.Section) ? "Other" : cell.Section;
+                string section = string.IsNullOrEmpty(cell.Section) ? "Outros" : cell.Section;
                 if (!groups.ContainsKey(section))
                 {
                     groups[section] = new List<SkGridItem>();
@@ -985,7 +985,7 @@ namespace SkToolbox
             GUILayout.BeginHorizontal();
             bool accept = GUILayout.Button(prompt.Accept, styleItem, GUILayout.Height(27f));
             GUILayout.Space(8f);
-            bool cancel = GUILayout.Button("Cancel", styleBack, GUILayout.Height(27f));
+            bool cancel = GUILayout.Button("Cancelar", styleBack, GUILayout.Height(27f));
             GUILayout.EndHorizontal();
             GUILayout.EndArea();
 
@@ -1010,7 +1010,7 @@ namespace SkToolbox
                         catch (Exception ex)
                         {
                             SkUtilities.Logz(new string[] { "PROMPT", "ERROR" }, new string[] { ex.Message }, LogType.Error);
-                            SkCommandProcessor.Notify("That failed: " + ex.Message);
+                            SkCommandProcessor.Notify("Falhou: " + ex.Message);
                         }
                     }
                 };
@@ -1093,7 +1093,7 @@ namespace SkToolbox
 
                     case SkFieldKind.Toggle:
                     {
-                        string label = (field.BoolValue ? "<color=#7CFC00>[ON]</color>" : "<color=#FF8080>[OFF]</color>");
+                        string label = (field.BoolValue ? "<color=#7CFC00>[LIGADO]</color>" : "<color=#FF8080>[DESLIGADO]</color>");
                         GUILayout.BeginHorizontal();
                         if (GUILayout.Button(label, styleBack, GUILayout.Width(90f))) field.BoolValue = !field.BoolValue;
                         GUILayout.FlexibleSpace();
@@ -1131,7 +1131,7 @@ namespace SkToolbox
                         catch (Exception ex)
                         {
                             SkUtilities.Logz(new string[] { "FORM", "ERROR" }, new string[] { ex.Message }, LogType.Error);
-                            SkCommandProcessor.Notify("That failed: " + ex.Message);
+                            SkCommandProcessor.Notify("Falhou: " + ex.Message);
                         }
                         CloseForm();
                     };
@@ -1141,7 +1141,7 @@ namespace SkToolbox
             GUI.enabled = formWasEnabled; // Cancel is never gated
             GUILayout.FlexibleSpace();
             // A form with no actions is a readout, so the only way out reads as Close rather than Cancel.
-            if (GUILayout.Button(form.Actions.Count == 0 ? "Close" : "Cancel", styleBack, GUILayout.Width(110f), GUILayout.Height(28f)))
+            if (GUILayout.Button(form.Actions.Count == 0 ? "Fechar" : "Cancelar", styleBack, GUILayout.Width(110f), GUILayout.Height(28f)))
             {
                 pendingAction = CloseForm;
             }
@@ -1157,7 +1157,7 @@ namespace SkToolbox
             if (field.Options.Count > FilterThreshold)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Search", styleSmall, GUILayout.Width(52f));
+                GUILayout.Label("Buscar", styleSmall, GUILayout.Width(52f));
                 field.Filter = GUILayout.TextField(field.Filter ?? "", styleFilter);
                 if (GUILayout.Button("x", styleBack, GUILayout.Width(28f))) field.Filter = "";
                 GUILayout.EndHorizontal();
@@ -1184,7 +1184,7 @@ namespace SkToolbox
                     field.Selected = i;
                 }
             }
-            if (shown == 0) GUILayout.Label("Nothing matches that.", styleTip);
+            if (shown == 0) GUILayout.Label("Nenhum resultado encontrado.", styleTip);
             GUILayout.EndScrollView();
         }
 
@@ -1199,7 +1199,7 @@ namespace SkToolbox
             if (field.Options.Count > FilterThreshold)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Search", styleSmall, GUILayout.Width(52f));
+                GUILayout.Label("Buscar", styleSmall, GUILayout.Width(52f));
                 field.Filter = GUILayout.TextField(field.Filter ?? "", styleFilter);
                 if (GUILayout.Button("x", styleBack, GUILayout.Width(28f))) field.Filter = "";
                 GUILayout.EndHorizontal();
@@ -1221,13 +1221,13 @@ namespace SkToolbox
                 }
                 shown++;
                 bool on = field.Checked[i];
-                string mark = on ? "<color=#7CFC00>[ON]</color>  " : "<color=#7A8796>[OFF]</color>  ";
+                string mark = on ? "<color=#7CFC00>[LIGADO]</color>  " : "<color=#7A8796>[DESLIGADO]</color>  ";
                 if (GUILayout.Button(mark + label, on ? styleTabOn : styleItem))
                 {
                     field.Checked[i] = !on;
                 }
             }
-            if (shown == 0) GUILayout.Label("Nothing matches that.", styleTip);
+            if (shown == 0) GUILayout.Label("Nenhum resultado encontrado.", styleTip);
             GUILayout.EndScrollView();
         }
 
@@ -1244,7 +1244,7 @@ namespace SkToolbox
         {
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUILayout.Label(toggleKey + " opens / closes, Escape closes", styleSmall, GUILayout.Height(18f));
+            GUILayout.Label(toggleKey + " abre / fecha, Esc fecha", styleSmall, GUILayout.Height(18f));
             GUILayout.EndHorizontal();
         }
 
@@ -1301,13 +1301,13 @@ namespace SkToolbox
         /// refreshTime / subWidth are accepted for source compatibility and ignored.
         /// </summary>
         /// <summary>Pushes a level that renders as an icon grid instead of a list.</summary>
-        public void RequestGridMenu(List<SkGridItem> grid, SkMenuSlider slider = null, string title = "Items", bool showFilter = true)
+        public void RequestGridMenu(List<SkGridItem> grid, SkMenuSlider slider = null, string title = "Itens", bool showFilter = true)
         {
             RequestGridMenu(grid, slider == null ? null : new List<SkMenuSlider> { slider }, title, showFilter);
         }
 
         /// <summary>Grid level with any number of sliders and toggles stacked above it.</summary>
-        public void RequestGridMenu(List<SkGridItem> grid, List<SkMenuSlider> sliders, string title = "Items", bool showFilter = true, List<SkMenuToggle> toggles = null)
+        public void RequestGridMenu(List<SkGridItem> grid, List<SkMenuSlider> sliders, string title = "Itens", bool showFilter = true, List<SkMenuToggle> toggles = null)
         {
             if (grid == null || grid.Count == 0) return;
             frames.Add(new MenuFrame { Title = title, Items = null, Grid = grid, Sliders = sliders, ShowFilter = showFilter, Toggles = toggles });
@@ -1339,7 +1339,7 @@ namespace SkToolbox
             }
             pendingSlider = null;
             menuOpen = true;
-            if (logResponse) SkUtilities.Logz(new string[] { "CONTROLLER", "RESP" }, new string[] { "Submenu created." });
+            if (logResponse) SkUtilities.Logz(new string[] { "CONTROLLER", "RESP" }, new string[] { "Submenu criado." });
         }
 
         public void RequestSubMenu(SkMenu subMenuOptions, float refreshTime = 0, int subWidth = 0)
@@ -1367,14 +1367,16 @@ namespace SkToolbox
 
         private static string ToggleFree(string s)
         {
-            return CleanText(s).Replace("[ON]", "").Replace("[OFF]", "").Trim();
+            return CleanText(s).Replace("[LIGADO]", "").Replace("[DESLIGADO]", "").Replace("[ON]", "").Replace("[OFF]", "").Trim();
         }
 
         private static string Display(string s)
         {
             string t = CleanText(s);
-            if (t.EndsWith("[ON]")) return t.Substring(0, t.Length - 4) + "<color=#7CFC00>[ON]</color>";
-            if (t.EndsWith("[OFF]")) return t.Substring(0, t.Length - 5) + "<color=#FF8080>[OFF]</color>";
+            if (t.EndsWith("[LIGADO]")) return t.Substring(0, t.Length - 8) + "<color=#7CFC00>[LIGADO]</color>";
+            if (t.EndsWith("[DESLIGADO]")) return t.Substring(0, t.Length - 11) + "<color=#FF8080>[DESLIGADO]</color>";
+            if (t.EndsWith("[ON]")) return t.Substring(0, t.Length - 4) + "<color=#7CFC00>[LIGADO]</color>";
+            if (t.EndsWith("[OFF]")) return t.Substring(0, t.Length - 5) + "<color=#FF8080>[DESLIGADO]</color>";
             return t;
         }
 

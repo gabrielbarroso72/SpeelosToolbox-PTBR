@@ -17,9 +17,9 @@ namespace SkToolbox.SkModules
         //GameObject gObject;
         //bool gPickPut = false;
 
-        Rect rectClock =    new Rect(05, 005, 125, 20);
-        Rect rectCoords =   new Rect(05, 027, 125, 20);
-        Rect rectEnemy =    new Rect(05, 280, 425, 50);
+        Rect rectClock = new Rect(05, 005, 125, 20);
+        Rect rectCoords = new Rect(05, 027, 125, 20);
+        Rect rectEnemy = new Rect(05, 280, 425, 50);
 
         List<Character> nearbyCharacters = new List<Character>();
 
@@ -64,68 +64,68 @@ namespace SkToolbox.SkModules
         {
             List<SkMenuController.SkGridItem> grid = new List<SkMenuController.SkGridItem>();
 
-            AddFoodCell(grid, "Best Health Food", FoodKind.Health, null);
-            AddFoodCell(grid, "Best Stamina Food", FoodKind.Stamina, null);
-            AddFoodCell(grid, "Best Eitr Food", FoodKind.Eitr, null);
-            AddFoodCell(grid, "Balanced Food", FoodKind.Balanced, SkIcons.First("Tankard", "BarleyWine"));
-            Action(grid, "Character", "Heal Self", "Restore health and stamina", SkIcons.First("MeadHealthMedium", "MeadHealthMinor", "Honey"), Heal);
-            Action(grid, "Character", "Repair All", "Repair every item you carry", SkIcons.First("Hammer"), RepairAll);
-            Action(grid, "Character", "Skills", "Set or reset a skill level", SkIcons.First("Wishbone", "Coins"), ShowSkillForm);
-            Action(grid, "Character", "Puke", "Empty your stomach, clearing all three food slots", SkIcons.First("Entrails", "RawMeat"),
-                   () => SkRun.CmdNotify("puke", "Stomach emptied."));
-            Action(grid, "Character", "Inventory Size", "Change how many rows your inventory has", SkIcons.First("ArmorLeatherChest", "ArmorRagsChest"),
+            AddFoodCell(grid, "Melhor Comida de Vida", FoodKind.Health, null);
+            AddFoodCell(grid, "Melhor Comida de Stamina", FoodKind.Stamina, null);
+            AddFoodCell(grid, "Melhor Comida de Eitr", FoodKind.Eitr, null);
+            AddFoodCell(grid, "Comida Equilibrada", FoodKind.Balanced, SkIcons.First("Tankard", "BarleyWine"));
+            Action(grid, "Personagem", "Curar a Si Mesmo", "Restaura vida e stamina", SkIcons.First("MeadHealthMedium", "MeadHealthMinor", "Honey"), Heal);
+            Action(grid, "Personagem", "Reparar Tudo", "Repara todos os itens que você carrega", SkIcons.First("Hammer"), RepairAll);
+            Action(grid, "Personagem", "Habilidades", "Define ou redefine o nível de uma habilidade", SkIcons.First("Wishbone", "Coins"), ShowSkillForm);
+            Action(grid, "Personagem", "Vomitar", "Esvazia o estômago, limpando os três espaços de comida", SkIcons.First("Entrails", "RawMeat"),
+                   () => SkRun.CmdNotify("puke", "Estômago esvaziado."));
+            Action(grid, "Personagem", "Tamanho do Inventário", "Altera quantas linhas o seu inventário possui", SkIcons.First("ArmorLeatherChest", "ArmorRagsChest"),
                    ShowInventoryForm);
-            Action(grid, "Character", "Stats", "Show what the game has recorded for this character", SkIcons.First("Ruby", "Coins"),
-                   () => SkRun.Show("Player Stats", "stats", "No stats to show yet."));
-            Action(grid, "Character", "Tweaks", "Carry weight, pickup range, jump, speeds and map reveal radius",
+            Action(grid, "Personagem", "Estatísticas", "Mostra o que o jogo registrou para este personagem", SkIcons.First("Ruby", "Coins"),
+                   () => SkRun.Show("Estatísticas do Jogador", "stats", "Nenhuma estatística para mostrar ainda."));
+            Action(grid, "Personagem", "Ajustes", "Limite de peso, raio de coleta, pulo, velocidades e raio de revelação do mapa",
                    SkIcons.First("Bronze", "Copper"), ShowTuningForm);
-            Action(grid, "Character", "Clear Inventory", "Throw away everything you are carrying",
+            Action(grid, "Personagem", "Limpar Inventário", "Descarta tudo o que você está carregando",
                    SkIcons.First("Flint", "Stone"), ShowClearInventoryForm);
 
-            Toggle(grid, "Cheats", "Godmode", "Take no damage", SkIcons.First("HelmetOdin", "CapeOdin"),
+            Toggle(grid, "Trapaças", "Modo Deus", "Não recebe nenhum dano", SkIcons.First("HelmetOdin", "CapeOdin"),
                    ToggleGodmode, () => Player.m_localPlayer != null && Player.m_localPlayer.InGodMode());
-            Toggle(grid, "Cheats", "Flying", "Free flight", SkIcons.First("Feathers"),
+            Toggle(grid, "Trapaças", "Voo", "Voo livre", SkIcons.First("Feathers"),
                    ToggleFlying, () => Player.m_localPlayer != null && Player.m_localPlayer.IsDebugFlying());
-            Toggle(grid, "Cheats", "Infinite Stamina", "Nothing costs stamina: running, swimming, sneaking, fishing, attacking, jumping, dodging", SkIcons.First("MeadStaminaMedium", "MeadStaminaMinor"),
+            Toggle(grid, "Trapaças", "Stamina Infinita", "Nada consome stamina: correr, nadar, furtividade, pescar, atacar, pular, esquivar", SkIcons.First("MeadStaminaMedium", "MeadStaminaMinor"),
                    ToggleInfStam, () => Player.m_localPlayer != null && SkCommandProcessor.infStamina);
-            Toggle(grid, "Cheats", "Infinite Eitr", "Spells and staves cost nothing and eitr refills at once. Needs eitr food - without it your maximum is zero", SkIcons.First("MeadEitrMinor", "Eitr", "Sap"),
+            Toggle(grid, "Trapaças", "Eitr Infinito", "Magias e cajados não custam nada e o eitr recarrega instantaneamente. Requer comida de eitr", SkIcons.First("MeadEitrMinor", "Eitr", "Sap"),
                    ToggleInfEitr, () => Player.m_localPlayer != null && SkCommandProcessor.infEitr);
-            Toggle(grid, "Cheats", "No Carry Limit", "Carry as much as you like, with no slowdown and no encumbered warning",
+            Toggle(grid, "Trapaças", "Sem Limite de Carga", "Carregue o quanto quiser, sem lentidão e sem aviso de sobrecarga",
                    SkIcons.First("ArmorBronzeChest", "ArmorLeatherChest"),
                    ToggleNoCarryLimit, () => Player.m_localPlayer != null && SkCommandProcessor.noCarryLimit);
-            Toggle(grid, "Cheats", "No Cost Building", "Unlock all pieces and build for free", SkIcons.First("Wood", "Stone"),
+            Toggle(grid, "Trapaças", "Construção Sem Custo", "Desbloqueia todas as peças e constrói de graça", SkIcons.First("Wood", "Stone"),
                    ToggleNoCost, () => Player.m_localPlayer != null && Player.m_localPlayer.NoCostCheat());
-            Toggle(grid, "Cheats", "Build Anywhere", "Remove build restrictions", SkIcons.First("Cultivator", "Hoe"),
+            Toggle(grid, "Trapaças", "Construir em Qualquer Lugar", "Remove restrições de construção", SkIcons.First("Cultivator", "Hoe"),
                    ToggleAnywhere, () => SkCommandPatcher.bBuildAnywhere);
-            Toggle(grid, "Cheats", "No Support Needed", "Pieces float without support. Turning this off lets unsupported builds collapse",
+            Toggle(grid, "Trapaças", "Sem Necessidade de Suporte", "Estruturas flutuam sem suporte. Desativar faz construções sem suporte desmoronarem",
                    SkIcons.First("FineWood", "RoundLog", "Wood"), ToggleNoSupport, () => SkCommandPatcher.BFreeSupport);
-            Toggle(grid, "Cheats", "Ghost", "Creatures cannot see you", SkIcons.First("CapeLinen", "CapeDeerHide", "Feathers"),
+            Toggle(grid, "Trapaças", "Fantasma", "Criaturas não conseguem te ver", SkIcons.First("CapeLinen", "CapeDeerHide", "Feathers"),
                    ToggleGhost, () => Player.m_localPlayer != null && Player.m_localPlayer.InGhostMode());
-            Action(grid, "Cheats", "Reach", "Interact with and place things from far away",
+            Action(grid, "Trapaças", "Alcance", "Interaja e coloque coisas de longe",
                    SkIcons.First("Chain", "LeatherScraps"), ShowReachForm);
-            Action(grid, "Cheats", "Tame", "Tame all nearby creatures", SkIcons.First("Carrot", "Raspberry"), Tame, SkScope.Server);
-            Action(grid, "Cheats", "Immunities", "Choose what is allowed to hurt you, rather than god mode's all or nothing",
+            Action(grid, "Trapaças", "Domesticar", "Domestica todas as criaturas próximas", SkIcons.First("Carrot", "Raspberry"), Tame, SkScope.Server);
+            Action(grid, "Trapaças", "Imunidades", "Escolha o que pode te causar dano, em vez do tudo ou nada do Modo Deus",
                    SkIcons.First("ShieldIronTower", "ShieldWood", "HelmetOdin"), ShowImmunityForm);
-            Action(grid, "Cheats", "Guardian Power", "Pick a boss power by its trophy, use it, or clear its cooldown",
+            Action(grid, "Trapaças", "Poder do Guardião", "Escolha o poder de um chefe pelo troféu, use-o ou limpe o tempo de recarga",
                    SkIcons.First("TrophyEikthyr", "Wishbone"), ShowPowerGrid);
-            Action(grid, "Cheats", "Status Effects", "Apply a status effect, or clear the ones you have",
+            Action(grid, "Trapaças", "Efeitos de Status", "Aplica um efeito de status ou limpa os existentes",
                    SkIcons.First("MeadFrostResist", "MeadPoisonResist", "MeadHealthMinor"), ShowStatusForm);
 
-            Toggle(grid, "Info", "Teleport to Mouse", "Press tilde (~) to teleport where you look", SkIcons.First("SurtlingCore", "Thunderstone"),
+            Toggle(grid, "Informações", "Teleporte para o Mouse", "Pressione til (~) para se teleportar para onde está olhando", SkIcons.First("SurtlingCore", "Thunderstone"),
                    ToggleTeleport, () => bTeleport);
-            Action(grid, "Info", "Portals", "List every portal tag", SkIcons.First("SurtlingCore"),
+            Action(grid, "Informações", "Portais", "Lista todas as tags de portais", SkIcons.First("SurtlingCore"),
                    () => SkCommandProcessor.ProcessCommand("/portals", SkCommandProcessor.LogTo.Chat));
-            Toggle(grid, "Info", "Display Coordinates", "Show coords in the top left corner", SkIcons.First("FishingRodFloat", "Thunderstone", "Ruby"),
+            Toggle(grid, "Informações", "Exibir Coordenadas", "Mostra as coordenadas no canto superior esquerdo", SkIcons.First("FishingRodFloat", "Thunderstone", "Ruby"),
                    ToggleCoords, () => SkCommandProcessor.bCoords);
-            Toggle(grid, "Info", "Detect Nearby Enemies", "Range: 20m", SkIcons.First("Wishbone"),
+            Toggle(grid, "Informações", "Detectar Inimigos Próximos", "Alcance: 20m", SkIcons.First("Wishbone"),
                    ToggleESPEnemies, () => SkCommandProcessor.bDetectEnemies);
-            Action(grid, "Info", "Position", "Print your coordinates, zone and distance from the centre", SkIcons.First("Amber", "Coins"),
-                   () => SkRun.Show("Position", "pos", "No position yet."));
-            Action(grid, "Info", "Find Tombstone", "Pin your nearby graves on the map", SkIcons.First("AmberPearl", "Ruby"),
+            Action(grid, "Informações", "Posição", "Exibe suas coordenadas, zona e distância do centro", SkIcons.First("Amber", "Coins"),
+                   () => SkRun.Show("Posição", "pos", "Sem posição ainda."));
+            Action(grid, "Informações", "Encontrar Lápide", "Marca suas lápides próximas no mapa", SkIcons.First("AmberPearl", "Ruby"),
                    () => SkCommandProcessor.ProcessCommand("/findtomb", SkCommandProcessor.LogTo.Chat));
-            Action(grid, "Info", "Bookmarks", "Save where you are standing, and teleport back to it later",
+            Action(grid, "Informações", "Marcadores", "Salva onde você está e permite teleportar de volta mais tarde",
                    SkIcons.First("SurtlingCore", "Thunderstone"), ShowBookmarkForm);
-            Action(grid, "Info", "Loadouts", "Snapshot your whole inventory, and restore it later",
+            Action(grid, "Informações", "Conjuntos de Equipamentos", "Salva um modelo de todo o seu inventário e restaura mais tarde",
                    SkIcons.First("ArmorBronzeChest", "ArmorLeatherChest", "ArmorRagsChest"), ShowLoadoutForm);
 
             return grid;
@@ -174,18 +174,18 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
 
             SkMenuController.SkFormField picker = new SkMenuController.SkFormField
             {
                 Id = "skill",
-                Label = "Skill",
+                Label = "Habilidade",
                 Kind = SkMenuController.SkFieldKind.Choice,
             };
             picker.Options.Add("All");
-            picker.OptionLabels.Add("All skills");
+            picker.OptionLabels.Add("Todas as habilidades");
 
             Skills skills = player.GetSkills();
             foreach (Skills.SkillType type in Enum.GetValues(typeof(Skills.SkillType)))
@@ -194,14 +194,14 @@ namespace SkToolbox.SkModules
                 float level = 0f;
                 try { level = skills != null ? skills.GetSkillLevel(type) : 0f; } catch (Exception) { }
                 picker.Options.Add(type.ToString());
-                picker.OptionLabels.Add(type.ToString() + "     <color=#9FB6CC>level " + Mathf.RoundToInt(level) + "</color>");
+                picker.OptionLabels.Add(type.ToString() + "     <color=#9FB6CC>nível " + Mathf.RoundToInt(level) + "</color>");
             }
             picker.Selected = 1; // first real skill rather than "All"
 
             SkMenuController.SkFormField amount = new SkMenuController.SkFormField
             {
                 Id = "level",
-                Label = "Level to set",
+                Label = "Nível a definir",
                 Kind = SkMenuController.SkFieldKind.IntSlider,
                 Min = 0,
                 Max = 100,
@@ -210,20 +210,20 @@ namespace SkToolbox.SkModules
 
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Skills",
-                Note = "Pick a skill, choose a level, then Set. Reset puts it back to zero.",
+                Title = "Habilidades",
+                Note = "Escolha uma habilidade, selecione um nível e clique em Definir. Redefinir volta para zero.",
             };
             form.Fields.Add(picker);
             form.Fields.Add(amount);
 
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Set level",
+                Label = "Definir nível",
                 Run = (SkMenuController.SkForm f) => SetSkill(f.Field("skill").SelectedOption, f.Field("level").IntValue),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Reset to zero",
+                Label = "Redefinir para zero",
                 Run = (SkMenuController.SkForm f) => ResetSkill(f.Field("skill").SelectedOption),
             });
 
@@ -244,16 +244,16 @@ namespace SkToolbox.SkModules
                     if (type == Skills.SkillType.None || type == Skills.SkillType.All) continue;
                     skills.CheatRaiseSkill(type.ToString(), target - skills.GetSkillLevel(type), false);
                 }
-                SkCommandProcessor.Notify("All skills set to " + target);
+                SkCommandProcessor.Notify("Todas as habilidades definidas para " + target);
                 return;
             }
 
             Skills.SkillType chosen;
             try { chosen = (Skills.SkillType)Enum.Parse(typeof(Skills.SkillType), name, true); }
-            catch (Exception) { SkCommandProcessor.Notify("Unknown skill: " + name); return; }
+            catch (Exception) { SkCommandProcessor.Notify("Habilidade desconhecida: " + name); return; }
 
             skills.CheatRaiseSkill(name, target - skills.GetSkillLevel(chosen), false);
-            SkCommandProcessor.Notify(name + " set to " + target);
+            SkCommandProcessor.Notify(name + " definida para " + target);
         }
 
         private static void ResetSkill(string name)
@@ -263,7 +263,7 @@ namespace SkToolbox.SkModules
             Skills skills = player.GetSkills();
             if (skills == null) return;
             skills.CheatResetSkill(name == "All" ? "all" : name);
-            SkCommandProcessor.Notify((name == "All" ? "All skills" : name) + " reset to zero");
+            SkCommandProcessor.Notify((name == "All" ? "Todas as habilidades" : name) + " redefinidas para zero");
         }
 
         // ------------------------------------------------------------------ immunities
@@ -281,7 +281,7 @@ namespace SkToolbox.SkModules
             SkMenuController.SkFormField list = new SkMenuController.SkFormField
             {
                 Id = "types",
-                Label = "Cannot hurt me",
+                Label = "Não pode me ferir",
                 Kind = SkMenuController.SkFieldKind.Checklist,
                 Height = 210,
             };
@@ -297,15 +297,14 @@ namespace SkToolbox.SkModules
 
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Immunities",
-                Note = "Anything switched on here cannot damage you. Creature and player attacks are deliberately not "
-                     + "listed - turning those off is what god mode is for.",
+                Title = "Imunidades",
+                Note = "Qualquer item ativado aqui não te causará dano. Ataques de criaturas e jogadores não estão listados de propósito - para isso use o Modo Deus.",
             };
             form.Fields.Add(list);
 
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Apply",
+                Label = "Aplicar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     SkMenuController.SkFormField picked = f.Field("types");
@@ -319,12 +318,12 @@ namespace SkToolbox.SkModules
                         SkCommandProcessor.immuneTo.Add(value);
                         on++;
                     }
-                    SkCommandProcessor.Notify(on > 0 ? "Immune to " + on + " kinds of damage." : "No immunities set.");
+                    SkCommandProcessor.Notify(on > 0 ? "Imune a " + on + " tipos de dano." : "Nenhuma imunidade definida.");
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "All on",
+                Label = "Ativar todas",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     SkMenuController.SkFormField picked = f.Field("types");
@@ -334,16 +333,16 @@ namespace SkToolbox.SkModules
                         int value;
                         if (int.TryParse(picked.Options[i], out value)) SkCommandProcessor.immuneTo.Add(value);
                     }
-                    SkCommandProcessor.Notify("Nothing but combat can hurt you now.");
+                    SkCommandProcessor.Notify("Nada além de combate pode te ferir agora.");
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "All off",
+                Label = "Desativar todas",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     SkCommandProcessor.immuneTo.Clear();
-                    SkCommandProcessor.Notify("Immunities cleared.");
+                    SkCommandProcessor.Notify("Imunidades limpas.");
                 },
             });
             SkMC.ShowForm(form);
@@ -402,7 +401,7 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
 
@@ -420,7 +419,7 @@ namespace SkToolbox.SkModules
             }
             if (powers.Count == 0)
             {
-                SkCommandProcessor.Notify("Power list is not available yet. Load into a world first.");
+                SkCommandProcessor.Notify("A lista de poderes não está disponível ainda. Entre em um mundo primeiro.");
                 return;
             }
 
@@ -447,7 +446,7 @@ namespace SkToolbox.SkModules
                 {
                     Name = gp,
                     Display = label,
-                    Tip = label + "  -  set this as your power. The ring marks the one you have",
+                    Tip = label + "  -  define este como seu poder. O anel marca o poder atual",
                     Icon = icon,
                     Section = "Powers",
                     Scope = SkScope.Client,
@@ -461,12 +460,12 @@ namespace SkToolbox.SkModules
                 });
             }
 
-            Action(grid, "Actions", "Use now", "Fire the power you have set. Like praying at the stone, it also buffs any player within 10m",
+            Action(grid, "Actions", "Usar agora", "Ativa o poder definido. Como rezar na pedra, também concede o bônus a jogadores a até 10m",
                    SkIcons.First("Wishbone", "TrophyEikthyr"), UsePower, SkScope.Server);
-            Action(grid, "Actions", "Clear cooldown", "Make the power ready again without waiting",
+            Action(grid, "Actions", "Limpar tempo de recarga", "Deixa o poder pronto novamente sem esperar",
                    SkIcons.First("MeadStaminaMedium", "Coins"), ClearPowerCooldown);
 
-            SkMC.RequestGridMenu(grid, (List<SkMenuController.SkMenuSlider>)null, "Guardian Power", showFilter: false);
+            SkMC.RequestGridMenu(grid, (List<SkMenuController.SkMenuSlider>)null, "Poder do Guardião", showFilter: false);
         }
 
         /// <summary>The power's display name, falling back to the prefab name before localization is up.</summary>
@@ -492,12 +491,12 @@ namespace SkToolbox.SkModules
             Player lp = Player.m_localPlayer;
             if (lp == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
             lp.SetGuardianPower(gp);
             lp.m_guardianPowerCooldown = 0f; // SetGuardianPower leaves it alone, so a swap would inherit the old wait
-            SkCommandProcessor.Notify("Power set: " + label);
+            SkCommandProcessor.Notify("Poder definido: " + label);
         }
 
         /// <summary>
@@ -514,19 +513,19 @@ namespace SkToolbox.SkModules
             Player lp = Player.m_localPlayer;
             if (lp == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
             if (string.IsNullOrEmpty(lp.GetGuardianPowerName()))
             {
-                SkCommandProcessor.Notify("No power set - pick a trophy first.");
+                SkCommandProcessor.Notify("Nenhum poder definido - escolha um troféu primeiro.");
                 return;
             }
 
             lp.m_guardianPowerCooldown = 0f; // both calls below refuse outright while one is running
             lp.StartGuardianPower();         // the animation and the sound
             lp.ActivateGuardianPower();      // the buff itself
-            SkCommandProcessor.Notify("Power used.");
+            SkCommandProcessor.Notify("Poder utilizado.");
         }
 
         private static void ClearPowerCooldown()
@@ -534,18 +533,18 @@ namespace SkToolbox.SkModules
             Player lp = Player.m_localPlayer;
             if (lp == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
             if (lp.m_guardianPowerCooldown <= 0f)
             {
                 SkCommandProcessor.Notify(string.IsNullOrEmpty(lp.GetGuardianPowerName())
-                    ? "No power set yet."
-                    : "Power is already ready.");
+                    ? "Nenhum poder definido ainda."
+                    : "O poder já está pronto.");
                 return;
             }
             lp.m_guardianPowerCooldown = 0f;
-            SkCommandProcessor.Notify("Power is ready again.");
+            SkCommandProcessor.Notify("O poder está pronto novamente.");
         }
 
         // ------------------------------------------------------------------ bookmarks and loadouts
@@ -556,7 +555,7 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
 
@@ -571,38 +570,41 @@ namespace SkToolbox.SkModules
 
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Bookmarks",
+                Title = "Marcadores",
                 Note = saved.Count > 0
-                    ? "Places you saved in this world."
-                    : "Nothing saved in this world yet. Press Save here to name your current spot.",
+                    ? "Locais salvos neste mundo."
+                    : "Nenhum local salvo neste mundo ainda. Clique em Salvar Aqui para nomear o local atual.",
             };
             if (names.Count > 0)
             {
                 form.Fields.Add(new SkMenuController.SkFormField
                 {
-                    Id = "mark", Label = "Saved places", Kind = SkMenuController.SkFieldKind.Choice, Height = 180,
+                    Id = "mark",
+                    Label = "Locais salvos",
+                    Kind = SkMenuController.SkFieldKind.Choice,
+                    Height = 180,
                 });
                 form.Field("mark").Options.AddRange(names);
                 form.Field("mark").OptionLabels.AddRange(labels);
             }
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Save here",
+                Label = "Salvar aqui",
                 // Asks for the name in a prompt over this form, rather than a text box sitting in it that has
                 // nothing to do with the list above it.
                 Run = (SkMenuController.SkForm f) => SkMC.ShowPrompt(new SkMenuController.SkPrompt
                 {
-                    Title = "Save bookmark",
-                    Label = "A name for where you are standing.",
-                    Accept = "Save",
+                    Title = "Salvar marcador",
+                    Label = "Um nome para onde você está pisando.",
+                    Accept = "Salvar",
                     OnAccept = (string name) =>
                     {
                         Player lp = Player.m_localPlayer;
-                        if (lp == null) { SkCommandProcessor.Notify("No player yet."); return; }
-                        if (name.Length == 0) { SkCommandProcessor.Notify("Give the bookmark a name first."); return; }
+                        if (lp == null) { SkCommandProcessor.Notify("Jogador ainda não carregado."); return; }
+                        if (name.Length == 0) { SkCommandProcessor.Notify("Dê um nome ao marcador primeiro."); return; }
                         SkCommandProcessor.Notify(SkBookmarks.Save(name, lp.transform.position)
-                            ? "Saved bookmark: " + name
-                            : "Load into a world first.");
+                            ? "Marcador salvo: " + name
+                            : "Entre em um mundo primeiro.");
                         ShowBookmarkForm(); // rebuild so the new one is in the list
                     },
                 }),
@@ -611,7 +613,7 @@ namespace SkToolbox.SkModules
             {
                 form.Actions.Add(new SkMenuController.SkFormAction
                 {
-                    Label = "Teleport",
+                    Label = "Teleportar",
                     Run = (SkMenuController.SkForm f) =>
                     {
                         Player lp = Player.m_localPlayer;
@@ -621,20 +623,20 @@ namespace SkToolbox.SkModules
                         {
                             if (!string.Equals(mark.Name, pick, StringComparison.OrdinalIgnoreCase)) continue;
                             lp.TeleportTo(mark.Pos, lp.transform.rotation, true);
-                            SkCommandProcessor.Notify("Teleporting to " + mark.Name);
+                            SkCommandProcessor.Notify("Teleportando para " + mark.Name);
                             return;
                         }
                     },
                 });
                 form.Actions.Add(new SkMenuController.SkFormAction
                 {
-                    Label = "Delete",
+                    Label = "Excluir",
                     Run = (SkMenuController.SkForm f) =>
                     {
                         string pick = f.Field("mark").SelectedOption;
                         if (string.IsNullOrEmpty(pick)) return;
                         SkBookmarks.Delete(pick);
-                        SkCommandProcessor.Notify("Deleted bookmark: " + pick);
+                        SkCommandProcessor.Notify("Marcador excluído: " + pick);
                     },
                 });
             }
@@ -647,57 +649,59 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
 
             List<string> names = SkLoadouts.Names();
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Loadouts",
-                Note = "Saves your whole inventory, not just what you are wearing: every stack, its size, quality, "
-                     + "durability and crafter, and which pieces were equipped. Loading one puts all of it back.",
+                Title = "Conjuntos de Equipamentos",
+                Note = "Salva todo o seu inventário: cada pilha, tamanho, qualidade, durabilidade e criador, além das peças equipadas. Carregar um conjunto restaura tudo.",
             };
             if (names.Count > 0)
             {
-                form.Warning = "Loading a set REPLACES everything you are carrying.";
+                form.Warning = "Carregar um conjunto SUBSTITUI tudo o que você está carregando.";
                 SkMenuController.SkFormField picker = new SkMenuController.SkFormField
                 {
-                    Id = "set", Label = "Saved sets", Kind = SkMenuController.SkFieldKind.Choice, Height = 150,
+                    Id = "set",
+                    Label = "Conjuntos salvos",
+                    Kind = SkMenuController.SkFieldKind.Choice,
+                    Height = 150,
                 };
                 foreach (string entry in names)
                 {
                     picker.Options.Add(entry);
                     int count = SkLoadouts.CountOf(entry);
                     picker.OptionLabels.Add(count >= 0
-                        ? entry + "     <color=#9FB6CC>" + count + " stacks</color>"
+                        ? entry + "     <color=#9FB6CC>" + count + " pilhas</color>"
                         : entry);
                 }
                 form.Fields.Add(picker);
                 form.Fields.Add(new SkMenuController.SkFormField
                 {
                     Id = "confirm",
-                    Label = "Replace what I am carrying",
+                    Label = "Substituir o que estou carregando",
                     Kind = SkMenuController.SkFieldKind.Toggle,
                 });
             }
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Save worn",
+                Label = "Salvar atual",
                 Run = (SkMenuController.SkForm f) => SkMC.ShowPrompt(new SkMenuController.SkPrompt
                 {
-                    Title = "Save loadout",
-                    Label = "A name for your inventory as it is now.",
-                    Accept = "Save",
+                    Title = "Salvar conjunto",
+                    Label = "Um nome para o seu inventário atual.",
+                    Accept = "Salvar",
                     OnAccept = (string name) =>
                     {
                         Player lp = Player.m_localPlayer;
-                        if (lp == null) { SkCommandProcessor.Notify("No player yet."); return; }
-                        if (name.Length == 0) { SkCommandProcessor.Notify("Give the set a name first."); return; }
+                        if (lp == null) { SkCommandProcessor.Notify("Jogador ainda não carregado."); return; }
+                        if (name.Length == 0) { SkCommandProcessor.Notify("Dê um nome ao conjunto primeiro."); return; }
                         int count = SkLoadouts.Save(name, lp);
                         SkCommandProcessor.Notify(count > 0
-                            ? "Saved " + count + " stacks as: " + name
-                            : "Your inventory is empty, nothing to save.");
+                            ? "Salvo " + count + " pilhas como: " + name
+                            : "Seu inventário está vazio, nada a salvar.");
                         ShowLoadoutForm();
                     },
                 }),
@@ -708,11 +712,11 @@ namespace SkToolbox.SkModules
                 form.Validate = (SkMenuController.SkForm f) =>
                 {
                     SkMenuController.SkFormField box = f.Field("confirm");
-                    return (box != null && !box.BoolValue) ? "Switch the confirmation to ON to load a set." : null;
+                    return (box != null && !box.BoolValue) ? "Ative a confirmação para carregar um conjunto." : null;
                 };
                 form.Actions.Add(new SkMenuController.SkFormAction
                 {
-                    Label = "Load set",
+                    Label = "Carregar conjunto",
                     Run = (SkMenuController.SkForm f) =>
                     {
                         Player lp = Player.m_localPlayer;
@@ -721,21 +725,21 @@ namespace SkToolbox.SkModules
                         int stacks, equipped;
                         if (!SkLoadouts.Restore(pick, lp, out stacks, out equipped))
                         {
-                            SkCommandProcessor.Notify("Could not read that set.");
+                            SkCommandProcessor.Notify("Não foi possível ler este conjunto.");
                             return;
                         }
-                        SkCommandProcessor.Notify("Restored " + stacks + " stacks, " + equipped + " equipped.");
+                        SkCommandProcessor.Notify("Restaurado " + stacks + " pilhas, " + equipped + " equipados.");
                     },
                 });
                 form.Actions.Add(new SkMenuController.SkFormAction
                 {
-                    Label = "Delete",
+                    Label = "Excluir",
                     Run = (SkMenuController.SkForm f) =>
                     {
                         string pick = f.Field("set").SelectedOption;
                         if (string.IsNullOrEmpty(pick)) return;
                         SkLoadouts.Delete(pick);
-                        SkCommandProcessor.Notify("Deleted set: " + pick);
+                        SkCommandProcessor.Notify("Conjunto excluído: " + pick);
                     },
                 });
             }
@@ -754,38 +758,38 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
             SkCommandProcessor.CaptureTuningBaseline(player);
 
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Tweaks",
-                Note = "Each slider starts where the game has it now. These are restored after you die, unless PersistCheatsOnDeath is off.",
+                Title = "Ajustes",
+                Note = "Cada controle começa no valor atual do jogo. Eles são restaurados ao morrer, a menos que PersistCheatsOnDeath esteja desativado.",
             };
-            form.Fields.Add(Slider("carry", "Carry weight", 50, 2000,
+            form.Fields.Add(Slider("carry", "Limite de peso", 50, 2000,
                                    SkCommandProcessor.carryWeight > 0 ? SkCommandProcessor.carryWeight : Mathf.RoundToInt(player.m_maxCarryWeight)));
             // The pickup sweep uses a fixed 100-entry buffer, so a huge radius quietly collects less, not more.
-            form.Fields.Add(Slider("pickup", "Auto pickup range", 2, 20,
+            form.Fields.Add(Slider("pickup", "Raio de coleta automática", 2, 20,
                                    SkCommandProcessor.pickupRange > 0 ? SkCommandProcessor.pickupRange : Mathf.RoundToInt(player.m_autoPickupRange)));
-            form.Fields.Add(Slider("jump", "Jump force", 4, 40,
+            form.Fields.Add(Slider("jump", "Força do pulo", 4, 40,
                                    SkCommandProcessor.jumpForce > 0 ? SkCommandProcessor.jumpForce : Mathf.RoundToInt(player.m_jumpForce)));
-            form.Fields.Add(Slider("run", "Run speed", 2, 40,
+            form.Fields.Add(Slider("run", "Velocidade de corrida", 2, 40,
                                    SkCommandProcessor.runSpeed > 0 ? SkCommandProcessor.runSpeed : Mathf.RoundToInt(player.m_runSpeed)));
-            form.Fields.Add(Slider("swim", "Swim speed", 1, 20,
+            form.Fields.Add(Slider("swim", "Velocidade de natação", 1, 20,
                                    SkCommandProcessor.swimSpeed > 0 ? SkCommandProcessor.swimSpeed : Mathf.RoundToInt(player.m_swimSpeed)));
-            form.Fields.Add(Slider("explore", "Map reveal radius", 50, 500,
+            form.Fields.Add(Slider("explore", "Raio de revelação do mapa", 50, 500,
                                    SkCommandProcessor.exploreRadius > 0 ? SkCommandProcessor.exploreRadius
                                    : (Minimap.instance != null ? Mathf.RoundToInt(Minimap.instance.m_exploreRadius) : 100)));
 
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Apply",
+                Label = "Aplicar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     Player lp = Player.m_localPlayer;
-                    if (lp == null) { SkCommandProcessor.Notify("No player yet."); return; }
+                    if (lp == null) { SkCommandProcessor.Notify("Jogador ainda não carregado."); return; }
                     SkCommandProcessor.carryWeight = f.Field("carry").IntValue;
                     SkCommandProcessor.pickupRange = f.Field("pickup").IntValue;
                     SkCommandProcessor.jumpForce = f.Field("jump").IntValue;
@@ -793,16 +797,16 @@ namespace SkToolbox.SkModules
                     SkCommandProcessor.swimSpeed = f.Field("swim").IntValue;
                     SkCommandProcessor.exploreRadius = f.Field("explore").IntValue;
                     SkCommandProcessor.ApplyTuning(lp);
-                    SkCommandProcessor.Notify("Tweaks applied.");
+                    SkCommandProcessor.Notify("Ajustes aplicados.");
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Defaults",
+                Label = "Padrões",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     SkCommandProcessor.ResetTuning(Player.m_localPlayer);
-                    SkCommandProcessor.Notify("Tweaks back to normal.");
+                    SkCommandProcessor.Notify("Ajustes restaurados para o padrão.");
                 },
             });
             SkMC.ShowForm(form);
@@ -814,39 +818,39 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
 
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Reach",
-                Note = "How far away you can interact with things and place pieces. Normal is about 5.",
+                Title = "Alcance",
+                Note = "A distância máxima para interagir com coisas e posicionar construções. O padrão é cerca de 5.",
             };
-            form.Fields.Add(Slider("reach", "Reach", 20, 100, Mathf.RoundToInt(SkCommandProcessor.farInteractDistance)));
+            form.Fields.Add(Slider("reach", "Alcance", 20, 100, Mathf.RoundToInt(SkCommandProcessor.farInteractDistance)));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Apply",
+                Label = "Aplicar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     Player lp = Player.m_localPlayer;
-                    if (lp == null) { SkCommandProcessor.Notify("No player yet."); return; }
+                    if (lp == null) { SkCommandProcessor.Notify("Jogador ainda não carregado."); return; }
                     SkCommandProcessor.farInteractDistance = f.Field("reach").IntValue;
                     SkCommandProcessor.farInteract = true;
                     SkCommandProcessor.ApplyFarInteract(lp, applyOffValues: true);
-                    SkCommandProcessor.Notify("Reach set to " + f.Field("reach").IntValue);
+                    SkCommandProcessor.Notify("Alcance definido para " + f.Field("reach").IntValue);
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Back to normal",
+                Label = "Voltar ao normal",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     Player lp = Player.m_localPlayer;
-                    if (lp == null) { SkCommandProcessor.Notify("No player yet."); return; }
+                    if (lp == null) { SkCommandProcessor.Notify("Jogador ainda não carregado."); return; }
                     SkCommandProcessor.farInteract = false;
                     SkCommandProcessor.ApplyFarInteract(lp, applyOffValues: true);
-                    SkCommandProcessor.Notify("Reach back to normal.");
+                    SkCommandProcessor.Notify("Alcance restaurado ao normal.");
                 },
             });
             SkMC.ShowForm(form);
@@ -857,25 +861,24 @@ namespace SkToolbox.SkModules
         {
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Clear Inventory",
-                Warning = "This DESTROYS every item you are carrying.",
-                Note = "Equipped gear included, and everything in any extra slots you have. Nothing is dropped on the ground, "
-                     + "no tombstone is left, and there is no way to get any of it back. Put anything you want to keep in a chest first.",
+                Title = "Limpar Inventário",
+                Warning = "Isso DESTRÓI todos os itens que você está carregando.",
+                Note = "Inclui equipamentos vestidos e espaços extras. Nada é jogado no chão, nenhuma lápide é criada e não há como recuperar. Guarde o que quiser manter em um baú primeiro.",
             };
             form.Fields.Add(new SkMenuController.SkFormField
             {
                 Id = "confirm",
-                Label = "I understand everything will be destroyed",
+                Label = "Eu entendo que tudo será destruído",
                 Kind = SkMenuController.SkFieldKind.Toggle,
             });
             form.Validate = (SkMenuController.SkForm f) =>
             {
                 SkMenuController.SkFormField box = f.Field("confirm");
-                return (box != null && !box.BoolValue) ? "Switch the confirmation to ON first." : null;
+                return (box != null && !box.BoolValue) ? "Ative a confirmação primeiro." : null;
             };
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Destroy everything",
+                Label = "Destruir tudo",
                 Run = (SkMenuController.SkForm f) =>
                     SkCommandProcessor.ProcessCommand("/clearinventory", SkCommandProcessor.LogTo.Chat),
             });
@@ -913,7 +916,7 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
 
@@ -922,13 +925,13 @@ namespace SkToolbox.SkModules
 
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Inventory Size",
-                Note = "Rows in your inventory. Four is the normal size; shrinking it drops whatever no longer fits.",
+                Title = "Tamanho do Inventário",
+                Note = "Linhas no seu inventário. 4 é o tamanho normal; diminuir descarta o que não couber.",
             };
             form.Fields.Add(new SkMenuController.SkFormField
             {
                 Id = "rows",
-                Label = "Rows",
+                Label = "Linhas",
                 Kind = SkMenuController.SkFieldKind.IntSlider,
                 Min = 1,
                 Max = 9,
@@ -936,61 +939,81 @@ namespace SkToolbox.SkModules
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Apply",
+                Label = "Aplicar",
                 Run = (SkMenuController.SkForm f) =>
-                    SkRun.CmdNotify("inventorysize " + f.Field("rows").IntValue, "Inventory set to " + f.Field("rows").IntValue + " rows."),
+                    SkRun.CmdNotify("inventorysize " + f.Field("rows").IntValue, "Inventário definido para " + f.Field("rows").IntValue + " linhas."),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Back to 4",
-                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("inventorysize 4", "Inventory back to 4 rows."),
+                Label = "Voltar para 4",
+                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("inventorysize 4", "Inventário restaurado para 4 linhas."),
             });
             SkMC.ShowForm(form);
         }
 
         /// <summary>Every status effect the game ships, by prefab name, which is what addstatus expects.</summary>
+        private static string StatusLabel(StatusEffect effect)
+        {
+            try
+            {
+                if (Localization.instance != null && !string.IsNullOrEmpty(effect.m_name))
+                {
+                    string localized = Localization.instance.Localize(effect.m_name);
+                    if (!string.IsNullOrEmpty(localized) && !localized.StartsWith("[")) return localized;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return Spaced(effect.name);
+        }
+
         private void ShowStatusForm()
         {
             ObjectDB db = ObjectDB.instance;
-            List<string> names = new List<string>();
+            List<StatusEffect> effects = new List<StatusEffect>();
             if (db != null && db.m_StatusEffects != null)
             {
                 foreach (StatusEffect effect in db.m_StatusEffects)
                 {
-                    if (effect != null && !string.IsNullOrEmpty(effect.name) && !names.Contains(effect.name))
+                    if (effect != null && !string.IsNullOrEmpty(effect.name) && !effects.Exists(e => e.name == effect.name))
                     {
-                        names.Add(effect.name);
+                        effects.Add(effect);
                     }
                 }
             }
-            if (names.Count == 0)
+            if (effects.Count == 0)
             {
-                SkCommandProcessor.Notify("Status effect list is not available yet. Load into a world first.");
+                SkCommandProcessor.Notify("A lista de efeitos de status não está disponível ainda. Entre em um mundo primeiro.");
                 return;
             }
-            names.Sort(StringComparer.OrdinalIgnoreCase);
+
+            effects.Sort((a, b) => string.Compare(StatusLabel(a), StatusLabel(b), StringComparison.OrdinalIgnoreCase));
 
             SkMenuController.SkFormField picker = new SkMenuController.SkFormField
             {
                 Id = "status",
-                Label = "Status effect",
+                Label = "Efeito de status",
                 Kind = SkMenuController.SkFieldKind.Choice,
                 Height = 220,
             };
-            picker.Options.AddRange(names);
+
+            foreach (StatusEffect effect in effects)
+            {
+                picker.Options.Add(effect.name);
+                picker.OptionLabels.Add(StatusLabel(effect));
+            }
 
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Status Effects",
-                Note = "Adds one effect at its normal duration. Clearing removes everything you currently have, food included.",
+                Title = "Efeitos de Status",
+                Note = "Adiciona um efeito com sua duração normal. Limpar remove tudo o que você possui atualmente, incluindo comida.",
             };
             form.Fields.Add(picker);
-            // Both buttons do the work directly rather than through addstatus / clearstatus. addstatus is registered
-            // with the failable constructor and onlyAdmin, which folds into OnlyServer, so running it as a client on
-            // someone else's server is refused - and status effects are purely local, so there is nothing to forward.
+
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Add effect",
+                Label = "Adicionar efeito",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string name = f.Field("status").SelectedOption;
@@ -998,27 +1021,29 @@ namespace SkToolbox.SkModules
                     Player target = Player.m_localPlayer;
                     if (target == null)
                     {
-                        SkCommandProcessor.Notify("No player yet.");
+                        SkCommandProcessor.Notify("Jogador ainda não carregado.");
                         return;
                     }
                     target.GetSEMan().AddStatusEffect(name.GetStableHashCode(), true, 0, 0f, -1);
-                    SkCommandProcessor.Notify("Added " + name);
+                    int sel = f.Field("status").Selected;
+                    string labelName = (sel >= 0 && sel < f.Field("status").OptionLabels.Count) ? f.Field("status").OptionLabels[sel] : name;
+                    SkCommandProcessor.Notify("Adicionado: " + labelName);
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Clear all",
+                Label = "Limpar todos",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     Player target = Player.m_localPlayer;
                     if (target == null)
                     {
-                        SkCommandProcessor.Notify("No player yet.");
+                        SkCommandProcessor.Notify("Jogador ainda não carregado.");
                         return;
                     }
                     target.ClearHardDeath();
                     target.GetSEMan().RemoveAllStatusEffects();
-                    SkCommandProcessor.Notify("Cleared status effects.");
+                    SkCommandProcessor.Notify("Efeitos de status limpos.");
                 },
             });
             SkMC.ShowForm(form);
@@ -1159,14 +1184,14 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
 
             List<ItemDrop> picks = PickFoods(kind);
             if (picks.Count == 0)
             {
-                SkCommandProcessor.Notify("No food found for that. Load into a world first.");
+                SkCommandProcessor.Notify("Nenhuma comida encontrada para isso. Entre em um mundo primeiro.");
                 return;
             }
 
@@ -1183,7 +1208,7 @@ namespace SkToolbox.SkModules
                 }
             }
 
-            SkCommandProcessor.Notify(eaten.Count > 0 ? "Ate: " + string.Join(", ", eaten.ToArray()) : "Could not eat anything.");
+            SkCommandProcessor.Notify(eaten.Count > 0 ? "Comeu: " + string.Join(", ", eaten.ToArray()) : "Não foi possível comer nada.");
         }
 
         private static Sprite IconOf(ItemDrop drop)
@@ -1198,7 +1223,7 @@ namespace SkToolbox.SkModules
         {
             List<ItemDrop> picks = PickFoods(kind);
             string tip = picks.Count == 0
-                ? label + "  -  fills all three food slots"
+                ? label + "  -  preenche os três espaços de comida"
                 : label + "  -  " + string.Join(", ", picks.ConvertAll(FoodName).ToArray());
             grid.Add(new SkMenuController.SkGridItem
             {
@@ -1206,7 +1231,7 @@ namespace SkToolbox.SkModules
                 Display = label,
                 Tip = tip,
                 Icon = iconOverride != null ? iconOverride : (picks.Count > 0 ? IconOf(picks[0]) : null),
-                Section = "Character",
+                Section = "Personagem",
                 Scope = SkScope.Client,
                 OnClick = (string ignored) => Feed(kind),
             });
@@ -1217,11 +1242,11 @@ namespace SkToolbox.SkModules
             bTeleport = !bTeleport;
             if (bTeleport)
             {
-                Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Teleport enabled. Press tilde (~)!", 0, null);
+                Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Teleporte ativado. Pressione til (~)!", 0, null);
             }
             else
             {
-                Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Teleport disabled.", 0, null);
+                Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Teleporte desativado.", 0, null);
             }
             BeginMenu();
         }
@@ -1282,7 +1307,7 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
             SkCommandProcessor.infEitr = !SkCommandProcessor.infEitr;
@@ -1290,15 +1315,15 @@ namespace SkToolbox.SkModules
 
             if (!SkCommandProcessor.infEitr)
             {
-                SkCommandProcessor.Notify("Infinite eitr off.");
+                SkCommandProcessor.Notify("Eitr infinito desativado.");
             }
             else
             {
                 // Max eitr comes entirely from food, so on an empty stomach the toggle has nothing to work with.
                 // Say so rather than let it look broken.
                 SkCommandProcessor.Notify(player.GetMaxEitr() > 0f
-                    ? "Infinite eitr on."
-                    : "Infinite eitr on - but you have eaten no eitr food, so your maximum is still zero.");
+                    ? "Eitr infinito ativado."
+                    : "Eitr infinito ativado - mas você não comeu comida de eitr, então seu máximo ainda é zero.");
             }
         }
 
@@ -1311,7 +1336,7 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Jogador ainda não carregado.");
                 return;
             }
             SkCommandProcessor.CaptureTuningBaseline(player);
@@ -1324,8 +1349,8 @@ namespace SkToolbox.SkModules
                 SkCommandProcessor.RestoreCarryBaseline(player);
             }
             SkCommandProcessor.Notify(SkCommandProcessor.noCarryLimit
-                ? "Carry limit lifted."
-                : "Carry limit back to normal.");
+                ? "Limite de carga removido."
+                : "Limite de carga restaurado ao normal.");
         }
 
         public void RepairAll()
@@ -1346,176 +1371,14 @@ namespace SkToolbox.SkModules
                         Vector3 targetLoc = hit.point;
                         Debug.DrawRay(Player.m_localPlayer.transform.position, targetLoc, Color.white);
                         Player.m_localPlayer.transform.position = targetLoc;
-                        Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Warp!", 0, null);
+                        Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Teletransporte!", 0, null);
                     }
                 }
             }
-            //if (Input.GetKeyDown(KeyCode.KeypadMinus))
-            //{
-            //    Ray rayCast = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit hit;
-            //    if (Physics.Raycast(rayCast, out hit))
-            //    {
-            //        Destroy(hit.collider.gameObject);
-            //        Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Removed!", 0, null);
-            //    }
-            //}
-            //if (Input.GetKeyDown(KeyCode.KeypadDivide))
-            //{
-            //    Ray rayCast = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit hit;
-            //    if (Physics.Raycast(rayCast, out hit))
-            //    {
-            //        CommandProcessor.PrintOut("GO Name: " + hit.collider.gameObject.name, false);
-            //    }
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.KeypadMultiply))
-            //{
-
-            //    Ray rayCast = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit hit;
-            //    if (Physics.Raycast(rayCast, out hit))
-            //    {
-            //        CommandProcessor.PrintOut("GO Name: " + hit.collider.gameObject.name, false);
-            //        if (!gPickPut)
-            //        {
-            //            gPickPut = true;
-            //            CommandProcessor.PrintOut("PICK" + hit.collider.gameObject.name, false);
-            //            gObject = hit.collider.gameObject;
-            //            gParent = gObject.transform.parent.gameObject;
-            //            gObject.transform.parent = Player.m_localPlayer.gameObject.transform;
-            //        } else
-            //        {
-            //            gPickPut = false;
-            //            CommandProcessor.PrintOut("PUT" + gObject.name, false);
-            //            gObject.transform.parent = gParent.transform;
-            //            gParent = null;
-            //        }
-                    
-            //    }
-            //}
-
-            //if (bDetectEnemies)
-            //{
-            //    List<Character> charList = Character.GetAllCharacters();
-            //    if (charList.Count > 0)
-            //    {
-            //        foreach (Character character in charList)
-            //        {
-            //            if (character != null && !character.IsDead() && !character.IsPlayer())
-            //            {
-            //                if (Vector3.Distance(character.transform.position, Player.m_localPlayer.transform.position) < 20f)
-            //                {
-            //                    if (!nearbyCharacters.Contains(character))
-            //                    {
-            //                        nearbyCharacters.Add(character);
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    if (nearbyCharacters.Contains(character))
-            //                    {
-            //                        nearbyCharacters.Remove(character);
-            //                    }
-            //                }
-            //            }
-            //            else
-            //            {
-            //                if (nearbyCharacters.Contains(character))
-            //                {
-            //                    nearbyCharacters.Remove(character);
-            //                }
-            //            }
-            //        }
-
-            //        if (nearbyCharacters.Count > 0)
-            //        {
-            //            List<Character> tempCharList = new List<Character>(nearbyCharacters);
-            //            foreach (Character character in tempCharList)
-            //            {
-            //                if (!charList.Contains(character))
-            //                {
-            //                    nearbyCharacters.Remove(character);
-            //                }
-            //            }
-            //        }
-            //    }
-            //    if (nearbyCharacters.Count > 0 && btDetectEmeiesSwitch)
-            //    {
-            //        Player.m_localPlayer.Message(MessageHud.MessageType.Center, "Enemy nearby!", 0, null);
-            //        btDetectEmeiesSwitch = false;
-            //    }
-            //    else if (nearbyCharacters.Count == 0)
-            //    {
-            //        btDetectEmeiesSwitch = true;
-            //    }
-            //}
         }
 
         void OnGUI()
         {
-            //if (Player.m_localPlayer != null)
-            //{
-            //    if (bDetectEnemies && nearbyCharacters.Count > 0)
-            //    {
-            //        EnemyWindow = GUILayout.Window(39999, rectEnemy, ProcessEnemies, "Enemy Information");
-            //    }
-            //    if (bClock)
-            //    {
-            //        GUI.Label(rectClock, "Time (0-1): " + EnvMan.instance.m_debugTime);
-            //    }
-            //    if (bCoords)
-            //    {
-            //        Vector3 plPos = Player.m_localPlayer.transform.position;
-            //        GUI.Label(rectCoords, "Coords: " + Mathf.RoundToInt(plPos.x) + "/" + Mathf.RoundToInt(plPos.y));
-            //    }
-            //}
         }
-
-        //void ProcessEnemies(int WindowID)
-        //{
-        //    GUILayout.BeginVertical();
-        //    if (nearbyCharacters?.Count > 0)
-        //    {
-        //        Vector3 playerPos = Player.m_localPlayer.transform.position;
-
-        //        foreach (Character toon in nearbyCharacters)
-        //        {
-        //            float toonDist = Vector3.Distance(playerPos, toon.transform.position);
-
-        //            if(toonDist > 15)
-        //            {
-        //                GUI.color = Color.green;
-        //            }
-        //            else if (toonDist > 10 && toonDist < 15)
-        //            {
-        //                GUI.color = Color.yellow;
-        //            }
-        //            else if (toonDist > 5 && toonDist < 10)
-        //            {
-        //                GUI.color = Color.yellow + Color.red;
-        //            }
-        //            else if (toonDist > 0 && toonDist < 5)
-        //            {
-        //                GUI.color = Color.red;
-        //            }
-
-        //            //GUI.color = Faction.getColor();
-        //            GUILayout.BeginHorizontal();
-
-        //            GUILayout.Label("Name: " + toon.GetHoverName());
-        //            GUILayout.Label("HP: " + Mathf.RoundToInt(toon.GetHealth()) + "/" + toon.GetMaxHealth() 
-        //                + " | Level: " + toon.GetLevel()
-        //                + " | Dist: " + Mathf.RoundToInt(toonDist));
-
-        //            GUILayout.EndHorizontal();
-        //            GUI.color = Color.white;
-        //        }
-        //    }
-        //    GUILayout.EndVertical();
-        //    GUI.DragWindow(new Rect(0, 0, 10000, 20));
-        //}
-
     }
 }

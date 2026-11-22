@@ -12,9 +12,10 @@ namespace SkToolbox
         // Speelo's Toolbox: a fork of Skrip's SkToolbox for Valheim 1.0. Distinct GUID so it never
         // collides with the original (deprecated) package if both end up in a profile.
         public const string
-            MODNAME = "SpeelosToolbox",
-            DISPLAYNAME = "Speelo's Toolbox",
+            MODNAME = "Speelo's Toolbox Tradução BR",
+            DISPLAYNAME = "Speelo's Toolbox Tradução BR",
             AUTHOR = "Speelo",
+            TRANSLATOR = "Fox72",
             ORIGINAL_AUTHOR = "Skrip",
             GUID = "com.speelo.speelostoolbox",
             VERSION = "1.1.6";
@@ -29,7 +30,7 @@ namespace SkToolbox
             if (Application.isBatchMode
                 || SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
             {
-                Logger.LogInfo("Headless server detected - SpeelosToolbox is client-only, not loading.");
+                Logger.LogInfo("Servidor sem interface gráfica detectado - SpeelosToolbox é apenas para cliente e não será carregado.");
                 return;
             }
 
@@ -47,194 +48,189 @@ namespace SkToolbox
             try
             {
                 SkConfigEntry.CDescriptor = Config.Bind("- Index", "ThisIsJustAnIndex-NotASetting", true
-                    , "Config sections:" +
-                    "\n0 - General" +
-                    "\n1 - Auto Run" + // Valheim 1.0: AutoRun re-enabled
-                    "\n2 - Customize Console Look" +
-                    "\n3 - Command Aliasing" + // Valheim 1.0: aliasing is live (BuildAliases/DecomposeAlias)
-                    "\n4 - On-Screen Menu" +
-                    "\n5 - Command Hotkeys" +
+                    , "Seções de configuração:" +
+                    "\n0 - Geral" +
+                    "\n1 - Execução Automática" +
+                    "\n2 - Personalizar Visual do Console" +
+                    "\n3 - Apelidos de Comandos" +
+                    "\n4 - Menu na Tela" +
+                    "\n5 - Atalhos de Comandos" +
                     "\n");
 
                 SkConfigEntry.CConsoleEnabled = Config.Bind("0 - General", "ConsoleEnabled", true
-                    , "Enables the console without launch option.");
+                    , "Ativa o console sem a necessidade de opção de inicialização na Steam.");
                 SkConfigEntry.CScrollable = Config.Bind("0 - General", "ConsoleScrollable", true
-                    , "Enables the console to be scrollable.");
+                    , "Permite que a rolagem de texto seja ativada no console.");
                 SkConfigEntry.CScrollableLimit = Config.Bind("0 - General", "ConsoleScrollableLimit", 500
-                    , "Maximum number of lines to store in the console. Game default = 30 (lol)");
+                    , "Número máximo de linhas armazenadas no console. Padrão do jogo = 30.");
                 SkConfigEntry.CConsoleAutoComplete = Config.Bind("0 - General", "AutoComplete", true
-                    , "Press tab to auto-complete Speelo's Toolbox commands if you have partially typed a command.");
+                    , "Pressione Tab para autocompletar os comandos da Caixa de Ferramentas ao digitar parcialmente.");
                 SkConfigEntry.CAllowChatCommandInput = Config.Bind("0 - General", "AllowChatCommandInput", true
-                    , "Toggle this if you want to allow or disable the entry of commands in the chat. If this is disabled, you can only input commands into the console.");
+                    , "Alterne esta opção para permitir ou desativar o envio de comandos pelo chat. Se desativado, os comandos só poderão ser digitados no console.");
                 SkConfigEntry.CAllowPublicChatOutput = Config.Bind("0 - General", "AllowPublicResponse", true
-                    , "Toggle this to allow the mod to respond publicly with certain commands, when entered into chat." +
-                    "\nThe /portal command for example, if used in chat and this is true, others nearby will be able to see the response." +
-                    "\nNOTE: If you see a response from your name, it is shown publicly and everyone can see it. If it is a response from (Speelo's Toolbox), only you see it.");
+                    , "Ative para permitir que o mod responda publicamente a certos comandos quando digitados no chat." +
+                    "\nPor exemplo, se o comando /portal for usado no chat com isso ativo, jogadores próximos verão a resposta." +
+                    "\nNOTA: Se a resposta sair com o seu nome, ela é pública e todos podem ver. Se for uma resposta de (Speelo's Toolbox), apenas você a vê.");
                 SkConfigEntry.CAllowChatOutput = Config.Bind("0 - General", "AllowResponseInChat", true
-                    , "Toggle this to allow the mod to show output in the chat. If this is disabled, the mod will not output to the chat at all, publicly or not.");
+                    , "Ative para permitir que o mod exiba retornos no chat. Se desativado, o mod não mostrará nenhuma mensagem no chat, seja pública ou privada.");
                 SkConfigEntry.CAllowExecuteOnClear = Config.Bind("0 - General", "AllowExecuteOnClear", false
-                    , "Toggle this to enable the ability to execute commands by clearing the input (by hitting escape, or selecting all and removing).");
+                    , "Ative para permitir a execução de comandos ao limpar a caixa de texto (pressionando Esc ou apagando todo o texto).");
                 SkConfigEntry.CKeepAchievements = Config.Bind("0 - General", "KeepAchievements", true
-                    , "Keep Steam achievements working while cheats are used." +
-                    "\nValheim disables achievement progress as soon as anything counts as cheated, and simply loading BepInEx already counts (it sets Game.isModded)." +
-                    "\nThis flips the game's own PlayerProfile.s_bypassCheatChecks switch, which every cheat check reads, so progress keeps counting." +
-                    "\nIt also stops cheat commands from permanently flagging the character, and clears that flag if it was already set." +
-                    "\nSet to false to let Valheim disable achievements normally.");
+                    , "Mantém as conquistas da Steam funcionando mesmo ao usar trapaças." +
+                    "\nO Valheim desativa o progresso de conquistas ao detectar modificações (carregar o BepInEx já define Game.isModded)." +
+                    "\nEsta opção ativa a chave interna PlayerProfile.s_bypassCheatChecks para continuar contabilizando conquistas." +
+                    "\nTambém impede que o personagem seja marcado permanentemente por trapaças e limpa marcas anteriores." +
+                    "\nDefina como false para manter o comportamento padrão do Valheim.");
                 SkConfigEntry.CPersistCheatsOnDeath = Config.Bind("0 - General", "PersistCheatsOnDeath", true
-                    , "Put your cheats back on after you die." +
-                    "\nDying destroys your character object and the game builds a new one from the prefab, so every cheat" +
-                    " that is stored on the character is silently lost: god mode, flying, no cost building, infinite" +
-                    " stamina and far interact all switch themselves off on the respawn." +
-                    "\nWith this on, whatever you had switched on is switched back on once you respawn." +
-                    "\nSet to false to let each death clear them, which is what Valheim does on its own.");
+                    , "Reaplica suas trapaças automaticamente após morrer." +
+                    "\nA morte destrói o objeto do personagem e o jogo cria um novo, fazendo com que trapaças ativas" +
+                    " (modo deus, voo, construção sem custo, stamina infinita, etc.) sejam desativadas ao reaparecer." +
+                    "\nCom isto ativo, todas as trapaças que estavam ligadas serão reativadas ao reaparecer." +
+                    "\nDefina como false para que a morte desative todas as trapaças normalmente.");
                 SkConfigEntry.CGodModeBlocksDamage = Config.Bind("0 - General", "GodModeBlocksDamage", true
-                    , "Make god mode block damage outright." +
-                    "\nValheim's own god mode does not stop damage: it subtracts health as normal and only rescues you at" +
-                    " the moment the hit would kill you, clamping health to 1. So your health bar still drains." +
-                    "\nWith this on, any damage aimed at you while god mode is active is discarded before it lands," +
-                    " including fire, poison and smoke." +
-                    "\nSet to false for Valheim's unmodified behaviour.");
+                    , "Faz o modo deus bloquear o dano completamente." +
+                    "\nO modo deus padrão do Valheim não impede dano: ele reduz sua vida e só impede a morte no último instante, mantendo 1 de vida." +
+                    "\nCom isto ativo, todo dano recebido (incluindo fogo, veneno e fumaça) é anulado antes de atingir você." +
+                    "\nDefina como false para manter o comportamento padrão do Valheim.");
                 SkConfigEntry.COpenConsoleWithSlash = Config.Bind("0 - General", "OpenConsoleWithSlash", false
-                    , "Toggle this to enable the ability to open the console with the slash (/) button." +
-                    "\nThis option takes precedence over OpenChatWithSlash if both are true.");
+                    , "Ative para permitir abrir o console pressionando a tecla barra (/)." +
+                    "\nEsta opção tem prioridade sobre OpenChatWithSlash se ambas estiverem ativas.");
                 SkConfigEntry.COpenChatWithSlash = Config.Bind("0 - General", "OpenChatWithSlash", false
-                    , "Toggle this to enable the ability to open chat with the slash (/) button.");
+                    , "Ative para permitir abrir o chat pressionando a tecla barra (/).");
 
                 SkConfigEntry.CAutoRun = Config.Bind("1 - AutoRun", "AutoRunEnabled", false
-                    , "Toggle this to run commands automatically upon spawn into server." +
-                    "\nNote this will only occur once per game launch to prevent unintended command executions.");
+                    , "Ative para executar comandos automaticamente ao entrar no servidor." +
+                    "\nNota: ocorre apenas uma vez por inicialização do jogo para evitar execuções indesejadas.");
                 SkConfigEntry.CAutoRunCommand = Config.Bind("1 - AutoRun", "AutoRunCommand", "/nosup; /god"
-                    , "Enter the commands to run upon spawn here. Seperate commands with a semicolon (;).");
+                    , "Insira aqui os comandos para executar ao reaparecer. Separe múltiplos comandos com ponto e vírgula (;).");
 
                 SkConfigEntry.OMenuToggleKey = Config.Bind("4 - OnScreenMenu", "MenuToggleKey", "F6"
-                    , "Key that opens and closes the clickable menu. Valid key names: https://docs.unity3d.com/ScriptReference/KeyCode.html" +
-                    "\nAlready taken: F11 and F12 take screenshots (Valheim and Steam), F5 opens the game console, F4 opens this mod's log console," +
-                    " F2 opens the connect panel, F9 cycles the controller layout, Ctrl+F1 toggles mouse capture, Ctrl+F3 hides the HUD." +
-                    "\nFree function keys: F6, F7, F8, F10.");
+                    , "Tecla que abre e fecha o menu interativo. Nomes de teclas válidos: https://docs.unity3d.com/ScriptReference/KeyCode.html" +
+                    "\nJá ocupadas: F11 e F12 tiram captura de tela, F5 abre o console do jogo, F4 abre o log do mod," +
+                    " F2 abre o painel de conexão, F9 alterna layout do controle, Ctrl+F1 alterna captura do mouse, Ctrl+F3 oculta o HUD." +
+                    "\nTeclas de função livres sugeridas: F6, F7, F8, F10.");
                 SkConfigEntry.OMenuWalk = Config.Bind("4 - OnScreenMenu", "WalkWithMenuOpen", true
-                    , "Let you walk around with the menu open, instead of freezing you in place." +
-                    "\nWASD moves as normal. Attacking, blocking, jumping and dodging stay switched off, which is the" +
-                    " same state the game puts you in for a moment after closing its own menus." +
-                    "\nTyping in a search box moves nothing. Hold the look key below to turn the camera." +
-                    "\nThis is keyboard and mouse only: with a gamepad active the menu freezes you as before.");
+                    , "Permite andar com o menu aberto, em vez de congelar seu personagem no lugar." +
+                    "\nWASD movimenta normalmente. Atacar, bloquear, pular e esquivar permanecem desativados enquanto o menu estiver aberto." +
+                    "\nAo digitar na caixa de busca, o movimento é pausado. Segure a tecla de olhar para girar a câmera." +
+                    "\nApenas teclado e mouse: com controle (gamepad), o menu congela a movimentação normalmente.");
                 SkConfigEntry.OMenuLookKey = Config.Bind("4 - OnScreenMenu", "MenuLookKey", "Mouse1"
-                    , "Hold this to turn the camera while the menu is open. Release it to get the cursor back." +
-                    "\nMouse1 is the right mouse button. It is safe to use even though it is normally block, because" +
-                    " blocking is switched off while the menu is open." +
-                    "\nLeftAlt is a good alternative if you would rather leave the right button alone." +
-                    "\nValid key names: https://docs.unity3d.com/ScriptReference/KeyCode.html");
+                    , "Segure esta tecla para girar a câmera com o menu aberto. Solte para ter o ponteiro do mouse de volta." +
+                    "\nMouse1 é o botão direito do mouse. É seguro usar pois a defesa fica desativada com o menu aberto." +
+                    "\nLeftAlt é uma ótima alternativa se preferir não usar o botão direito." +
+                    "\nNomes de teclas válidos: https://docs.unity3d.com/ScriptReference/KeyCode.html");
                 SkConfigEntry.OBookmarks = Config.Bind("4 - OnScreenMenu", "Bookmarks", ""
-                    , "Saved teleport spots, managed from the menu - there is no need to edit this by hand." +
-                    "\nEach entry is seed|name|x|y|z, and only the ones matching the world you are in are shown.");
+                    , "Locais de teletransporte salvos, gerenciados pelo menu (não é necessário editar manualmente)." +
+                    "\nCada entrada é seed|nome|x|y|z, e apenas os locais do mundo atual são exibidos.");
                 SkConfigEntry.OLoadouts = Config.Bind("4 - OnScreenMenu", "Loadouts", ""
-                    , "Saved equipment sets, managed from the menu - there is no need to edit this by hand." +
-                    "\nEach entry is name|prefab:quality,prefab:quality.");
+                    , "Conjuntos de equipamentos salvos, gerenciados pelo menu (não é necessário editar manualmente)." +
+                    "\nCada entrada segue o formato nome|prefab:qualidade,prefab:qualidade.");
                 SkConfigEntry.OMenuOpacity = Config.Bind("4 - OnScreenMenu", "MenuOpacity", 0.96f
-                    , "How solid the menu background is. 1 = fully opaque, 0.5 = half see-through. Takes effect immediately.");
+                    , "Opacidade do fundo do menu. 1 = totalmente opaco, 0.5 = meio transparente. Aplicação imediata.");
 
 
                 SkConfigEntry.CAllowLookCustomizations = Config.Bind("2 - CustomizeConsoleLook", "ConsoleAllowLookCustomizations", true
-                    , "Toggle this to enable or disable the customization settings below.");
+                    , "Ative para habilitar ou desabilitar as configurações de visual do console abaixo.");
 
                 SkConfigEntry.CConsoleFont = Config.Bind("2 - CustomizeConsoleLook", "ConsoleFont", "Consola.ttl"
-                    , "Set the font size of the text in the console. Game default = AveriaSansLibre-Bold");
+                    , "Define a fonte do texto do console. Padrão do jogo = AveriaSansLibre-Bold");
                 SkConfigEntry.CConsoleFontSize = Config.Bind("2 - CustomizeConsoleLook", "ConsoleFontSize", 18
-                    , "Set the font size of the text in the console. Game default = 18");
+                    , "Define o tamanho da fonte do texto no console. Padrão do jogo = 18");
 
                 SkConfigEntry.CConsoleOutputTextColor = Config.Bind("2 - CustomizeConsoleLook", "ConsoleOutputTextColor", "#E6F7FFFF"
-                    , "Set the color of the output text shown in the console. Game default = #FFFFFFFF. Color format is #RRGGBBAA");
+                    , "Define a cor do texto de saída no console. Padrão do jogo = #FFFFFFFF. Formato de cor: #RRGGBBAA");
                 SkConfigEntry.CConsoleInputTextColor = Config.Bind("2 - CustomizeConsoleLook", "ConsoleInputTextColor", "#E6F7FFFF"
-                    , "Set the color of the input text shown in the console. Game default = #FFFFFFFF. Color format is #RRGGBBAA");
+                    , "Define a cor do texto de entrada no console. Padrão do jogo = #FFFFFFFF. Formato de cor: #RRGGBBAA");
                 SkConfigEntry.CConsoleSelectionColor = Config.Bind("2 - CustomizeConsoleLook", "ConsoleSelectionColor", "#A8CEFFC0"
-                    , "Set the color of the selection highlight in the console. Game default = #A8CEFFC0. Color format is #RRGGBBAA");
+                    , "Define a cor do destaque de seleção no console. Padrão do jogo = #A8CEFFC0. Formato de cor: #RRGGBBAA");
                 SkConfigEntry.CConsoleCaretColor = Config.Bind("2 - CustomizeConsoleLook", "ConsoleCaretColor", "#DCE6F5FF"
-                    , "Set the color of the input text caret shown in the console. Game default = #FFFFFFFF. Color format is #RRGGBBAA");
+                    , "Define a cor do cursor de texto no console. Padrão do jogo = #FFFFFFFF. Formato de cor: #RRGGBBAA");
 
                 SkConfigEntry.CAlias1 = Config.Bind("3 - CommandAliasing", "Alias1", "/creative: /god; /ghost; /imacheater; /nores; /nocost; /echo Creative mode toggled!"
-                    , "Set this to create a command alias. Specify what the user will type, and what will be executed. " +
-                    "Command chaining does work here, and these aliases can be used with the AutoRun functionality above." +
-                    " Note that aliases cannot reference other aliases. The slash (/) prefix is also not required - command aliases can be set to anything you want!" +
-                    " Aliases do work from chat as well, if the execute from chat setting is enabled above. Alias commands also appear in the /? help menus." +
-                    "\nFormat: WhatToType: WhatToExecute" +
-                    "\nExample: This will create a new command, '/Cmd1', and when entered it will execute /god and /fly" +
+                    , "Defina isto para criar um apelido de comando (alias). Especifique o que o usuário digitará e o que será executado. " +
+                    "Encadeamento de comandos é suportado e pode ser usado com a Execução Automática." +
+                    " Apelidos não podem referenciar outros apelidos. O prefixo barra (/) não é obrigatório - apelidos de comandos podem ser o que você quiser!" +
+                    " Apelidos também funcionam pelo chat (se a opção de chat estiver ativa) e aparecem nos menus de ajuda /?." +
+                    "\nFormato: OQueDigitar: OQueExecutar" +
+                    "\nExemplo: Cria um novo comando '/Cmd1' que executa /god e /fly" +
                     "\n/Cmd1: /god; /fly" +
                     "\n##################" +
-                    "\nSet this to create command alias 1.");
+                    "\nDefina para criar o apelido de comando 1.");
                 SkConfigEntry.CAlias2 = Config.Bind("3 - CommandAliasing", "Alias2", ""
-                    , "Set this to create command alias 2.");
+                    , "Defina para criar o apelido de comando 2.");
                 SkConfigEntry.CAlias3 = Config.Bind("3 - CommandAliasing", "Alias3", ""
-                    , "Set this to create command alias 3.");
+                    , "Defina para criar o apelido de comando 3.");
                 SkConfigEntry.CAlias4 = Config.Bind("3 - CommandAliasing", "Alias4", ""
-                    , "Set this to create command alias 4.");
+                    , "Defina para criar o apelido de comando 4.");
                 SkConfigEntry.CAlias5 = Config.Bind("3 - CommandAliasing", "Alias5", ""
-                    , "Set this to create command alias 5.");
+                    , "Defina para criar o apelido de comando 5.");
                 SkConfigEntry.CAlias6 = Config.Bind("3 - CommandAliasing", "Alias6", ""
-                    , "Set this to create command alias 6.");
+                    , "Defina para criar o apelido de comando 6.");
                 SkConfigEntry.CAlias7 = Config.Bind("3 - CommandAliasing", "Alias7", ""
-                    , "Set this to create command alias 7.");
+                    , "Defina para criar o apelido de comando 7.");
                 SkConfigEntry.CAlias8 = Config.Bind("3 - CommandAliasing", "Alias8", ""
-                    , "Set this to create command alias 8.");
+                    , "Defina para criar o apelido de comando 8.");
                 SkConfigEntry.CAlias9 = Config.Bind("3 - CommandAliasing", "Alias9", ""
-                    , "Set this to create command alias 9.");
+                    , "Defina para criar o apelido de comando 9.");
                 SkConfigEntry.CAlias10 = Config.Bind("3 - CommandAliasing", "Alias10", ""
-                    , "Set this to create command alias 10.");
+                    , "Defina para criar o apelido de comando 10.");
                 SkConfigEntry.CAlias11 = Config.Bind("3 - CommandAliasing", "Alias11", ""
-                    , "Set this to create command alias 11.");
+                    , "Defina para criar o apelido de comando 11.");
                 SkConfigEntry.CAlias12 = Config.Bind("3 - CommandAliasing", "Alias12", ""
-                    , "Set this to create command alias 12.");
+                    , "Defina para criar o apelido de comando 12.");
                 SkConfigEntry.CAlias13 = Config.Bind("3 - CommandAliasing", "Alias13", ""
-                    , "Set this to create command alias 13.");
+                    , "Defina para criar o apelido de comando 13.");
                 SkConfigEntry.CAlias14 = Config.Bind("3 - CommandAliasing", "Alias14", ""
-                    , "Set this to create command alias 14.");
+                    , "Defina para criar o apelido de comando 14.");
                 SkConfigEntry.CAlias15 = Config.Bind("3 - CommandAliasing", "Alias15", ""
-                    , "Set this to create command alias 15.");
+                    , "Defina para criar o apelido de comando 15.");
 
                 SkConfigEntry.CHotkey1 = Config.Bind("5 - CommandHotkeys", "Hotkey 1", ""
-                    , "Set this to create a hotkey for a command or command chain." +
-                    "\nValid Format is WhatToPress: WhatToExecute" +
-                    "\nExample 1 Press z to input /fly; /god        | z: /fly; /god" +
-                    "\nExample 2 Press Shift+Z to input /creative   | Z: /creative" +
-                    "\nExample 3 Press Tilde to open the console    | `: /console" +
-                    "\nOnly 'Printable ASCII characters' are valid! (https://theasciicode.com.ar/). Capital letters make the hotkey require Shift before the hotkey press." +
-                    " Only one command or command chain can be assigned to each key (if hotkey 1 assigns to q, hotkey 2 cannot also assign to q)." +
-                    "\nOnly the first colon separates the key from the command, so the command itself may contain one." +
-                    " The key cannot be a colon or a space." +
-                    "\nHotkeys do not fire while you are typing - in chat, the console, a sign, a map pin, the inventory or this mod's own menu." +
-                    "\nChanges here are read at startup, so restart the game or use Reload Toolbox in the System tab after editing." +
-                    " A slot that cannot be read says so in the console at startup rather than failing silently.");
+                    , "Defina isto para criar um atalho de teclado para um comando ou sequência de comandos." +
+                    "\nFormato válido: OQuePressionar: OQueExecutar" +
+                    "\nExemplo 1: Pressione z para executar /fly; /god       | z: /fly; /god" +
+                    "\nExemplo 2: Pressione Shift+Z para executar /creative  | Z: /creative" +
+                    "\nExemplo 3: Pressione Acento para abrir o console      | `: /console" +
+                    "\nApenas caracteres ASCII imprimíveis são válidos! (https://theasciicode.com.ar/). Letras maiúsculas exigem pressionar Shift junto." +
+                    " Cada tecla só pode ser atribuída a um atalho (se o atalho 1 for q, o atalho 2 não pode ser q)." +
+                    "\nApenas o primeiro dois-pontos separa a tecla do comando (o comando em si pode conter dois-pontos)." +
+                    " A tecla não pode ser dois-pontos nem espaço." +
+                    "\nAtalhos não são acionados durante a digitação no chat, console, placas, marcadores de mapa, inventário ou menu do mod." +
+                    "\nAs alterações são lidas na inicialização; reinicie o jogo ou use Recarregar Toolbox na aba Sistema após editar." +
+                    " Atalhos inválidos avisarão no console ao iniciar.");
                 SkConfigEntry.CHotkey2 = Config.Bind("5 - CommandHotkeys", "Hotkey 2", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey3 = Config.Bind("5 - CommandHotkeys", "Hotkey 3", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey4 = Config.Bind("5 - CommandHotkeys", "Hotkey 4", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey5 = Config.Bind("5 - CommandHotkeys", "Hotkey 5", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey6 = Config.Bind("5 - CommandHotkeys", "Hotkey 6", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey7 = Config.Bind("5 - CommandHotkeys", "Hotkey 7", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey8 = Config.Bind("5 - CommandHotkeys", "Hotkey 8", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey9 = Config.Bind("5 - CommandHotkeys", "Hotkey 9", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey10 = Config.Bind("5 - CommandHotkeys", "Hotkey 10", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey11 = Config.Bind("5 - CommandHotkeys", "Hotkey 11", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey12 = Config.Bind("5 - CommandHotkeys", "Hotkey 12", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey13 = Config.Bind("5 - CommandHotkeys", "Hotkey 13", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey14 = Config.Bind("5 - CommandHotkeys", "Hotkey 14", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
                 SkConfigEntry.CHotkey15 = Config.Bind("5 - CommandHotkeys", "Hotkey 15", ""
-                    , "Set this to create a hotkey for a command or command chain.");
+                    , "Defina para criar um atalho de teclado para um comando ou sequência de comandos.");
 
             }
             catch (Exception Ex)
             {
-                SkUtilities.Logz(new string[] { "ERR" }, new string[] { "Could not load config. Please confirm there is a working version of BepInEx installed.",
+                SkUtilities.Logz(new string[] { "ERR" }, new string[] { "Não foi possível carregar a configuração. Verifique se há uma versão funcional do BepInEx instalada.",
                                                                             Ex.Message, Ex.Source}, LogType.Error);
             }
         }

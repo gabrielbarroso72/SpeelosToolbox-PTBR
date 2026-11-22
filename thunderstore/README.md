@@ -1,81 +1,123 @@
-# Speelo's Toolbox
+# Speelo's Toolbox - Tradução PT-BR 🇧🇷
 
-A clickable in-game cheat menu for Valheim 1.0, plus a console and chat command extender. Press **F6**, click what you want. No keybinds to memorise.
+Um menu interativo de trapaças e utilitários clicável dentro do jogo para **Valheim 1.0+**, além de um extensor de comandos para console e chat. Pressione **F6** e clique no que desejar, sem precisar memorizar atalhos no teclado!
 
-Based on Skrip's SkToolbox ([Nexus](https://www.nexusmods.com/valheim/mods/8), source by derekShaheen on [GitHub](https://github.com/derekShaheen/SkToolbox-for-Valheim)), rebuilt for Valheim 1.0.7 and given a mouse-driven interface. GPL-3.0.
+Esta é a versão **100% traduzida para o Português do Brasil (PT-BR)** por **Fox72**, baseada no projeto mantido por Speelo ([GitHub Original](https://github.com/Speelo/SpeelosToolbox)) e no mod original de Skrip / derekShaheen ([SkToolbox](https://github.com/derekShaheen/SkToolbox-for-Valheim)), sob a licença GPL-3.0.
 
-**This is a client-side mod. It does not belong on a dedicated server** - it is a menu, and a server has no screen to draw one on. **If you have it installed on a server, remove it:** version 1.1.1 crashed servers on startup, and 1.1.2 refuses to load there and logs a line saying so. You lose nothing by removing it; the commands that change shared world state already reach the server from your client through the game's own admin channel.
+> ⚠️ **Mod Exclusivo para o Cliente (Client-Side):** Este mod **NÃO** deve ser instalado em um servidor dedicado. Ele é uma interface gráfica do usuário (GUI) e o servidor não possui tela para renderizá-la. Remova-o do servidor dedicado. Os comandos que alteram o estado do mundo enviado continuam alcançando o servidor normalmente a partir do seu cliente através do canal de admin do próprio jogo.
 
-On a client it works normally whether you play alone, host a world, or join someone else's - each button's hover tip says which of those it needs.
+---
 
-Use discretion in multiplayer. These commands change your character and the world around you, and other players will notice.
+## 🌟 Recursos Exclusivos da Versão PT-BR
 
-## The menu
+Além de todos os textos, menus, botões, dicas de ferramentas (*tooltips*) e notificações do console traduzidos para o Português do Brasil, esta versão inclui melhorias de usabilidade:
 
-**F6** opens and closes it, **Escape** closes it. The key is rebindable with `MenuToggleKey` in the config. F6 is the default because Valheim and Steam both use F11 and F12 for screenshots, F5 is the game console, and F9 cycles the controller layout.
+- 📸 **Geração de Criaturas com Câmera Livre (*Free Fly*):** Ao ativar a *Câmera Livre* (na aba *Sistema > Exibição*), as criaturas invocadas no menu *Invocação* são geradas exatamente no **ponto focal do terreno ou construção para onde a sua câmera está apontando**, e não mais presas ao corpo do seu personagem!
+- 🛠️ **Ocultamento Inteligente de Bancadas para Screenshots:** Ao ativar a câmera livre enquanto trabalha em uma bancada, a interface gráfica da bancada/inventário é ocultada automaticamente, **mantendo o seu personagem na postura e animação de trabalho na bancada** para tirar *prints* perfeitos!
+- 🎯 **Tradução Fiel do Valheim:** Todos os nomes de status (*"Molhado"*, *"Frio"*, *"Conforto"*), alimentos, habilidades e comandos correspondem à localização oficial em Português do jogo.
 
-Five tabs across the top. Hovering anything shows what it does next to the cursor.
+---
 
-- **Player** - grouped into Character, Cheats and Info. Bookmarks save a spot to teleport back to, and loadouts snapshot your whole inventory to restore later. One-click food, healing, repair, skills, puke, inventory size and stats; toggles for god mode, flying, no-cost building, build anywhere, infinite stamina, infinite eitr, no carry limit and taming; status effects, guardian powers and per-source immunities; and readouts for position, portals, coordinates and nearby enemies. Toggles light up with a green outline while they are on, read from live game state rather than remembered, so they stay correct even when you use Valheim's own hotkeys.
-- **Give** - every item in the game as a grid of icons, with a search box and a quantity slider. Items go straight into your inventory. Modded items appear automatically.
-- **Spawn** - every creature in the game as a grid, with sliders for how many and what star level, and a switch to spawn them tamed.
-- **World** - grouped into Terrain, Building, Time & Weather, Rules, Progression, Travel, Cleanup and Server. Terrain tools with radius and height sliders; repairing and refuelling everything around you; weather, time, wind and raids; difficulty, world modifiers and presets; boss and world keys; teleporting, map search and revealing the map out to a chosen distance; cleanup commands; and kick, ban and ping for servers.
-- **System** - display settings (field of view, frame limit, detail distance, snow, free fly camera, debug mode), and the toolbox itself: reload, unload, open the log folder.
+## 🎮 O Menu (F6)
 
-Anything that needs a value first opens a small form inside the menu, with a search where the list is long. The commands that change the world for everyone ask for a confirmation before they run.
+Pressione **F6** para abrir ou fechar o menu (**ESC** também fecha). A tecla pode ser alterada no arquivo de configuração `com.speelo.speelostoolbox.cfg` no campo `MenuToggleKey`.
 
-Every button's hover tip also says who a click affects, because Valheim's split between local and shared commands is not guessable from their names. See below.
+O menu possui 5 abas principais na parte superior:
 
-While the menu is open the mouse is freed for the menu, but you can still walk: WASD moves you as normal, and holding the right mouse button turns the camera until you release it. Attacking, blocking, jumping and dodging stay switched off, clicks never swing your weapon, and typing in a search box moves nothing and will not swap hotbar slots or open the inventory. `WalkWithMenuOpen` and `MenuLookKey` in the config control this, and with a gamepad active the menu freezes you in place instead.
+### 1. 👤 Jogador (Player)
+- **Personagem:** Cura instantânea, seleção automática das melhores combinações de comida (Saúde Máxima, Estamina Máxima, Eitr Máximo ou Balanceada), reparar equipamentos, limpar inventário, ajustar habilidades e tamanho do inventário.
+- **Bookmarks & Loadouts:** Salve pontos do mapa para se teleportar de volta a qualquer momento e crie *snapshots* completos do seu inventário para restaurar depois.
+- **Trapaças (Toggles):** Modo Deus (God Mode com bloqueio real de dano), Voar, Construção sem custo, Construir em qualquer lugar, Estamina infinita, Eitr infinito, Sem limite de peso, Domesticar ao redor.
+- **Efeitos e Poderes:** Aplique/remova efeitos de status, poderes dos guardiões e imunidades específicas por tipo de dano (fogo, queda, afogamento, etc.).
+- **Informações:** Leitura em tempo real de posição, coordenadas, portais ativos e contagem de inimigos próximos.
 
-### Food
+### 2. 🎁 Entregar (Give)
+- Grade de ícones com **todos os itens do jogo** (incluindo itens de outros mods).
+- Barra de pesquisa integrada com suporte a acentos e nomes em português.
+- Controles deslizantes para definir a **Quantidade** (1 a 100) e o **Nível de Melhoria** (1 a 4). Os itens vão direto para o seu inventário.
 
-The Player tab has four one-click buttons that fill all three food slots: best health, best stamina, best eitr, and a balanced option that takes the best of each. Hover a button to see exactly which foods it will eat.
+### 3. 🐉 Invocação (Spawn)
+- Grade com **todas as criaturas e chefes do jogo**.
+- Controles para quantidade e **nível de estrelas** (1 a 3 estrelas).
+- Alternador para **gerar criatura domesticada**.
+- *Suporte à Câmera Livre:* gera as criaturas onde a câmera livre está focando!
 
-## Multiplayer and dedicated servers
+### 4. 🌍 Mundo (World)
+- **Terreno:** Ferramentas de nivelar, elevar, escavar e desfazer edições com ajuste de raio e altura, além do otimizador de terreno (`/optterrain`).
+- **Construção:** Reparar todas as estruturas ao redor e reabastecer tochas/fogueiras/lareiras instantaneamente.
+- **Tempo e Clima:** Forçar qualquer tipo de clima, travar/definir hora do dia, controlar direção e intensidade do vento, avançar tempo ou dormir.
+- **Regras:** Ajustar dificuldade simulada de jogadores, desativar geração natural de inimigos (`nospawn`), sem mapa, sem portais e modificadores/predefinições de mundo.
+- **Progressão:** Definir/remover chaves globais de chefes e chaves do jogador.
+- **Viagem:** Teletransporte por coordenadas, buscar e pinar estruturas/biomas no mapa, revelar mapa por raio ou por completo.
+- **Limpeza:** Eliminar inimigos/ninhos, eliminar domesticados, limpar itens caídos no chão, limpar peixes/pássaros e apagar fogo/fumaça.
+- **Servidor:** Expulsar (*kick*), banir, desbanir, lista de banidos e ping.
 
-Hover any button and the tip ends with one of these:
+### 5. ⚙️ Sistema (System)
+- **Exibição:** Campo de visão (FOV), limite de FPS, distância de detalhes (LOD), acúmulo de neve, Câmera Livre (*freefly*), Modo Debug e velocidade do jogo.
+- **Caixa de Ferramentas:** Recarregar mod, descarregar mod e abrir pasta de logs.
 
-- **(client)** - changes nothing for anyone else.
-- **(server)** - changes the world for everyone on it.
-- **(server), needs you to be admin** - sent to the server to run there, which means your ID has to be in its `adminlist.txt`.
-- **(host only)** - does nothing unless you are the one running the world.
+---
 
-On a dedicated server the world keys, world modifiers and presets, save, kick, ban and unban are forwarded to the server and refused unless you are an admin there. Sleep, Skip Time, Difficulty and List Keys are forwarded as well, but the server additionally wants `devcommands` typed into its own console before it will accept them.
+## 🕹️ Movimentação com o Menu Aberto
 
-Weather, time of day and wind only ever change your own game, on any setup, including a world you host yourself. They set the renderer's override rather than the world's clock.
+Enquanto o menu estiver aberto:
+- A seta do mouse fica livre para clicar nas opções.
+- Você pode continuar andando normalmente com **WASD**.
+- Segurar o **Botão Direito do Mouse** permite girar a câmera.
+- Ataques, esquivas e saltos acidentais são bloqueados para evitar acidentes enquanto você navega ou digita na barra de busca.
 
-Terrain edits, spawned creatures, taming, No Portals and the cleanup buttons write shared world state and need no admin at all, so they land on everyone whether or not you are running the server. Worth knowing before you click one on someone else's world.
+---
 
-## Console and chat commands
+## 💬 Comandos no Console (F5) e Chat
 
-Open the console with F5, which this mod enables for you, and type `/?` for the full list. Most commands also work in chat with a `/` prefix.
+Ao abrir o console do jogo (**F5**), digite `/?` para ver a lista completa de comandos. A maioria dos comandos também pode ser digitada no chat do jogo com o prefixo `/`.
 
-Player: `/god` `/ghost` `/fly` `/heal` `/infstam` `/nocost` `/nores` `/nosup` `/repair` `/clearinventory` `/give` `/set` `/tame` `/killall` `/tp` `/coords` `/findtomb` `/farinteract` `/imacheater`
+Exemplos de comandos:
+- **Jogador:** `/god`, `/ghost`, `/fly`, `/heal`, `/infstam`, `/nocost`, `/repair`, `/give`, `/tame`, `/tp`, `/coords`
+- **Mundo:** `/spawn`, `/spawntamed`, `/env`, `/tod`, `/wind`, `/stopevent`, `/tl`, `/tr`, `/td`, `/tu`, `/removedrops`, `/revealmap`, `/resetmap`, `/seed`
 
-World: `/spawn` `/spawntamed` `/env` `/tod` `/wind` `/resetwind` `/stopevent` `/tr` `/td` `/tl` `/tu` `/optterrain` `/removedrops` `/portals` `/revealmap` `/resetmap` `/seed` `/whois` `/detect`
+Você pode encadear comandos usando ponto e vírgula, por exemplo: `/god; /fly`.
 
-Console: `/?` `/echo` `/clear` `/console` `/listitems` `/listprefabs` `/listicons` `/listskills` `/q`
+---
 
-Commands chain with `;`, so `/god; /fly` runs both. The config supports auto-run on spawn, aliases, and up to fifteen hotkeys - `l: /fly` runs it when you press L, and a capital means hold Shift. Hotkeys are read at startup and do not fire while you are typing.
+## 🏆 Conquistas (Achievements)
 
-## Achievements
+Por padrão, o Valheim desativa as conquistas da Steam assim que detecta qualquer mod ou código de trapaça.
 
-Valheim switches off achievement progress the moment anything counts as cheated, and merely loading BepInEx already counts, because BepInEx sets the game's `isModded` flag. So achievements are off for every modded player before this mod does anything.
+A opção `KeepAchievements` (ativada por padrão nas configurações do mod) mantém o seletor `s_bypassCheatChecks` ativado. Isso garante que:
+- Você continue progredindo e liberando conquistas na Steam mesmo usando o mod.
+- Itens e construções invocados não fiquem marcados com a *flag* de trapaça.
+- Limpa o sinalizador de trapaça permanente do seu personagem ao entrar no jogo.
 
-`KeepAchievements`, on by default, flips the game's own `PlayerProfile.s_bypassCheatChecks` switch, which every cheat check reads. Achievement progress keeps counting, and spawned items, pieces and world objects are no longer stamped as cheated. It also stops cheat commands from permanently flagging your character, and clears that flag if it was already set.
+---
 
-Two things it cannot undo: a world whose starting global keys were set outside the world-modifier menu stays flagged as a cheated world when you play unmodded, and achievements you already missed are not awarded retroactively. Set `KeepAchievements` to false if you would rather Valheim behave normally.
+## ⚙️ Arquivo de Configuração
 
-## Config
-
+O arquivo de configuração é gerado automaticamente em:
 `BepInEx/config/com.speelo.speelostoolbox.cfg`
 
-Notable settings: `MenuToggleKey`, `MenuOpacity` for how solid the menu background is, `KeepAchievements`, and the console appearance options inherited from SkToolbox.
+Opções importantes:
+- `MenuToggleKey`: Tecla para abrir o menu (Padrão: `F6`).
+- `MenuOpacity`: Opacidade do fundo do menu.
+- `KeepAchievements`: Mantém as conquistas ativas (`true`/`false`).
+- `WalkWithMenuOpen`: Permite andar com o menu aberto (`true`/`false`).
 
-## Requirements
+---
 
-- BepInExPack_Valheim 5.4.2350 or newer
-- A client. This mod refuses to load on a headless server (`-nographics -batchmode`) and logs that it has done so.
+## 📋 Requisitos
 
-Jotunn is **not** required.
+- **Valheim 1.0+**
+- **BepInExPack_Valheim** (v5.4.2350 ou superior)
+- Executar no cliente (jogo do jogador).
+
+> *Jotunn **NÃO** é necessário.*
+
+---
+
+## 📜 Créditos e Licença
+
+- **Fox72**: Tradução completa para o Português do Brasil (PT-BR), adaptação das interfaces, suporte à Câmera Livre para *spawn* e ocultamento de bancadas.
+- **Speelo**: Desenvolvedor do fork mantido [SpeelosToolbox](https://github.com/Speelo/SpeelosToolbox) para Valheim 1.0.
+- **Skrip / derekShaheen**: Criadores originais do [SkToolbox-for-Valheim](https://github.com/derekShaheen/SkToolbox-for-Valheim).
+
+Licenciado sob **GPL-3.0**.

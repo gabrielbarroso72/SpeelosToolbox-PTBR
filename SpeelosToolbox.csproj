@@ -12,11 +12,14 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
 
-    <AssemblyName>SpeelosToolbox</AssemblyName>
+    <AssemblyName>SpeelosToolbox_PTBR</AssemblyName>
     <RootNamespace>SkToolbox</RootNamespace>
     <Version>1.1.6</Version>
-    <Authors>Speelo, Skrip, derekShaheen</Authors>
-    <Description>Speelo's Toolbox: clickable cheat menu and console/chat command extender for Valheim 1.0 (fork of Skrip's SkToolbox)</Description>
+    <Title>Speelo's Toolbox PT-BR</Title>
+    <Authors>Fox72, Speelo, Skrip, derekShaheen</Authors>
+    <Company>Fox72</Company>
+    <Product>Speelo's Toolbox PT-BR</Product>
+    <Description>Tradução Brasileira do mod Speelo's Toolbox para Valheim por Fox72 (fork de Speelo e Skrip)</Description>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
 
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

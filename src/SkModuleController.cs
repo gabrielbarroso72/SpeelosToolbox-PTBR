@@ -242,12 +242,12 @@ namespace SkToolbox
             moduleSpawn = gameObject.AddComponent<SkModules.ModSpawn>();
 
             // Create entry points on each module. These names are the tab labels, so they stay short.
-            moduleConsole.CallerEntry = new SkMenuItem("System", () => moduleConsole.ShowGrid(), "Display settings, and the toolbox itself");
+            moduleConsole.CallerEntry = new SkMenuItem("Sistema", () => moduleConsole.ShowGrid(), "Configurações de exibição e a própria caixa de ferramentas");
             //moduleGeneric.CallerEntry = new SkMenuItem("Generic Menu\t►", () => menuController.RequestSubMenu(moduleGeneric.FlushMenu()), "Empty Menu with a long context tip");
-            modulePlayer.CallerEntry = new SkMenuItem("Player", () => modulePlayer.ShowGrid(), "Food, healing, cheats and readouts for your character");
-            moduleWorld.CallerEntry = new SkMenuItem("World", () => moduleWorld.ShowGrid(), "Terrain, weather, time, wind, events and the map");
-            moduleGive.CallerEntry = new SkMenuItem("Give", () => moduleGive.ShowGrid(), "Every item in the game");
-            moduleSpawn.CallerEntry = new SkMenuItem("Spawn", () => moduleSpawn.ShowGrid(), "Every creature in the game");
+            modulePlayer.CallerEntry = new SkMenuItem("Jogador", () => modulePlayer.ShowGrid(), "Comida, cura, trapaças e informações do seu personagem");
+            moduleWorld.CallerEntry = new SkMenuItem("Mundo", () => moduleWorld.ShowGrid(), "Terreno, clima, tempo, vento, eventos e mapa");
+            moduleGive.CallerEntry = new SkMenuItem("Itens", () => moduleGive.ShowGrid(), "Todos os itens do jogo");
+            moduleSpawn.CallerEntry = new SkMenuItem("Criaturas", () => moduleSpawn.ShowGrid(), "Todas as criaturas do jogo");
 
             // Add modules to the menu list
             // This is the order the tabs will be shown as well.

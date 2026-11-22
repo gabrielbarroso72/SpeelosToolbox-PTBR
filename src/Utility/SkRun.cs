@@ -20,7 +20,7 @@ namespace SkToolbox.Utility
             if (string.IsNullOrEmpty(command)) return;
             if (Console.instance == null)
             {
-                SkCommandProcessor.Notify("The game console is not ready yet.");
+                SkCommandProcessor.Notify("O console do jogo ainda não está pronto.");
                 return;
             }
             RunRaw(command);
@@ -62,7 +62,7 @@ namespace SkToolbox.Utility
             List<string> printed = Capture(command);
             if (printed.Count == 0)
             {
-                SkCommandProcessor.Notify(emptyMessage ?? "Nothing to show.");
+                SkCommandProcessor.Notify(emptyMessage ?? "Nada para mostrar.");
                 return;
             }
             Text(title, string.Join("\n", printed.ToArray()));
@@ -78,7 +78,7 @@ namespace SkToolbox.Utility
             form.Fields.Add(new SkMenuController.SkFormField
             {
                 Id = "text",
-                Label = "Output",
+                Label = "Saída",
                 Kind = SkMenuController.SkFieldKind.Info,
                 TextValue = body,
                 Height = 300,
@@ -92,7 +92,7 @@ namespace SkToolbox.Utility
             List<string> added = new List<string>();
             if (string.IsNullOrEmpty(command) || Console.instance == null)
             {
-                SkCommandProcessor.Notify("The game console is not ready yet.");
+                SkCommandProcessor.Notify("O console do jogo ainda não está pronto.");
                 return added;
             }
 

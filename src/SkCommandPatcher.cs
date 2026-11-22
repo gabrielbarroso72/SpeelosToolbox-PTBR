@@ -506,7 +506,7 @@ namespace SkToolbox
                 // Flying handles up and down for itself in UpdateDebugFly, and neither value means what it usually
                 // does up there: SetControls routes jump into Player.Dodge while you are crouch-toggled or blocking,
                 // so injecting it mid-air spends stamina on a dodge nobody asked for.
-                if (__instance.IsDebugFlying()) return;
+                if (__instance.IsDebugFlying() || GameCamera.InFreeFly()) return;
 
                 if (jumpEdge) jump = true;
                 if (crouchEdge) crouch = true;
@@ -551,6 +551,66 @@ namespace SkToolbox
         // already been applied, and it is called from exactly one place, so it fires once per spawn and not on
         // teleports.
         // ---------------------------------------------------------------------------------------------------------
+        
+        // ---------------------------------------------------------------------------------------------------------
+        // Speelo's Toolbox: Esconder interface de bancada/inventário durante o uso da Câmera Livre (freefly).
+        // ---------------------------------------------------------------------------------------------------------
+        [HarmonyPatch(typeof(InventoryGui), "Update")]
+        private static class PatchInventoryGuiFreeFly
+        {
+            private static void Prefix(InventoryGui __instance)
+            {
+                if (__instance == null) return;
+
+                GameObject root = SkUtilities.GetPrivateField<GameObject>(__instance, "m_root");
+                if (root == null)
+                {
+                    Component comp = SkUtilities.GetPrivateField<Component>(__instance, "m_root");
+                    if (comp != null) root = comp.gameObject;
+                }
+
+                if (root != null && InventoryGui.IsVisible())
+                {
+                    if (GameCamera.InFreeFly())
+                    {
+                        if (root.activeSelf) root.SetActive(false);
+                    }
+                    else
+                    {
+                        if (!root.activeSelf) root.SetActive(true);
+                    }
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(StoreGui), "Update")]
+        private static class PatchStoreGuiFreeFly
+        {
+            private static void Prefix(StoreGui __instance)
+            {
+                if (__instance == null) return;
+
+                GameObject root = SkUtilities.GetPrivateField<GameObject>(__instance, "m_root");
+                if (root == null)
+                {
+                    Component comp = SkUtilities.GetPrivateField<Component>(__instance, "m_root");
+                    if (comp != null) root = comp.gameObject;
+                }
+
+                if (root != null && StoreGui.IsVisible())
+                {
+                    if (GameCamera.InFreeFly())
+                    {
+                        if (root.activeSelf) root.SetActive(false);
+                    }
+                    else
+                    {
+                        if (!root.activeSelf) root.SetActive(true);
+                    }
+                }
+            }
+        }
+
         [HarmonyPatch(typeof(Player), nameof(Player.OnSpawned))]
         private static class PatchReapplyToggles
         {

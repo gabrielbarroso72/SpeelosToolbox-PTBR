@@ -294,64 +294,64 @@ namespace SkToolbox
 
         public static Dictionary<string, string> commandList = new Dictionary<string, string>()
         {
-             {"/alt", "- (Removed) The menu is mouse-driven now. Press the MenuToggleKey (default F6) to open it."}
-             ,{"/listicons", "[Filter] - List item prefabs that have an icon, for picking menu icons"}
-            ,{"/console", "[1/0] - Toggle the console. No parameter with toggle. 1 = Open, 0 = Closed. Intended for use with hotkeys and aliases."}
-            ,{"/coords", "- Show coords in corner of the screen"}
-            ,{"/clear", "- Clear the current output shown in the console"}
-            ,{"/clearinventory", "- Removes all items from your inventory. There is no confirmation, be careful."}
-            ,{"/detect", "[Range=20] - Toggle enemy detection"}
-            ,{"/farinteract", "[Distance=50] - Toggles far interactions (building as well). To change distance, toggle this off then back on with new distance"}
-            ,{"/echo", "[Text] - Echo the text back to the console. This is intended for use with aliases and the autorun features."}
-            ,{"/env", "[Weather] - Change the weather. No parameter provided will list all weather. -1 will allow the game to control the weather again."}
+             {"/alt", "- (Removido) O menu agora é controlado pelo mouse. Pressione a tecla de alternar menu (padrão F6) para abri-lo."}
+             ,{"/listicons", "[Filtro] - Lista prefabs de itens que possuem um ícone, para escolher ícones do menu"}
+            ,{"/console", "[1/0] - Alterna o console. Sem parâmetros alterna o estado. 1 = Aberto, 0 = Fechado. Destinado ao uso com atalhos e aliases."}
+            ,{"/coords", "- Mostra as coordenadas no canto da tela"}
+            ,{"/clear", "- Limpa a saída atual exibida no console"}
+            ,{"/clearinventory", "- Remove todos os itens do seu inventário. Não há confirmação, tome cuidado."}
+            ,{"/detect", "[Alcance=20] - Alterna a detecção de inimigos"}
+            ,{"/farinteract", "[Distância=50] - Alterna interações à distância (incluindo construção). Para alterar a distância, desative e ative novamente com o novo valor"}
+            ,{"/echo", "[Texto] - Exibe o texto de volta no console. Destinado ao uso com aliases e execução automática."}
+            ,{"/env", "[Clima] - Altera o clima. Sem parâmetros lista todos os climas. -1 permite que o jogo volte a controlar o clima."}
             //,{"/event", "[Event] - Begin an event"}
-            ,{"/findtomb", "- Pin nearby dead player tombstones on the map if any currently exist"}
-            ,{"/fly", "- Toggle flying"}
-            ,{"/freecam", "- Toggle freecam"}
-            ,{"/ghost", "- Toggle Ghostmode (enemy creatures cannot see you)"}
-            ,{"/give", "[Item] [Qty=1], OR /give [Item] [Qty=1] [Player] [Level=1] - Gives item to player. If player has a space in name, only provide name before the space. Capital letters matter in item / player name!"}
-            ,{"/god", "- Toggle Godmode"}
-            ,{"/heal", "[Player=local] - Heal Player"}
-            ,{"/imacheater", "- Use the toolbox to force enable standard cheats on any server"}
-            ,{"/infstam", "- Toggles infinite stamina"}
-            ,{"/killall", "- Kills all nearby creatures"}
-            ,{"/listitems", "[Name Contains] - List all items. Optionally include name starts with. Ex. /listitems Woo returns any item that contains the letters 'Woo'"}
-            ,{"/listprefabs", "[Name Contains] - Lists all prefabs - List all prefabs/creatures. Optionally include name starts with. Ex. /listprefabs Troll returns any prefab that starts with the letters 'Troll'"}
-            ,{"/listskills", "- Lists all skills"}
-            ,{"/nocost", "- Toggle no requirement building"}
-            ,{"/nores", "- Toggle no restrictions to where you can build (except ward zones)"}
-            ,{"/nosup", "- Toggle no supports required for buildings - WARNING! - IF YOU REJOIN AND THIS IS DISABLED, YOUR STRUCTURES MAY FALL APART - USE WITH CARE. Maybe use the AutoRun functionality?"}
-            ,{"/optterrain", "- Optimize old terrain modifications"}
-            ,{"/portals", "- List all portal tags"}
+            ,{"/findtomb", "- Marca láides de jogadores mortos próximos no mapa, se houver"}
+            ,{"/fly", "- Alterna o modo de voo"}
+            ,{"/freecam", "- Alterna a câmera livre"}
+            ,{"/ghost", "- Alterna o Modo Fantasma (criaturas inimigas não podem te ver)"}
+            ,{"/give", "[Item] [Qtd=1], OU /give [Item] [Qtd=1] [Jogador] [Nível=1] - Dá o item ao jogador. Se o nome tiver espaço, use apenas a primeira parte do nome. Letras maiúsculas importam no nome do item/jogador!"}
+            ,{"/god", "- Alterna o Modo Deus"}
+            ,{"/heal", "[Jogador=local] - Cura o jogador"}
+            ,{"/imacheater", "- Usa a toolbox para forçar a ativação de trapaças padrão em qualquer servidor"}
+            ,{"/infstam", "- Alterna stamina infinita"}
+            ,{"/killall", "- Mata todas as criaturas próximas"}
+            ,{"/listitems", "[Nome Contém] - Lista todos os itens. Opcionalmente filtre pelo início do nome. Ex: /listitems Woo retorna itens que contêm 'Woo'"}
+            ,{"/listprefabs", "[Nome Contém] - Lista todos os prefabs/criaturas. Opcionalmente filtre pelo início do nome. Ex: /listprefabs Troll retorna prefabs que começam com 'Troll'"}
+            ,{"/listskills", "- Lista todas as habilidades"}
+            ,{"/nocost", "- Alterna construção sem custo/requisitos"}
+            ,{"/nores", "- Alterna a remoção de restrições de local para construir (exceto zonas de proteção)"}
+            ,{"/nosup", "- Alterna a dispensa de suporte para construções - AVISO! - SE RECONECTAR E ISSO ESTIVER DESATIVADO, SUAS ESTRUTURAS PODEM DESMORONAR - USE COM CUIDADO."}
+            ,{"/optterrain", "- Otimiza modificações antigas de terreno"}
+            ,{"/portals", "- Lista todas as marcas de portais"}
             //,{"/randomevent", "- Begins a random event"}
-            ,{"/removedrops", "- Removes items from the ground"}
-            ,{"/resetwind", "- If wind has been set, this will allow the game to take control of the wind again" }
-            ,{"/repair", "- Repair your inventory"}
-            ,{"/resetmap", "- Reset the map exploration"}
-            ,{"/revealmap", "- Reveals the entire minimap"}
-            ,{"/q", "- Quickly exit the game. Commands are sometimes just more convenient."}
-            ,{"/seed", "- Reveals the map seed"}
-            ,{"/set cw", "[Weight] - Set your weight limit (default 300)"}
-            ,{"/set difficulty", "[Player Count] - Set the difficulty (default is number of connected players)"}
-            ,{"/set exploreradius", "[Radius=100] - Set the explore radius"}
-            ,{"/set jumpforce", "[Force] - Set jump force (default 10). Careful if you fall too far!"}
-            ,{"/set pickup", "[Radius] - Set your auto pickup radius (default 2)"}
-            ,{"/set skill", "[Skill] [Level] - Set your skill level"}
-            ,{"/set speed", "[Speed Type] [Speed] - Speed Types: crouch (def: 2), run (def: 7), swim (def: 2)"}
-            ,{"/td", "[Radius=5] [Height=1] - Dig nearby terrain. Radius 30 max."}
-            ,{"/tl", "[Radius=5] - Level nearby terrain. Radius 30 max."}
-            ,{"/tr", "[Radius=5] [Height=1] - Raise nearby terrain. Radius 30 max."}
-            ,{"/tu", "[Radius=5] - Undo terrain modifications around you. Radius 50 max."}
-            ,{"/spawn", "[Creature Name] [Level=1] - Spawns a creature or prefab in front of you. Capitals in name matter! Ex. /spawn Boar 3 (use /give for items!)"}
-            ,{"/spawntamed", "[Creature Name] [Level=1] - Spawns a tamed creature in front of you. Capitals in name matter! Ex. /spawntamed Boar 3"}
-            ,{"/stopevent", "- Stops a current event"}
-            ,{"/tame", "- Tame all nearby creatures"}
-            ,{"/tod", "[0-1] - Set (and lock) time of day (-1 to unlock time) - Ex. /tod 0.5"}
-            ,{"/tp", "[X,Y] - Teleport you to the coords provided" }
+            ,{"/removedrops", "- Remove itens jogados no chão"}
+            ,{"/resetwind", "- Se o vento foi alterado, permite que o jogo volte a controlar o vento" }
+            ,{"/repair", "- Repara todos os itens do seu inventário"}
+            ,{"/resetmap", "- Reseta a exploração do mapa"}
+            ,{"/revealmap", "- Revela todo o minimapa"}
+            ,{"/q", "- Sai rapidamente do jogo."}
+            ,{"/seed", "- Revela a semente (seed) do mapa"}
+            ,{"/set cw", "[Peso] - Define o limite de carga (padrão 300)"}
+            ,{"/set difficulty", "[Qtd Jogadores] - Define a dificuldade (padrão é o número de jogadores conectados)"}
+            ,{"/set exploreradius", "[Raio=100] - Define o raio de revelação do mapa"}
+            ,{"/set jumpforce", "[Força] - Define a força do pulo (padrão 10). Cuidado com quedas altas!"}
+            ,{"/set pickup", "[Raio] - Define o raio de coleta automática (padrão 2)"}
+            ,{"/set skill", "[Habilidade] [Nível] - Define o nível de uma habilidade"}
+            ,{"/set speed", "[Tipo] [Velocidade] - Tipos: crouch (agachar, pad: 2), run (correr, pad: 7), swim (nadar, pad: 2)"}
+            ,{"/td", "[Raio=5] [Altura=1] - Escava o terreno próximo. Raio máximo de 30."}
+            ,{"/tl", "[Raio=5] - Nivela o terreno próximo. Raio máximo de 30."}
+            ,{"/tr", "[Raio=5] [Altura=1] - Eleva o terreno próximo. Raio máximo de 30."}
+            ,{"/tu", "[Raio=5] - Desfaz modificações de terreno ao seu redor. Raio máximo de 50."}
+            ,{"/spawn", "[Nome Criatura] [Nível=1] - Evoca uma criatura ou prefab à sua frente. Letras maiúsculas importam! Ex: /spawn Boar 3 (use /give para itens!)"}
+            ,{"/spawntamed", "[Nome Criatura] [Nível=1] - Evoca uma criatura domesticada à sua frente. Letras maiúsculas importam! Ex: /spawntamed Boar 3"}
+            ,{"/stopevent", "- Interrompe o evento atual"}
+            ,{"/tame", "- Domestica todas as criaturas próximas"}
+            ,{"/tod", "[0-1] - Define (e trava) a hora do dia (-1 para destravar o tempo) - Ex: /tod 0.5"}
+            ,{"/tp", "[X,Z] - Teletransporta você para as coordenadas informadas" }
             //,{"/tp [x, y] OR /tp [TO PLAYER] [FROM PLAYER=SELF]", "Teleport you to the coords or the target player to target other player If player has a space in name, only use first portion of the name.. "
             //                                                        + "\nEx. /tp 60,40 | /tp Skrip (Teleport to Skrip) | /tp TSkrip FSkrip (Teleport player FSkrip to player TSkrip)"}
-            ,{"/wind", "[Angle] [Intensity] - Set the wind direction and intensity"}
-            ,{"/whois", "- List all players"}
+            ,{"/wind", "[Ângulo] [Intensidade] - Define a direção e intensidade do vento"}
+            ,{"/whois", "- Lista todos os jogadores"}
         };
 
         public static void Announce()
@@ -364,7 +364,7 @@ namespace SkToolbox
                 }
                 else
                 {
-                    PrintOut("Toolbox by Skrip (DS) is enabled.", LogTo.Console);
+                    PrintOut("Toolbox por Skrip (DS) está ativada.", LogTo.Console);
                     PrintOut("New Version Available on NexusMods!\t► Current: " + SkVersionChecker.currentVersion + " Latest: " + SkVersionChecker.latestVersion, LogTo.Console | LogTo.DebugConsole);
                 }
 
@@ -495,7 +495,7 @@ namespace SkToolbox
                 //        entry.Value.IsCheat = false;
                 //    }
                 //}
-                new Terminal.ConsoleCommand("echo", "Echo the text back to the console. This is intended for use with aliases and the autorun features. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("echo", "Exibe o texto de volta no console. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (args.Length > 1)
                     {
@@ -508,7 +508,7 @@ namespace SkToolbox
                             PrintOut(str, LogTo.Console, false);
                     }
                 });
-                new Terminal.ConsoleCommand("/console", "[1/0] - Toggle the console. No parameter with toggle. 1 = Open, 0 = Closed. Intended for use with hotkeys and aliases. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/console", "[1/0] - Alterna o console. 1 = Aberto, 0 = Fechado. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (args.Length > 1)
                     {
@@ -531,12 +531,12 @@ namespace SkToolbox
                         }
                     }
                 });
-                new Terminal.ConsoleCommand("/q", "Quickly exit the game. Commands are sometimes just more convenient. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/q", "Sai rapidamente do jogo. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
-                    PrintOut("Quitting game...", LogTo.Console | LogTo.DebugConsole);
+                    PrintOut("Saindo do jogo...", LogTo.Console | LogTo.DebugConsole);
                     Application.Quit();
                 });
-                new Terminal.ConsoleCommand("/clear", "Clear the current output shown in the console. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/clear", "Limpa a saída atual exibida no console. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     Console.instance.m_output.text = string.Empty;
                     try
@@ -549,7 +549,7 @@ namespace SkToolbox
 
                     }
                 });
-                new Terminal.ConsoleCommand("/repair", "Repair your inventory. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/repair", "Repara seu inventário. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     List<ItemDrop.ItemData> itemList = new List<ItemDrop.ItemData>();
                     Player.m_localPlayer.GetInventory().GetWornItems(itemList);
@@ -564,18 +564,18 @@ namespace SkToolbox
 
                         }
                     }
-                    PrintOut("All items repaired!");
+                    PrintOut("Todos os itens foram reparados!");
                 });
-                new Terminal.ConsoleCommand("/portals", "List all portal tags. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/portals", "Lista todas as marcas de portais. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     PrintOut(ListPortals(), LogTo.Console);
                 });
-                new Terminal.ConsoleCommand("/tl", "[Radius=5] - Level nearby terrain. Radius 30 max. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/tl", "[Raio=5] - Nivela o terreno próximo. Raio máximo de 30. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     GameObject tLevel = ZNetScene.instance.GetPrefab("digg_v2");
                     if (tLevel == null)
                     {
-                        PrintOut("Terrain level failed. Report to mod author - terrain level error 1");
+                        PrintOut("Falha ao nivelar terreno. Reporte ao autor do mod - erro 1 de nivelamento");
                         return;
                     }
                     float radius = 5f;
@@ -591,9 +591,9 @@ namespace SkToolbox
                     }
                     TerrainModification.ModifyTerrain(Player.m_localPlayer.transform.position, tLevel, radius);
 
-                    PrintOut("Terrain levelled!");
+                    PrintOut("Terreno nivelado!");
                 });
-                new Terminal.ConsoleCommand("/tu", "[Radius=5] - Undo terrain modifications around you. Radius 50 max. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/tu", "[Raio=5] - Desfaz modificações de terreno ao seu redor. Raio máximo de 50. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     float radius = 5f;
                     if (args.Length > 1)
@@ -608,14 +608,14 @@ namespace SkToolbox
                     }
                     TerrainModification.ResetTerrain(Player.m_localPlayer.transform.position, radius);
 
-                    PrintOut("Terrain reset!");
+                    PrintOut("Terreno resetado!");
                 });
-                new Terminal.ConsoleCommand("/tr", "[Radius=5] [Height=1] - Raise nearby terrain. Radius 30 max. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/tr", "[Raio=5] [Altura=1] - Eleva o terreno próximo. Raio máximo de 30. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     GameObject tLevel = ZNetScene.instance.GetPrefab("raise");
                     if (tLevel == null)
                     {
-                        PrintOut("Terrain raise failed. Report to mod author - terrain raise error 1");
+                        PrintOut("Falha ao elevar terreno. Reporte ao autor do mod - erro 1 de elevação");
                         return;
                     }
                     float radius = 5f;
@@ -642,14 +642,14 @@ namespace SkToolbox
                     }
                     TerrainModification.ModifyTerrain(Player.m_localPlayer.transform.position + (Vector3.up * height), tLevel, radius);
 
-                    PrintOut("Terrain raised!");
+                    PrintOut("Terreno elevado!");
                 });
-                new Terminal.ConsoleCommand("/td", "[Radius=5] [Height=1] - Dig nearby terrain. Radius 30 max. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/td", "[Raio=5] [Altura=1] - Escava o terreno próximo. Raio máximo de 30. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     GameObject tLevel = ZNetScene.instance.GetPrefab("digg_v2");
                     if (tLevel == null)
                     {
-                        PrintOut("Terrain dig failed. Report to mod author - terrain dig error 1");
+                        PrintOut("Falha ao escavar terreno. Reporte ao autor do mod - erro 1 de escavação");
                         return;
                     }
                     float radius = 5f;
@@ -676,15 +676,15 @@ namespace SkToolbox
                     }
                     TerrainModification.ModifyTerrain(Player.m_localPlayer.transform.position - (Vector3.up * height), tLevel, radius);
 
-                    PrintOut("Terrain dug!");
+                    PrintOut("Terreno escavado!");
                     return;
                 });
-                new Terminal.ConsoleCommand("/resetwind", "If wind has been set, this will allow the game to take control of the wind again. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/resetwind", "Permite que o jogo volte a controlar o vento. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     EnvMan.instance.ResetDebugWind();
-                    PrintOut("Wind unlocked and under game control.");
+                    PrintOut("Vento destravado e sob controle do jogo.");
                 });
-                new Terminal.ConsoleCommand("/wind", "[Angle] [Intensity] - Set the wind direction and intensity. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/wind", "[Ângulo] [Intensidade] - Define a direção e intensidade do vento. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (args.Length == 3)
                     {
@@ -694,20 +694,20 @@ namespace SkToolbox
                     }
                     else
                     {
-                        PrintOut("Failed to set wind. Check parameters! Ex. /wind 240 5");
+                        PrintOut("Falha ao definir vento. Verifique os parâmetros! Ex: /wind 240 5");
                     }
                 });
-                new Terminal.ConsoleCommand("/env", "[Weather] - Change the weather. No parameter provided will list all weather. -1 will allow the game to control the weather again. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/env", "[Clima] - Altera o clima. Sem parâmetros lista todos os climas. -1 destrava o clima. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (args.Length == 1)
                     {
                         // Valheim 1.0: list the live EnvMan environments instead of the stale hard-coded weatherList.
                         if (EnvMan.instance == null)
                         {
-                            PrintOut("Can't find environment manager.");
+                            PrintOut("Gerenciador de clima não encontrado.");
                             return;
                         }
-                        PrintOut("Current environment: " + (EnvMan.instance.GetCurrentEnvironment()?.m_name ?? "(none)"));
+                        PrintOut("Clima atual: " + (EnvMan.instance.GetCurrentEnvironment()?.m_name ?? "(none)"));
                         foreach (string weather in EnvMan.instance.m_environments.Select(e => e.m_name).OrderBy(q => q))
                         {
                             PrintOut(weather);
@@ -720,7 +720,7 @@ namespace SkToolbox
                             if (EnvMan.instance != null)
                             {
                                 EnvMan.instance.m_debugEnv = "";
-                                PrintOut("Weather unlocked and under game control.");
+                                PrintOut("Clima destravado e sob controle do jogo.");
                             }
                         }
                         else
@@ -749,41 +749,41 @@ namespace SkToolbox
                             if (match != null)
                             {
                                 EnvMan.instance.m_debugEnv = match.m_name; // canonical name: EnvMan.GetEnv is a case-sensitive exact match
-                                PrintOut("Weather set to: " + EnvMan.instance.m_debugEnv);
+                                PrintOut("Clima definido para: " + EnvMan.instance.m_debugEnv);
                             }
                             else if (EnvMan.instance == null)
                             {
-                                PrintOut("Failed to set weather to '" + finalWeatherName + "'. Can't find environment manager.");
+                                PrintOut("Falha ao definir clima para '" + finalWeatherName + "'. Can't find environment manager.");
                             }
                             else
                             {
-                                PrintOut("Failed to set weather to '" + finalWeatherName + "'. Unknown environment. Use /env to list, /env -1 to unlock.");
+                                PrintOut("Falha ao definir clima para '" + finalWeatherName + "'. Unknown environment. Use /env to list, /env -1 to unlock.");
                             }
                         }
                     }
                     else
                     {
-                        PrintOut("Failed to set weather. Check parameters! Ex. /env, /env -1, /env Misty");
+                        PrintOut("Falha ao definir clima. Verifique os parâmetros! Ex: /env, /env -1, /env Misty");
                     }
                 });
-                new Terminal.ConsoleCommand("/fly", "Toggle flying. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/fly", "Alterna o modo de voo. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     // Valheim 1.0: use Player.ToggleDebugFly() (flips m_debugFly AND writes ZDOVars.s_debugFly so remote clients/monsters see IsDebugFlying()).
                     Player lp = Player.m_localPlayer;
                     if (lp == null || lp.GetComponent<ZNetView>() == null || !lp.GetComponent<ZNetView>().IsValid())
                     {
-                        PrintOut("Fly: no local player yet. Spawn into a world first.");
+                        PrintOut("Voo: nenhum jogador local. Entre em um mundo primeiro.");
                         return;
                     }
                     flyEnabled = lp.ToggleDebugFly();          // public, Player.cs:7518; returns the new state
                     Player.m_debugMode = flyEnabled || noCostEnabled || SkCommandPatcher.BCheat; // never stomp debugmode enabled by /imacheater or /nocost
-                    PrintOut("Fly toggled! (" + flyEnabled.ToString() + ")");
+                    PrintOut("Voo alternado! (" + flyEnabled.ToString() + ")");
                 });
-                new Terminal.ConsoleCommand("/listicons", "[Filter] - List item prefabs that have an icon, for picking menu icons. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/listicons", "[Filtro] - Lista prefabs de itens que possuem ícone. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (ObjectDB.instance == null || ObjectDB.instance.m_items == null)
                     {
-                        PrintOut("Item database is not loaded yet.");
+                        PrintOut("Banco de dados de itens ainda não foi carregado.");
                         return;
                     }
                     string filter = args.Length > 1 ? args[1].ToLower() : string.Empty;
@@ -799,31 +799,31 @@ namespace SkToolbox
                         PrintOut(prefab.name);
                         count++;
                     }
-                    PrintOut(count + " item icon(s) listed.");
+                    PrintOut(count + " ícone(s) de item listado(s).");
                 });
 
-                new Terminal.ConsoleCommand("/alt", "(Removed) The menu is mouse-driven now; press the MenuToggleKey (default F6). (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/alt", "(Removido) O menu agora é controlado pelo mouse; pressione F6. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     SkMenuController menu = SkLoader.Load != null ? SkLoader.Load.GetComponent<SkMenuController>() : null;
-                    PrintOut("The menu is mouse-driven now. Press " + (menu != null ? menu.ToggleKey.ToString() : "F6") + " to open it; the /alt keyboard controls were removed.");
+                    PrintOut("O menu agora é controlado pelo mouse. Pressione " + (menu != null ? menu.ToggleKey.ToString() : "F6") + " para abri-lo; o controle por teclado de /alt foi removido.");
                 });
-                new Terminal.ConsoleCommand("/stopevent", "Stops a current event. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/stopevent", "Interrompe o evento atual. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     // Valheim 1.0: on a joined server the server re-broadcasts the running event every 2 s (RPC_SetEvent), so a local reset is undone.
                     if (ZNet.instance == null || !ZNet.instance.IsServer())
                     {
-                        PrintOut("Events can only be stopped by the host/server (the server re-syncs the active event every 2s).");
+                        PrintOut("Eventos só podem ser interrompidos pelo anfitrião/servidor (o servidor ressincroniza eventos a cada 2s).");
                         return;
                     }
                     RandEventSystem.instance.ResetRandomEvent();
-                    PrintOut("Event stopped!");
+                    PrintOut("Evento interrompido!");
                 });
-                new Terminal.ConsoleCommand("/revealmap", "Reveals the entire minimap. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/revealmap", "Revela todo o minimapa. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     Minimap.instance.ExploreAll();
-                    PrintOut("Map revealed!");
+                    PrintOut("Mapa revelado!");
                 });
-                new Terminal.ConsoleCommand("/whois", "List all players. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/whois", "Lista todos os jogadores. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     // Valheim 1.0: GetConnectedPeers() is only the server on a client; use the server-synced roster.
                     string playerStr = string.Empty;
@@ -836,9 +836,9 @@ namespace SkToolbox
                     {
                         playerStr = playerStr.Remove(0, 2);
                     }
-                    PrintOut("Active Players (" + players.Count + ") - " + playerStr);
+                    PrintOut("Jogadores Ativos (" + players.Count + ") - " + playerStr);
                 });
-                new Terminal.ConsoleCommand("/give", "[Item] [Qty=1], OR /give [Item] [Qty=1] [Player] [Level=1] - Gives item to player. If player has a space in name, only provide name before the space. Capital letters matter in item / player name! (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/give", "[Item] [Qtd=1] [Jogador] [Nível=1] - Dá o item ao jogador. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     string cmdPlr = Player.m_localPlayer.GetPlayerName();
                     string cmdItem = string.Empty;
@@ -847,7 +847,7 @@ namespace SkToolbox
                     // Valheim 1.0: ConsoleEventArgs.Args is the raw line split on spaces: args[0] is "/give", real parameters start at args[1]
                     if (args.Length < 2)
                     {
-                        PrintOut("Failed. No item provided. /give [Item] [Qty=1] [Player] [Level=1]");
+                        PrintOut("Falhou. Nenhum item informado. /give [Item] [Qtd=1] [Jogador] [Nível=1]");
                         return;
                     }
                     cmdItem = args[1];
@@ -897,14 +897,14 @@ namespace SkToolbox
 
                     if (plrObj == null)
                     {
-                        PrintOut("Failed. Player does not exist. /give [Item] [Qty=1] [Player] [Level=1]");
+                        PrintOut("Falhou. Jogador não existe. /give [Item] [Qtd=1] [Jogador] [Nível=1]");
                         return;
                     }
 
                     GameObject item = ZNetScene.instance.GetPrefab(cmdItem); // Valheim 1.0: args[0] is the command word
                     if (item)
                     {
-                        PrintOut("Spawning " + cmdQty + " of item " + cmdItem + "(" + cmdLvl + ") on " + cmdPlr);
+                        PrintOut("Gerando " + cmdQty + " do item " + cmdItem + "(" + cmdLvl + ") on " + cmdPlr);
 
                         //for (int x = 0; x < cmdQty; x++)
                         //{
@@ -921,38 +921,38 @@ namespace SkToolbox
                         }
                         catch (Exception ex)
                         {
-                            PrintOut("Something unexpected failed.");
+                            PrintOut("Ocorreu uma falha inesperada.");
                             SkUtilities.Logz(new string[] { "ERR", "/give" }, new string[] { ex.Message, ex.Source }, LogType.Warning);
                         }
                         //}
                     }
                     else
                     {
-                        PrintOut("Failed. Check parameters. /give [Item] [Qty=1] [Player] [Level=1]");
+                        PrintOut("Falhou. Verifique os parâmetros. /give [Item] [Qtd=1] [Jogador] [Nível=1]");
                     }
                     return;
                 });
-                new Terminal.ConsoleCommand("/god", "Toggle Godmode. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/god", "Alterna o Modo Deus. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     // Valheim 1.0: derive the toggle from the live Player state (m_godMode is per Player instance, the static survives relog).
                     if (Player.m_localPlayer == null)
                     {
-                        PrintOut("No local player.");
+                        PrintOut("Nenhum jogador local.");
                         return;
                     }
                     godEnabled = !Player.m_localPlayer.InGodMode(); // Player.cs:4470
                     Player.m_localPlayer.SetGodMode(godEnabled);    // Player.cs:4465
-                    PrintOut("Godmode " + (godEnabled ? "ON" : "OFF")
+                    PrintOut("Modo Deus " + (godEnabled ? "ON" : "OFF")
                         + (godEnabled && (SkConfigEntry.CGodModeBlocksDamage == null || SkConfigEntry.CGodModeBlocksDamage.Value)
                            ? " - damage is blocked outright." : "."));
                 });
-                new Terminal.ConsoleCommand("/clearinventory", "Removes all items from your inventory. There is no confirmation, be careful. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/clearinventory", "Remove todos os itens do seu inventário. Não há confirmação, tome cuidado. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     Player.m_localPlayer.UnequipAllItems(); // Valheim 1.0: RemoveAll() leaves Humanoid m_rightItem/m_leftItem/armor slots pointing at removed ItemData
                     Player.m_localPlayer.GetInventory().RemoveAll();
-                    PrintOut("All items removed from inventory.");
+                    PrintOut("Todos os itens foram removidos do inventário.");
                 });
-                new Terminal.ConsoleCommand("/findtomb", "Pin nearby dead player tombstones on the map if any currently exist. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/findtomb", "Marca láides de jogadores mortos próximos no mapa. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     TombStone[] listTraders = GameObject.FindObjectsByType<TombStone>(FindObjectsSortMode.None);
                     if (listTraders.Length > 0)
@@ -965,20 +965,20 @@ namespace SkToolbox
                             }
                         }
                     }
-                    PrintOut("Tombstone sought out! Potentially " + listTraders.Length + " found.");
+                    PrintOut("Láides buscadas! Potencialmente " + listTraders.Length + " encontrada(s).");
                     return;
                 });
-                new Terminal.ConsoleCommand("/seed", "Reveals the map seed. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/seed", "Revela a semente (seed) do mapa. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     World wrld = SkUtilities.GetPrivateField<World>(WorldGenerator.instance, "m_world");
-                    PrintOut("Map seed: " + wrld.m_seedName);
+                    PrintOut("Semente do mapa: " + wrld.m_seedName);
                 });
-                new Terminal.ConsoleCommand("/freecam", "Toggle freecam. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/freecam", "Alterna a câmera livre. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     GameCamera.instance.ToggleFreeFly();
-                    PrintOut("Free cam toggled " + GameCamera.InFreeFly().ToString());
+                    PrintOut("Câmera livre alternada: " + GameCamera.InFreeFly().ToString());
                 });
-                new Terminal.ConsoleCommand("/heal", "[Player=local] - Heal Player. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/heal", "[Jogador=local] - Cura o jogador. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (args.Length > 1)
                     {
@@ -989,7 +989,7 @@ namespace SkToolbox
                                 if (pl.GetPlayerName().ToLower().Equals(args[1].ToLower()))
                                 {
                                     pl.Heal(pl.GetMaxHealth());
-                                    PrintOut("Player healed: " + pl.GetPlayerName());
+                                    PrintOut("Jogador curado: " + pl.GetPlayerName());
                                 }
                             }
                         }
@@ -997,34 +997,34 @@ namespace SkToolbox
                     else
                     {
                         Player.m_localPlayer.Heal(Player.m_localPlayer.GetMaxHealth(), true);
-                        PrintOut("Self healed.");
+                        PrintOut("Cura própria aplicada.");
                     }
                 });
-                new Terminal.ConsoleCommand("/nores", "Toggle no restrictions to where you can build (except ward zones). (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/nores", "Alterna a remoção de restrições de construção. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     SkCommandPatcher.InitPatch();
                     SkCommandPatcher.bBuildAnywhere = !SkCommandPatcher.bBuildAnywhere;
-                    PrintOut("No build restrictions toggled! (" + SkCommandPatcher.bBuildAnywhere.ToString() + ")");
+                    PrintOut("Sem restrições de construção alternado! (" + SkCommandPatcher.bBuildAnywhere.ToString() + ")");
                 });
-                new Terminal.ConsoleCommand("/nocost", "Toggle no requirement building. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/nocost", "Alterna a construção sem custo/requisitos. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     // Valheim 1.0: use the public setter (refreshes the hammer piece table) and derive the state from the live Player.
                     Player lp = Player.m_localPlayer;
                     if (lp == null)
                     {
-                        PrintOut("No local player.");
+                        PrintOut("Nenhum jogador local.");
                         return;
                     }
                     noCostEnabled = !lp.NoCostCheat();         // Player.cs:6177
                     lp.SetNoPlacementCost(noCostEnabled);      // public, Player.cs:7526; calls UpdateAvailablePiecesList() so "unlock all pieces" applies immediately
                     Player.m_debugMode = flyEnabled || noCostEnabled || SkCommandPatcher.BCheat; // never stomp debugmode enabled by /imacheater or /fly
-                    PrintOut("No build cost/requirements toggled! (" + noCostEnabled.ToString() + ")");
+                    PrintOut("Construção sem custo/requisitos alternada! (" + noCostEnabled.ToString() + ")");
                 });
-                new Terminal.ConsoleCommand("/tp", "[X,Y] - Teleport you to the coords provided. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/tp", "[X,Z] - Teletransporta você para as coordenadas informadas. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (args.Length != 2 || !args[1].Contains(","))
                     {
-                        PrintOut("Syntax /tp X,Z");
+                        PrintOut("Sintaxe: /tp X,Z");
                         return;
                     }
                     try
@@ -1055,17 +1055,17 @@ namespace SkToolbox
                             Vector3 pos2 = new Vector3(x, targetY, z);
                             // distantTeleport: true waits for the zone to load and never bounces back with "$msg_portal_blocked".
                             if (localPlayer2.TeleportTo(pos2, localPlayer2.transform.rotation, true))
-                                PrintOut("Teleporting...");
+                                PrintOut("Teletransportando...");
                             else
-                                PrintOut("Teleport refused (already teleporting or <2s since last teleport). Try again in a moment.");
+                                PrintOut("Teletransporte recusado (já teletransportando ou <2s desde o último teletransporte). Tente novamente em um momento.");
                         }
                     }
                     catch (Exception)
                     {
-                        PrintOut("Syntax /tp X,Z");
+                        PrintOut("Sintaxe: /tp X,Z");
                     }
                 });
-                new Terminal.ConsoleCommand("/detect", "[Range=20] - Toggle enemy detection. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/detect", "[Alcance=20] - Alterna a detecção de inimigos. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     bDetectEnemies = !bDetectEnemies;
                     if (args.Length > 0)
@@ -1080,9 +1080,9 @@ namespace SkToolbox
                             bDetectRange = 20;
                         }
                     }
-                    PrintOut("Detect enemies toggled! (" + bDetectEnemies.ToString() + ", range: " + bDetectRange + ")");
+                    PrintOut("Detecção de inimigos alternada! (" + bDetectEnemies.ToString() + ", range: " + bDetectRange + ")");
                 });
-                new Terminal.ConsoleCommand("/imacheater", "Use the toolbox to force enable standard cheats on any server. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/imacheater", "Força a ativação de trapaças padrão em qualquer servidor. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     SkCommandPatcher.InitPatch();
                     SkCommandPatcher.BCheat = !SkCommandPatcher.BCheat;
@@ -1124,52 +1124,52 @@ namespace SkToolbox
                         SkUtilities.InvokePrivateMethod(Console.instance, "updateCommandList", null);
                     }
 
-                    PrintOut("Cheats toggled! (" + SkCommandPatcher.BCheat.ToString() + ")");
+                    PrintOut("Trapaças alternadas! (" + SkCommandPatcher.BCheat.ToString() + ")");
                     if (SkCommandPatcher.BCheat)
                     {
                         PrintOut("Vanilla cheat commands (god/fly/ghost/nocost/debugmode...) are now valid on this client, including on joined servers.");
                     }
                 });
-                new Terminal.ConsoleCommand("/nosup", "Toggle no supports required for buildings - WARNING! - IF YOU REJOIN AND THIS IS DISABLED, YOUR STRUCTURES MAY FALL APART - USE WITH CARE. Maybe use the AutoRun functionality? (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/nosup", "Alterna a dispensa de suporte para construções - AVISO! SUAS ESTRUTURAS PODEM DESMORONAR SE DESATIVADO. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     SkCommandPatcher.InitPatch();
                     SkCommandPatcher.BFreeSupport = !SkCommandPatcher.BFreeSupport;
-                    PrintOut("No build support requirements toggled! (" + SkCommandPatcher.BFreeSupport.ToString() + ")");
+                    PrintOut("Sem requisitos de suporte de construção alternado! (" + SkCommandPatcher.BFreeSupport.ToString() + ")");
                 });
-                new Terminal.ConsoleCommand("/coords", "Show coords in corner of the screen. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/coords", "Mostra coordenadas no canto da tela. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     bCoords = !bCoords;
-                    PrintOut("Show coords toggled! (" + bCoords.ToString() + ")");
+                    PrintOut("Exibição de coordenadas alternada! (" + bCoords.ToString() + ")");
                 });
-                new Terminal.ConsoleCommand("/resetmap", "Reset the map exploration. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/resetmap", "Reseta a exploração do mapa. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     Minimap.instance.Reset();
                 });
-                new Terminal.ConsoleCommand("/infstam", "Toggles infinite stamina. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/infstam", "Alterna stamina infinita. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     // Valheim 1.0: SetMaxStamina(9999f) removed - Player.UpdateFood recomputes max stamina from food
                     // every second, so it was dead code that only flashed the bar.
                     Player lpStam = Player.m_localPlayer;
                     if (lpStam == null)
                     {
-                        PrintOut("Infinite stamina: no local player yet. Spawn into a world first.");
+                        PrintOut("Stamina infinita: nenhum jogador local. Entre em um mundo primeiro.");
                         return;
                     }
                     infStamina = !infStamina;
                     ApplyInfStamina(lpStam, applyOffValues: true);
-                    PrintOut("Infinite stamina toggled! (" + infStamina.ToString() + ")");
+                    PrintOut("Stamina infinita alternada! (" + infStamina.ToString() + ")");
                 });
-                new Terminal.ConsoleCommand("/tame", "Tame all nearby creatures. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/tame", "Domestica todas as criaturas próximas. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     Tameable.TameAllInArea(Player.m_localPlayer.transform.position, 20f);
-                    PrintOut("Creatures tamed!");
+                    PrintOut("Criaturas domesticadas!");
                 });
-                new Terminal.ConsoleCommand("/farinteract", "[Distance=50] - Toggles far interactions (building as well). To change distance, toggle this off then back on with new distance. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/farinteract", "[Distância=50] - Alterna interações à distância. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     Player lpReach = Player.m_localPlayer;
                     if (lpReach == null)
                     {
-                        PrintOut("Far interactions: no local player yet. Spawn into a world first.");
+                        PrintOut("Interação à distância: nenhum jogador local. Entre em um mundo primeiro.");
                         return;
                     }
                     farInteract = !farInteract;
@@ -1182,27 +1182,27 @@ namespace SkToolbox
                         }
                         catch (Exception)
                         {
-                            PrintOut("Failed to set far interaction distance. Check params. /farinteract 50");
+                            PrintOut("Falha ao definir distância de interação. Verifique os parâmetros. /farinteract 50");
                         }
                     }
                     ApplyFarInteract(lpReach, applyOffValues: true);
                     PrintOut(farInteract
-                        ? "Far interactions toggled! (True Distance: " + farInteractDistance + ")"
-                        : "Far interactions toggled! (False)");
+                        ? "Interações à distância alternadas! (Ativado Distância: " + farInteractDistance + ")"
+                        : "Interações à distância alternadas! (Desativado)");
                 });
-                new Terminal.ConsoleCommand("/ghost", "Toggle Ghostmode (enemy creatures cannot see you). (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/ghost", "Alterna o Modo Fantasma. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     Player lpGhost = Player.m_localPlayer;
                     if (lpGhost == null)
                     {
-                        PrintOut("Ghost: no local player yet. Spawn into a world first.");
+                        PrintOut("Modo Fantasma: nenhum jogador local. Entre em um mundo primeiro.");
                         return;
                     }
                     lpGhost.SetGhostMode(!lpGhost.InGhostMode());
                     ghostEnabled = lpGhost.InGhostMode(); // so a respawn can put it back
-                    PrintOut("Ghost mode toggled! (" + ghostEnabled.ToString() + ")");
+                    PrintOut("Modo Fantasma alternado! (" + ghostEnabled.ToString() + ")");
                 });
-                new Terminal.ConsoleCommand("/tod", "[0-1] - Set (and lock) time of day (-1 to unlock time). Ex. /tod 0.5 (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args) // Valheim 1.0: description was a copy-paste from /portals
+                new Terminal.ConsoleCommand("/tod", "[0-1] - Define (e trava) a hora do dia (-1 para destravar). (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args) // Valheim 1.0: description was a copy-paste from /portals
                 {
                     if (args.Length > 1)
                     {
@@ -1214,26 +1214,26 @@ namespace SkToolbox
                         if (num10 < 0f)
                         {
                             EnvMan.instance.m_debugTimeOfDay = false;
-                            PrintOut("Time unlocked and under game control.");
+                            PrintOut("Hora destravada e sob controle do jogo.");
                         }
                         else
                         {
                             EnvMan.instance.m_debugTimeOfDay = true;
                             EnvMan.instance.m_debugTime = Mathf.Clamp01(num10);
-                            PrintOut("Setting time of day:" + num10);
+                            PrintOut("Definindo hora do dia: " + num10);
                         }
                     }
                     else
                     {
-                        PrintOut("Failed. Syntax /tod [0-1] Ex. /tod 0.5");
+                        PrintOut("Falhou. Sintaxe: /tod [0-1] Ex: /tod 0.5");
                     }
                 });
-                new Terminal.ConsoleCommand("/optterrain", "Optimize old terrain modifications. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/optterrain", "Otimiza modificações antigas de terreno. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     TerrainComp.UpgradeTerrain();
                     Heightmap.UpdateTerrainAlpha(); // Valheim 1.0: vanilla optterrain also re-syncs the paint-mask alpha into the TerrainComp
                 });
-                new Terminal.ConsoleCommand("/set", "[Option] [value] [value]. Option can be one of [cw,difficulty,exploreradius,jumpforce,pickup,skill,speed]. All options take 1 value except [skill,speed]. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/set", "[Opção] [valor] [valor]. Opções: [cw,difficulty,exploreradius,jumpforce,pickup,skill,speed]. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (args.Length > 1)
                     {
@@ -1243,11 +1243,11 @@ namespace SkToolbox
                             {
                                 int newWeight = int.Parse(args[2]);
                                 Player.m_localPlayer.m_maxCarryWeight = newWeight;
-                                PrintOut("New carry weight set to: " + newWeight);
+                                PrintOut("Novo limite de carga definido para: " + newWeight);
                             }
                             catch (Exception)
                             {
-                                PrintOut("Failed to set new carry weight. Check params.");
+                                PrintOut("Falha ao definir novo limite de carga. Verifique os parâmetros.");
                             }
                             return;
                         }
@@ -1266,11 +1266,11 @@ namespace SkToolbox
                                 }
                                 catch (Exception)
                                 {
-                                    PrintOut("Failed to set skill. Check params / skill name. See /listskills. /set skill [skill] [level]");
+                                    PrintOut("Falha ao definir habilidade. Verifique os parâmetros / nome. Veja /listskills. /set skill [habilidade] [nível]");
                                     return;
                                 }
                             }
-                            PrintOut("Failed to set skill. Check params / skill name. See /listskills.  /set skill [skill] [level]");
+                            PrintOut("Falha ao definir habilidade. Verifique os parâmetros / nome. Veja /listskills. /set skill [habilidade] [nível]");
                             return;
                         }
 
@@ -1282,17 +1282,17 @@ namespace SkToolbox
                                 {
                                     int cmdRange = int.Parse(args[2]);
                                     Player.m_localPlayer.m_autoPickupRange = cmdRange;
-                                    PrintOut("New range set to: " + cmdRange);
+                                    PrintOut("Novo raio definido para: " + cmdRange);
                                     return;
                                 }
                                 catch (Exception)
                                 {
-                                    PrintOut("Failed to set pickup range. Check params. /set pickup 2");
+                                    PrintOut("Falha ao definir raio de coleta. Verifique os parâmetros. /set pickup 2");
                                     return;
                                 }
                             }
 
-                            PrintOut("Failed to set pickup range. Check params.  /set pickup 2");
+                            PrintOut("Falha ao definir raio de coleta. Verifique os parâmetros. /set pickup 2");
                             return;
                         }
 
@@ -1304,17 +1304,17 @@ namespace SkToolbox
                                 {
                                     int cmdRange = int.Parse(args[2]);
                                     Player.m_localPlayer.m_jumpForce = cmdRange;
-                                    PrintOut("New range set to: " + cmdRange);
+                                    PrintOut("Novo raio definido para: " + cmdRange);
                                     return;
                                 }
                                 catch (Exception)
                                 {
-                                    PrintOut("Failed to set jump force. Check params. /set jumpforce 10");
+                                    PrintOut("Falha ao definir força de pulo. Verifique os parâmetros. /set jumpforce 10");
                                     return;
                                 }
                             }
 
-                            PrintOut("Failed to set jump force. Check params.  /set jumpforce 10");
+                            PrintOut("Falha ao definir força de pulo. Verifique os parâmetros. /set jumpforce 10");
                             return;
                         }
 
@@ -1326,17 +1326,17 @@ namespace SkToolbox
                                 {
                                     int cmdRange = int.Parse(args[2]);
                                     Minimap.instance.m_exploreRadius = cmdRange;
-                                    PrintOut("New range set to: " + cmdRange);
+                                    PrintOut("Novo raio definido para: " + cmdRange);
                                     return;
                                 }
                                 catch (Exception)
                                 {
-                                    PrintOut("Failed to set explore radius. Check params. /set exploreradius 100");
+                                    PrintOut("Falha ao definir raio de exploração. Verifique os parâmetros. /set exploreradius 100");
                                     return;
                                 }
                             }
 
-                            PrintOut("Failed to set explore radius. Check params.  /set exploreradius 100");
+                            PrintOut("Falha ao definir raio de exploração. Verifique os parâmetros. /set exploreradius 100");
                             return;
                         }
 
@@ -1369,21 +1369,21 @@ namespace SkToolbox
                                                 Player.m_localPlayer.m_swimSpeed = cmdSpeed;
                                                 break;
                                         }
-                                        PrintOut("New " + cmdType + " speed set to: " + cmdSpeed + " (was: " + wasSpeed + ")");
+                                        PrintOut("New " + cmdType + " definida para: " + cmdSpeed + " (era: " + wasSpeed + ")");
                                     }
                                     catch (Exception)
                                     {
-                                        PrintOut("Failed to set speed. Check params name. Ex. /set speed crouch 2");
+                                        PrintOut("Falha ao definir velocidade. Verifique o tipo. Ex: /set speed crouch 2");
                                         return;
                                     }
                                 }
                                 else
                                 {
-                                    PrintOut("Failed to set speed. Check params name. Ex.  /set speed crouch 2");
+                                    PrintOut("Falha ao definir velocidade. Verifique o tipo. Ex: /set speed crouch 2");
                                 }
                                 return;
                             }
-                            PrintOut("Failed to set speed. Check params name. Ex.  /set speed crouch 2");
+                            PrintOut("Falha ao definir velocidade. Verifique o tipo. Ex: /set speed crouch 2");
                             return;
                         }
 
@@ -1395,21 +1395,21 @@ namespace SkToolbox
                                 {
                                     int diffLvl = int.Parse(args[2]);
                                     Game.instance.SetForcePlayerDifficulty(diffLvl);
-                                    PrintOut("Difficulty set to " + diffLvl.ToString());
+                                    PrintOut("Dificuldade definida para " + diffLvl.ToString());
                                     return;
                                 }
                                 catch (Exception)
                                 {
-                                    PrintOut("Failed to set difficulty. Check params. /set difficulty 5");
+                                    PrintOut("Falha ao definir dificuldade. Verifique os parâmetros. /set difficulty 5");
                                     return;
                                 }
                             }
-                            PrintOut("Failed to set difficulty. Check params.  /set difficulty 5");
+                            PrintOut("Falha ao definir dificuldade. Verifique os parâmetros. /set difficulty 5");
                             return;
                         }
                     }
                 });
-                new Terminal.ConsoleCommand("/removedrops", "Removes items from the ground. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/removedrops", "Remove itens jogados no chão. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     // Valheim 1.0: skip live fish and item-pieces (like vanilla removedrops) and claim ownership so ZNetScene.Destroy really destroys the ZDO.
                     ItemDrop[] array2 = UnityEngine.Object.FindObjectsByType<ItemDrop>(FindObjectsSortMode.None);
@@ -1432,17 +1432,17 @@ namespace SkToolbox
                             removed++;
                         }
                     }
-                    PrintOut("Items cleared (" + removed + ").");
+                    PrintOut("Itens removidos (" + removed + ").");
                 });
                 // Valheim 1.0: /spawntamed no longer re-invokes itself (StackOverflow) nor mass-tames via TameAllInArea (which now ignores point/radius); it tames only the spawned creature.
-                new Terminal.ConsoleCommand("/spawntamed", "[Creature Name] [Level=1] - Spawns a tamed creature in front of you. Capitals in name matter! Ex. /spawntamed Boar 3. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/spawntamed", "[Nome Criatura] [Nível=1] - Evoca uma criatura domesticada à sua frente. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     GameObject spawned = SpawnPrefab(args);
                     if (spawned == null) return;
                     MonsterAI ai = spawned.GetComponent<MonsterAI>();
                     if (ai == null)
                     {
-                        PrintOut("Spawned, but " + args[1] + " has no MonsterAI and cannot be tamed.");
+                        PrintOut("Spawned, but " + args[1] + " não possui IA de monstro e não pode ser domesticado.");
                         return;
                     }
                     ai.MakeTame(); // public in 1.0.7; -> Character.SetTamed -> RPC_SetTamed on the locally-owned fresh ZDO
@@ -1451,18 +1451,18 @@ namespace SkToolbox
                     {
                         tameable.m_tamedEffect.Create(spawned.transform.position, spawned.transform.rotation);
                     }
-                    PrintOut("Spawned tamed - " + args[1]);
+                    PrintOut("Gerado domesticado - " + args[1]);
                 });
                 // Valheim 1.0: /spawn body moved to SpawnPrefab(); the dead "spawn_id"/"alive_time" writes onto a random ZDO were dropped.
-                new Terminal.ConsoleCommand("/spawn", "[Creature Name] [Level=1] - Spawns a creature or prefab in front of you. Capitals in name matter! Ex. /spawn Boar 3 (use /give for items!) (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/spawn", "[Nome Criatura] [Nível=1] - Evoca uma criatura ou prefab à sua frente. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     GameObject spawned = SpawnPrefab(args);
                     if (spawned != null)
                     {
-                        PrintOut("Spawned - " + args[1]);
+                        PrintOut("Gerado - " + args[1]);
                     }
                 });
-                new Terminal.ConsoleCommand("/killall", "Kills all nearby creatures. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/killall", "Mata todas as criaturas próximas. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     List<Character> CharList = new List<Character>();
                     Character.GetCharactersInRange(Player.m_localPlayer.transform.position, 50f, CharList);
@@ -1475,9 +1475,9 @@ namespace SkToolbox
                             character.Damage(hitData);
                         }
                     }
-                    PrintOut("Nearby creatures killed! (50m)");
+                    PrintOut("Criaturas próximas mortas! (50m)");
                 });
-                new Terminal.ConsoleCommand("/listitems", "[Name Contains] - List all items. Optionally include name starts with. Ex. /listitems Woo returns any item that contains the letters 'Woo'. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/listitems", "[Nome Contém] - Lista todos os itens. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     if (args.Length > 1)
                     { //starts with
@@ -1499,7 +1499,7 @@ namespace SkToolbox
                         }
                     }
                 });
-                new Terminal.ConsoleCommand("/listprefabs", "[Name Contains] - Lists all prefabs - List all prefabs / creatures. Optionally include name starts with.Ex. / listprefabs Troll returns any prefab that starts with the letters 'Troll'. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/listprefabs", "[Nome Contém] - Lista todos os prefabs/criaturas. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
                     ConsoleOpt.BuildPrefabs();
                     if (args.Length > 1)
@@ -1520,9 +1520,9 @@ namespace SkToolbox
                         }
                     }
                 });
-                new Terminal.ConsoleCommand("/listskills", "Lists all skills. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
+                new Terminal.ConsoleCommand("/listskills", "Lista todas as habilidades. (Speelo's Toolbox)", delegate (Terminal.ConsoleEventArgs args)
                 {
-                    string skillList = "Skills found: ";
+                    string skillList = "Habilidades encontradas: ";
                     foreach (object obj in Enum.GetValues(typeof(Skills.SkillType)))
                     {
                         if (!obj.ToString().Contains("None") && !obj.ToString().Contains("All") && !obj.ToString().Contains("FireMagic") && !obj.ToString().Contains("FrostMagic"))
@@ -1564,9 +1564,9 @@ namespace SkToolbox
 
             if (inCommand.StartsWith("help") && source.HasFlag(LogTo.Console))
             {
-                Console.instance.Print("devcommands - Enable standard developer/cheat commands");
-                Console.instance.Print("/? [Page] - Speelo's Toolbox Commands - Pages 1 through " + (Mathf.Ceil(commandList.Count / pageSize) + (commandList.Count % pageSize == 0 ? 0 : 1)) + " - Example /? 1");
-                Console.instance.Print("Speelo's Toolbox - Close the console and press " + (SkLoader.Load != null && SkLoader.Load.GetComponent<SkMenuController>() != null ? SkLoader.Load.GetComponent<SkMenuController>().ToggleKey.ToString() : "F6") + " to open the menu.");
+                Console.instance.Print("devcommands - Ativa comandos padrão de desenvolvedor/trapaças");
+                Console.instance.Print("/? [Página] - Comandos da Speelo's Toolbox - Páginas 1 a " + (Mathf.Ceil(commandList.Count / pageSize) + (commandList.Count % pageSize == 0 ? 0 : 1)) + " - Exemplo /? 1");
+                Console.instance.Print("Speelo's Toolbox - Feche o console e pressione " + (SkLoader.Load != null && SkLoader.Load.GetComponent<SkMenuController>() != null ? SkLoader.Load.GetComponent<SkMenuController>().ToggleKey.ToString() : "F6") + " para abrir o menu.");
                 return false;
             }
 
@@ -1581,7 +1581,7 @@ namespace SkToolbox
                     }
                     List<string> commands = new List<string>(commandList.Keys);
                     List<string> descriptions = new List<string>(commandList.Values);
-                    PrintOut("Command List Page " + displayPage + " / " + (Mathf.Ceil(commandList.Count / pageSize) + (commandList.Count % pageSize == 0 ? 0 : 1)));
+                    PrintOut("Lista de Comandos Página " + displayPage + " / " + (Mathf.Ceil(commandList.Count / pageSize) + (commandList.Count % pageSize == 0 ? 0 : 1)));
                     for (int x = ((pageSize * displayPage) - pageSize); // This will iterate over all items by page. The ternary on next line allows final page to have correct number of elements
                             x < ((commandList.Count > ((pageSize * (displayPage + 1)) - pageSize)) ? ((pageSize * (displayPage + 1)) - pageSize) : commandList.Count);
                             // Example: Is 35 items > (( 10 * (2 + 1)) - 10)? If it is, then there is another page after this one, and we can select a full page worth of items. Otherwise, use the final menu item as the end so we over get an index exception.
@@ -1593,7 +1593,7 @@ namespace SkToolbox
                 }
                 else
                 {
-                    PrintOut("Type /? # to see the help for that page number. Ex. /? 1", source, false);
+                    PrintOut("Digite /? # para ver a ajuda daquela página. Ex: /? 1", source, false);
                 }
 
                 return true;
@@ -1644,7 +1644,7 @@ namespace SkToolbox
             
             //if (inCommandSpl[0].Equals("/q"))
             //{
-            //    PrintOut("Quitting game...", source | LogTo.DebugConsole);
+            //    PrintOut("Saindo do jogo...", source | LogTo.DebugConsole);
             //    Application.Quit();
             //    return true;
             //}
@@ -1690,7 +1690,7 @@ namespace SkToolbox
 
             //        }
             //    }
-            //    PrintOut("All items repaired!");
+            //    PrintOut("Todos os itens foram reparados!");
             //    return true;
             //}
 
@@ -1705,7 +1705,7 @@ namespace SkToolbox
             //    GameObject tLevel = ZNetScene.instance.GetPrefab("digg_v2");
             //    if (tLevel == null)
             //    {
-            //        PrintOut("Terrain level failed. Report to mod author - terrain level error 1");
+            //        PrintOut("Falha ao nivelar terreno. Reporte ao autor do mod - erro 1 de nivelamento");
             //        return true;
             //    }
             //    float radius = 5f;
@@ -1721,7 +1721,7 @@ namespace SkToolbox
             //    }
             //    TerrainModification.ModifyTerrain(Player.m_localPlayer.transform.position, tLevel, radius);
 
-            //    PrintOut("Terrain levelled!");
+            //    PrintOut("Terreno nivelado!");
             //    return true;
             //}
 
@@ -1740,7 +1740,7 @@ namespace SkToolbox
             //    }
             //    TerrainModification.ResetTerrain(Player.m_localPlayer.transform.position, radius);
 
-            //    PrintOut("Terrain reset!");
+            //    PrintOut("Terreno resetado!");
             //    return true;
             //}
 
@@ -1749,7 +1749,7 @@ namespace SkToolbox
             //    GameObject tLevel = ZNetScene.instance.GetPrefab("raise");
             //    if (tLevel == null)
             //    {
-            //        PrintOut("Terrain raise failed. Report to mod author - terrain raise error 1");
+            //        PrintOut("Falha ao elevar terreno. Reporte ao autor do mod - erro 1 de elevação");
             //        return true;
             //    }
             //    float radius = 5f;
@@ -1776,7 +1776,7 @@ namespace SkToolbox
             //    }
             //    TerrainModification.ModifyTerrain(Player.m_localPlayer.transform.position + (Vector3.up * height), tLevel, radius);
 
-            //    PrintOut("Terrain raised!");
+            //    PrintOut("Terreno elevado!");
             //    return true;
             //}
 
@@ -1785,7 +1785,7 @@ namespace SkToolbox
             //    GameObject tLevel = ZNetScene.instance.GetPrefab("digg_v2");
             //    if (tLevel == null)
             //    {
-            //        PrintOut("Terrain dig failed. Report to mod author - terrain dig error 1");
+            //        PrintOut("Falha ao escavar terreno. Reporte ao autor do mod - erro 1 de escavação");
             //        return true;
             //    }
             //    float radius = 5f;
@@ -1812,14 +1812,14 @@ namespace SkToolbox
             //    }
             //    TerrainModification.ModifyTerrain(Player.m_localPlayer.transform.position - (Vector3.up * height), tLevel, radius);
 
-            //    PrintOut("Terrain dug!");
+            //    PrintOut("Terreno escavado!");
             //    return true;
             //}
 
             //if (inCommandSpl[0].Equals("/resetwind"))
             //{
             //    EnvMan.instance.ResetDebugWind();
-            //    PrintOut("Wind unlocked and under game control.");
+            //    PrintOut("Vento destravado e sob controle do jogo.");
             //}
 
             //if (inCommandSpl[0].Equals("/wind"))
@@ -1833,7 +1833,7 @@ namespace SkToolbox
             //    }
             //    else
             //    {
-            //        PrintOut("Failed to set wind. Check parameters! Ex. /wind 240 5");
+            //        PrintOut("Falha ao definir vento. Verifique os parâmetros! Ex: /wind 240 5");
             //    }
             //}
 
@@ -1853,7 +1853,7 @@ namespace SkToolbox
             //            if (EnvMan.instance != null)
             //            {
             //                EnvMan.instance.m_debugEnv = "";
-            //                PrintOut("Weather unlocked and under game control.");
+            //                PrintOut("Clima destravado e sob controle do jogo.");
             //            }
             //        }
             //        else
@@ -1880,22 +1880,22 @@ namespace SkToolbox
             //                if (EnvMan.instance != null)
             //                {
             //                    EnvMan.instance.m_debugEnv = finalWeatherName;
-            //                    PrintOut("Weather set to: " + EnvMan.instance.m_debugEnv);
+            //                    PrintOut("Clima definido para: " + EnvMan.instance.m_debugEnv);
             //                }
             //                else
             //                {
-            //                    PrintOut("Failed to set weather to '" + finalWeatherName + "'. Can't find environment manager.");
+            //                    PrintOut("Falha ao definir clima para '" + finalWeatherName + "'. Can't find environment manager.");
             //                }
             //            }
             //            else
             //            {
-            //                PrintOut("Failed to set weather to '" + finalWeatherName + "'. Check parameters! Ex. /env, /env -1, /env Misty");
+            //                PrintOut("Falha ao definir clima para '" + finalWeatherName + "'. Check parameters! Ex. /env, /env -1, /env Misty");
             //            }
             //        }
             //    }
             //    else
             //    {
-            //        PrintOut("Failed to set weather. Check parameters! Ex. /env, /env -1, /env Misty");
+            //        PrintOut("Falha ao definir clima. Verifique os parâmetros! Ex: /env, /env -1, /env Misty");
             //    }
             //    return true;
             //}
@@ -1905,7 +1905,7 @@ namespace SkToolbox
             //    flyEnabled = !flyEnabled;
             //    Player.m_debugMode = flyEnabled;
             //    SkUtilities.SetPrivateField(Player.m_localPlayer, "m_debugFly", flyEnabled);
-            //    PrintOut("Fly toggled! (" + flyEnabled.ToString() + ")");
+            //    PrintOut("Voo alternado! (" + flyEnabled.ToString() + ")");
             //    return true;
             //}
 
@@ -1919,14 +1919,14 @@ namespace SkToolbox
             //if (inCommandSpl[0].Equals("/stopevent"))
             //{
             //    RandEventSystem.instance.ResetRandomEvent();
-            //    PrintOut("Event stopped!");
+            //    PrintOut("Evento interrompido!");
             //    return true;
             ////}
 
             //if (inCommandSpl[0].Equals("/revealmap"))
             //{
             //    Minimap.instance.ExploreAll();
-            //    PrintOut("Map revealed!");
+            //    PrintOut("Mapa revelado!");
             //}
 
             //if (inCommandSpl[0].Equals("/whois"))
@@ -1944,7 +1944,7 @@ namespace SkToolbox
             //    {
             //        playerStr = playerStr.Remove(0, 2);
             //    }
-            //    PrintOut("Active Players (" + Player.GetAllPlayers().Count + ") - " + playerStr, source, true);
+            //    PrintOut("Jogadores Ativos (" + Player.GetAllPlayers().Count + ") - " + playerStr, source, true);
             //}
 
             //if (inCommandSpl[0].Equals("/give"))
@@ -1957,7 +1957,7 @@ namespace SkToolbox
             //    int cmdLvl = 1;
             //    if (cmdSplt.Length == 0)
             //    {
-            //        PrintOut("Failed. No item provided. /give [Item] [Qty=1] [Player] [Level=1]");
+            //        PrintOut("Falhou. Nenhum item informado. /give [Item] [Qtd=1] [Jogador] [Nível=1]");
             //    }
             //    if (cmdSplt.Length >= 1) // if they provided an item
             //    {
@@ -2053,14 +2053,14 @@ namespace SkToolbox
 
             //    if (plrObj == null)
             //    {
-            //        PrintOut("Failed. Player does not exist. /give [Item] [Qty=1] [Player] [Level=1]");
+            //        PrintOut("Falhou. Jogador não existe. /give [Item] [Qtd=1] [Jogador] [Nível=1]");
             //        return true;
             //    }
 
             //    GameObject item = ZNetScene.instance.GetPrefab(cmdSplt[0]);
             //    if (item)
             //    {
-            //        PrintOut("Spawning " + cmdQty + " of item " + cmdSplt[0] + "(" + cmdLvl + ") on " + cmdPlr, source, true);
+            //        PrintOut("Gerando " + cmdQty + " do item " + cmdSplt[0] + "(" + cmdLvl + ") on " + cmdPlr, source, true);
 
             //        //for (int x = 0; x < cmdQty; x++)
             //        //{
@@ -2077,14 +2077,14 @@ namespace SkToolbox
             //        }
             //        catch (Exception ex)
             //        {
-            //            PrintOut("Something unexpected failed.");
+            //            PrintOut("Ocorreu uma falha inesperada.");
             //            SkUtilities.Logz(new string[] { "ERR", "/give" }, new string[] { ex.Message, ex.Source }, LogType.Warning);
             //        }
             //        //}
             //    }
             //    else
             //    {
-            //        PrintOut("Failed. Check parameters. /give [Item] [Qty=1] [Player] [Level=1]");
+            //        PrintOut("Falhou. Verifique os parâmetros. /give [Item] [Qtd=1] [Jogador] [Nível=1]");
             //    }
             //    return true;
             //}
@@ -2100,7 +2100,7 @@ namespace SkToolbox
             //if (inCommandSpl[0].Equals("/clearinventory"))
             //{
             //    Player.m_localPlayer.GetInventory().RemoveAll();
-            //    PrintOut("All items removed from inventory.");
+            //    PrintOut("Todos os itens foram removidos do inventário.");
             //    return true;
             //}
 
@@ -2117,7 +2117,7 @@ namespace SkToolbox
             //            }
             //        }
             //    }
-            //    PrintOut("Tombstone sought out! Potentially " + listTraders.Length + " found.");
+            //    PrintOut("Láides buscadas! Potencialmente " + listTraders.Length + " encontrada(s).");
             //    return true;
             //}
 
@@ -2125,14 +2125,14 @@ namespace SkToolbox
             //if (inCommandSpl[0].Equals("/seed"))
             //{
             //    World wrld = SkUtilities.GetPrivateField<World>(WorldGenerator.instance, "m_world");
-            //    PrintOut("Map seed: " + wrld.m_seedName, source, true);
+            //    PrintOut("Semente do mapa: " + wrld.m_seedName, source, true);
             //    return true;
             //}
 
             //if (inCommandSpl[0].Equals("/freecam"))
             //{
             //    GameCamera.instance.ToggleFreeFly();
-            //    PrintOut("Free cam toggled " + GameCamera.InFreeFly().ToString(), source, true);
+            //    PrintOut("Câmera livre alternada: " + GameCamera.InFreeFly().ToString(), source, true);
             //    return true;
             //}
 
@@ -2147,7 +2147,7 @@ namespace SkToolbox
             //                if (pl.GetPlayerName().ToLower().Equals(inCommandSpl[1].ToLower()))
             //                {
             //                    pl.Heal(pl.GetMaxHealth());
-            //                    PrintOut("Player healed: " + pl.GetPlayerName(), source, true);
+            //                    PrintOut("Jogador curado: " + pl.GetPlayerName(), source, true);
             //                }
             //            }
             //        }
@@ -2155,7 +2155,7 @@ namespace SkToolbox
             //    else
             //    {
             //        Player.m_localPlayer.Heal(Player.m_localPlayer.GetMaxHealth(), true);
-            //        PrintOut("Self healed.", source, true);
+            //        PrintOut("Cura própria aplicada.", source, true);
             //    }
 
             //    return true;
@@ -2165,7 +2165,7 @@ namespace SkToolbox
             //{
             //    SkCommandPatcher.InitPatch();
             //    SkCommandPatcher.bBuildAnywhere = !SkCommandPatcher.bBuildAnywhere;
-            //    PrintOut("No build restrictions toggled! (" + SkCommandPatcher.bBuildAnywhere.ToString() + ")");
+            //    PrintOut("Sem restrições de construção alternado! (" + SkCommandPatcher.bBuildAnywhere.ToString() + ")");
             //    return true;
             //}
 
@@ -2174,7 +2174,7 @@ namespace SkToolbox
             //    noCostEnabled = !noCostEnabled;
             //    Player.m_debugMode = noCostEnabled;
             //    SkUtilities.SetPrivateField(Player.m_localPlayer, "m_noPlacementCost", noCostEnabled);
-            //    PrintOut("No build cost/requirements toggled! (" + noCostEnabled.ToString() + ")");
+            //    PrintOut("Construção sem custo/requisitos alternada! (" + noCostEnabled.ToString() + ")");
             //    return true;
             //}
 
@@ -2208,7 +2208,7 @@ namespace SkToolbox
             //{
             //    if (inCommandSpl.Length != 2 || !inCommandSpl[1].Contains(","))
             //    {
-            //        PrintOut("Syntax /tp X,Z");
+            //        PrintOut("Sintaxe: /tp X,Z");
             //        return true;
             //    }
             //    try
@@ -2227,12 +2227,12 @@ namespace SkToolbox
             //        {
             //            Vector3 pos2 = new Vector3(x, y, z);
             //            localPlayer2.TeleportTo(pos2, localPlayer2.transform.rotation, false);
-            //            PrintOut("Teleporting...", source, true);
+            //            PrintOut("Teletransportando...", source, true);
             //        }
             //    }
             //    catch (Exception)
             //    {
-            //        PrintOut("Syntax /tp X,Z");
+            //        PrintOut("Sintaxe: /tp X,Z");
             //    }
 
                 //}
@@ -2295,7 +2295,7 @@ namespace SkToolbox
                 //                if (pl1 != null && pl2 != null)
                 //                {
                 //                    pl2.TeleportTo(pl1.transform.position, pl1.transform.rotation, false);
-                //                    PrintOut("Teleporting...", source, true);
+                //                    PrintOut("Teletransportando...", source, true);
                 //                }
                 //                else
                 //                {
@@ -2331,7 +2331,7 @@ namespace SkToolbox
             //            bDetectRange = 20;
             //        }
             //    }
-            //    PrintOut("Detect enemies toggled! (" + bDetectEnemies.ToString() + ", range: " + bDetectRange + ")");
+            //    PrintOut("Detecção de inimigos alternada! (" + bDetectEnemies.ToString() + ", range: " + bDetectRange + ")");
             //    return true;
             //}
 
@@ -2353,7 +2353,7 @@ namespace SkToolbox
             //        }
             //    }
 
-            //    PrintOut("Cheats toggled! (" + SkCommandPatcher.BCheat.ToString() + ")");
+            //    PrintOut("Trapaças alternadas! (" + SkCommandPatcher.BCheat.ToString() + ")");
             //    return true;
             //}
 
@@ -2361,14 +2361,14 @@ namespace SkToolbox
             //{
             //    SkCommandPatcher.InitPatch();
             //    SkCommandPatcher.BFreeSupport = !SkCommandPatcher.BFreeSupport;
-            //    PrintOut("No build support requirements toggled! (" + SkCommandPatcher.BFreeSupport.ToString() + ")");
+            //    PrintOut("Sem requisitos de suporte de construção alternado! (" + SkCommandPatcher.BFreeSupport.ToString() + ")");
             //    return true;
             //}
 
             //if (inCommandSpl[0].Equals("/coords"))
             //{
             //    bCoords = !bCoords;
-            //    PrintOut("Show coords toggled! (" + bCoords.ToString() + ")");
+            //    PrintOut("Exibição de coordenadas alternada! (" + bCoords.ToString() + ")");
             //    return true;
             //}
 
@@ -2395,14 +2395,14 @@ namespace SkToolbox
             //        Player.m_localPlayer.m_runStaminaDrain = 10f;
             //        Player.m_localPlayer.SetMaxStamina(100f, true);
             //    }
-            //    PrintOut("Infinite stamina toggled! (" + infStamina.ToString() + ")");
+            //    PrintOut("Stamina infinita alternada! (" + infStamina.ToString() + ")");
             //    return true;
             //}
 
             //if (inCommandSpl[0].Equals("/tame"))
             //{
             //    Tameable.TameAllInArea(Player.m_localPlayer.transform.position, 20f);
-            //    PrintOut("Creatures tamed!");
+            //    PrintOut("Criaturas domesticadas!");
             //    return true;
             //}
 
@@ -2421,7 +2421,7 @@ namespace SkToolbox
             //            }
             //            catch (Exception)
             //            {
-            //                PrintOut("Failed to set far interaction distance. Check params. /farinteract 50");
+            //                PrintOut("Falha ao definir distância de interação. Verifique os parâmetros. /farinteract 50");
             //            }
             //        }
             //        else
@@ -2444,7 +2444,7 @@ namespace SkToolbox
             //if (inCommandSpl[0].Equals("/ghost"))
             //{
             //    Player.m_localPlayer.SetGhostMode(!Player.m_localPlayer.InGhostMode());
-            //    PrintOut("Ghost mode toggled! (" + Player.m_localPlayer.InGhostMode().ToString() + ")");
+            //    PrintOut("Modo Fantasma alternado! (" + Player.m_localPlayer.InGhostMode().ToString() + ")");
             //    return true;
             //}
 
@@ -2460,18 +2460,18 @@ namespace SkToolbox
             //        if (num10 < 0f)
             //        {
             //            EnvMan.instance.m_debugTimeOfDay = false;
-            //            PrintOut("Time unlocked and under game control.");
+            //            PrintOut("Hora destravada e sob controle do jogo.");
             //        }
             //        else
             //        {
             //            EnvMan.instance.m_debugTimeOfDay = true;
             //            EnvMan.instance.m_debugTime = Mathf.Clamp01(num10);
-            //            PrintOut("Setting time of day:" + num10);
+            //            PrintOut("Definindo hora do dia: " + num10);
             //        }
             //    }
             //    else
             //    {
-            //        PrintOut("Failed. Syntax /tod [0-1] Ex. /tod 0.5");
+            //        PrintOut("Falhou. Sintaxe: /tod [0-1] Ex: /tod 0.5");
             //    }
 
             //    return true;
@@ -2493,11 +2493,11 @@ namespace SkToolbox
             //            {
             //                int newWeight = int.Parse(inCommandSpl[2]);
             //                Player.m_localPlayer.m_maxCarryWeight = newWeight;
-            //                PrintOut("New carry weight set to: " + newWeight);
+            //                PrintOut("Novo limite de carga definido para: " + newWeight);
             //            }
             //            catch (Exception)
             //            {
-            //                PrintOut("Failed to set new carry weight. Check params.");
+            //                PrintOut("Falha ao definir novo limite de carga. Verifique os parâmetros.");
             //            }
             //            return true;
             //        }
@@ -2516,11 +2516,11 @@ namespace SkToolbox
             //                }
             //                catch (Exception)
             //                {
-            //                    PrintOut("Failed to set skill. Check params / skill name. See /listskills. /set skill [skill] [level]");
+            //                    PrintOut("Falha ao definir habilidade. Verifique os parâmetros / nome. Veja /listskills. /set skill [habilidade] [nível]");
             //                    return true;
             //                }
             //            }
-            //            PrintOut("Failed to set skill. Check params / skill name. See /listskills.  /set skill [skill] [level]");
+            //            PrintOut("Falha ao definir habilidade. Verifique os parâmetros / nome. Veja /listskills. /set skill [habilidade] [nível]");
             //            return true;
             //        }
 
@@ -2532,17 +2532,17 @@ namespace SkToolbox
             //                {
             //                    int cmdRange = int.Parse(inCommandSpl[2]);
             //                    Player.m_localPlayer.m_autoPickupRange = cmdRange;
-            //                    PrintOut("New range set to: " + cmdRange);
+            //                    PrintOut("Novo raio definido para: " + cmdRange);
             //                    return true;
             //                }
             //                catch (Exception)
             //                {
-            //                    PrintOut("Failed to set pickup range. Check params. /set pickup 2");
+            //                    PrintOut("Falha ao definir raio de coleta. Verifique os parâmetros. /set pickup 2");
             //                    return true;
             //                }
             //            }
 
-            //            PrintOut("Failed to set pickup range. Check params.  /set pickup 2");
+            //            PrintOut("Falha ao definir raio de coleta. Verifique os parâmetros. /set pickup 2");
             //            return true;
             //        }
 
@@ -2554,17 +2554,17 @@ namespace SkToolbox
             //                {
             //                    int cmdRange = int.Parse(inCommandSpl[2]);
             //                    Player.m_localPlayer.m_jumpForce = cmdRange;
-            //                    PrintOut("New range set to: " + cmdRange);
+            //                    PrintOut("Novo raio definido para: " + cmdRange);
             //                    return true;
             //                }
             //                catch (Exception)
             //                {
-            //                    PrintOut("Failed to set jump force. Check params. /set jumpforce 10");
+            //                    PrintOut("Falha ao definir força de pulo. Verifique os parâmetros. /set jumpforce 10");
             //                    return true;
             //                }
             //            }
 
-            //            PrintOut("Failed to set jump force. Check params.  /set jumpforce 10");
+            //            PrintOut("Falha ao definir força de pulo. Verifique os parâmetros. /set jumpforce 10");
             //            return true;
             //        }
 
@@ -2576,17 +2576,17 @@ namespace SkToolbox
             //                {
             //                    int cmdRange = int.Parse(inCommandSpl[2]);
             //                    Minimap.instance.m_exploreRadius = cmdRange;
-            //                    PrintOut("New range set to: " + cmdRange);
+            //                    PrintOut("Novo raio definido para: " + cmdRange);
             //                    return true;
             //                }
             //                catch (Exception)
             //                {
-            //                    PrintOut("Failed to set explore radius. Check params. /set exploreradius 100");
+            //                    PrintOut("Falha ao definir raio de exploração. Verifique os parâmetros. /set exploreradius 100");
             //                    return true;
             //                }
             //            }
 
-            //            PrintOut("Failed to set explore radius. Check params.  /set exploreradius 100");
+            //            PrintOut("Falha ao definir raio de exploração. Verifique os parâmetros. /set exploreradius 100");
             //            return true;
             //        }
 
@@ -2619,21 +2619,21 @@ namespace SkToolbox
             //                                Player.m_localPlayer.m_swimSpeed = cmdSpeed;
             //                                break;
             //                        }
-            //                        PrintOut("New " + cmdType + " speed set to: " + cmdSpeed + " (was: " + wasSpeed + ")");
+            //                        PrintOut("New " + cmdType + " definida para: " + cmdSpeed + " (era: " + wasSpeed + ")");
             //                    }
             //                    catch (Exception)
             //                    {
-            //                        PrintOut("Failed to set speed. Check params name. Ex. /set speed crouch 2");
+            //                        PrintOut("Falha ao definir velocidade. Verifique o tipo. Ex: /set speed crouch 2");
             //                        return true;
             //                    }
             //                }
             //                else
             //                {
-            //                    PrintOut("Failed to set speed. Check params name. Ex.  /set speed crouch 2");
+            //                    PrintOut("Falha ao definir velocidade. Verifique o tipo. Ex: /set speed crouch 2");
             //                }
             //                return true;
             //            }
-            //            PrintOut("Failed to set speed. Check params name. Ex.  /set speed crouch 2");
+            //            PrintOut("Falha ao definir velocidade. Verifique o tipo. Ex: /set speed crouch 2");
             //            return true;
             //        }
 
@@ -2645,16 +2645,16 @@ namespace SkToolbox
             //                {
             //                    int diffLvl = int.Parse(inCommandSpl[2]);
             //                    Game.instance.SetForcePlayerDifficulty(diffLvl);
-            //                    PrintOut("Difficulty set to " + diffLvl.ToString());
+            //                    PrintOut("Dificuldade definida para " + diffLvl.ToString());
             //                    return true;
             //                }
             //                catch (Exception)
             //                {
-            //                    PrintOut("Failed to set difficulty. Check params. /set difficulty 5");
+            //                    PrintOut("Falha ao definir dificuldade. Verifique os parâmetros. /set difficulty 5");
             //                    return true;
             //                }
             //            }
-            //            PrintOut("Failed to set difficulty. Check params.  /set difficulty 5");
+            //            PrintOut("Falha ao definir dificuldade. Verifique os parâmetros. /set difficulty 5");
             //            return true;
             //        }
             //    }
@@ -2698,7 +2698,7 @@ namespace SkToolbox
             //        GameObject creature = ZNetScene.instance.GetPrefab(inCommandSpl[1]);
             //        if (creature == null)
             //        {
-            //            PrintOut("Creature not found.");
+            //            PrintOut("Criatura não encontrada.");
             //            return true;
             //        }
 
@@ -2750,7 +2750,7 @@ namespace SkToolbox
             //            }
             //            //this.SpawnEffect(createdCreature);
             //        }
-            //        PrintOut("Spawned - " + inCommandSpl[1]);
+            //        PrintOut("Gerado - " + inCommandSpl[1]);
             //    }
 
             //    return true;
@@ -2769,7 +2769,7 @@ namespace SkToolbox
             //            character.Damage(hitData);
             //        }
             //    }
-            //    PrintOut("Nearby creatures killed! (50m)");
+            //    PrintOut("Criaturas próximas mortas! (50m)");
             //    return true;
             //}
 
@@ -2822,7 +2822,7 @@ namespace SkToolbox
 
             //if (inCommandSpl[0].Equals("/listskills"))
             //{
-            //    string skillList = "Skills found: ";
+            //    string skillList = "Habilidades encontradas: ";
             //    foreach (object obj in Enum.GetValues(typeof(Skills.SkillType)))
             //    {
             //        if (!obj.ToString().Contains("None") && !obj.ToString().Contains("All") && !obj.ToString().Contains("FireMagic") && !obj.ToString().Contains("FrostMagic"))
@@ -2840,18 +2840,18 @@ namespace SkToolbox
         {
             if (args.Length <= 1)
             {
-                PrintOut("Usage: [Creature Name] [Level=1]");
+                PrintOut("Uso: [Nome da Criatura] [Nível=1]");
                 return null;
             }
             if (ZNetScene.instance == null || Player.m_localPlayer == null)
             {
-                PrintOut("Not in a world.");
+                PrintOut("Não está em um mundo.");
                 return null;
             }
             GameObject creature = ZNetScene.instance.GetPrefab(args[1]);
             if (creature == null)
             {
-                PrintOut("Creature not found.");
+                PrintOut("Criatura não encontrada.");
                 return null;
             }
 
@@ -3013,11 +3013,11 @@ namespace SkToolbox
             if (!outStr.Equals(string.Empty))
             {
                 outStr = outStr.Substring(0, outStr.Length - 2);
-                return ("Portals found: " + outStr);
+                return ("Portais encontrados: " + outStr);
             }
             else
             {
-                return ("No portals found.");
+                return ("Nenhum portal encontrado.");
             }
         }
 
@@ -3036,7 +3036,7 @@ namespace SkToolbox
             {
                 if (radius > 30f)
                 {
-                    PrintOut("Radius clamped to 30 max!", LogTo.Console);
+                    PrintOut("Raio limitado ao máximo de 30!", LogTo.Console);
                 }
                 //radius = Mathf.Clamp(radius, 0f, 25f) / 2f + 0.25f;
                 radius = Mathf.Clamp(radius, 0f, 30f);
@@ -3099,7 +3099,7 @@ namespace SkToolbox
             {
                 if (radius > 50)
                 {
-                    PrintOut("Radius clamped to 50 max!", LogTo.Console);
+                    PrintOut("Raio limitado ao máximo de 50!", LogTo.Console);
                 }
                 radius = Mathf.Clamp(radius, 2, 50);
                 Vector3 centerpos = centerLocation;

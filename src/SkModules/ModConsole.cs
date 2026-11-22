@@ -83,9 +83,9 @@ namespace SkToolbox.SkModules
         public void BeginMenu()
         {
             SkMenu consoleOptMenu = new SkMenu();
-            consoleOptMenu.AddItem("Reload Toolbox", new Action(ReloadMenu));
-            consoleOptMenu.AddItem("Unload Toolbox", new Action(UnloadMenu));
-            consoleOptMenu.AddItem("Open Log Folder", new Action(OpenLogFolder));
+            consoleOptMenu.AddItem("Recarregar Toolbox", new Action(ReloadMenu));
+            consoleOptMenu.AddItem("Descarregar Toolbox", new Action(UnloadMenu));
+            consoleOptMenu.AddItem("Abrir Pasta de Logs", new Action(OpenLogFolder));
             //consoleOptMenu.AddItemToggle("Write to File", ref conWriteToFile, new Action(ToggleWriteFile), "Write log output to file?");
             MenuOptions = consoleOptMenu;
         }
@@ -114,27 +114,27 @@ namespace SkToolbox.SkModules
         {
             List<SkMenuController.SkGridItem> grid = new List<SkMenuController.SkGridItem>
             {
-                Cell("Display", "Field of View", "Widen or narrow the camera", SkIcons.First("Torch"), ShowFovForm),
-                Cell("Display", "Frame Limit", "Cap the frame rate", SkIcons.First("Feathers"), ShowFpsForm),
-                Cell("Display", "Detail Distance", "How far away the game keeps full detail", SkIcons.First("Stone", "Wood"), ShowLodForm),
-                Cell("Display", "Snow Buildup", "Add or clear snow on nearby building pieces", SkIcons.First("FreezeGland", "WolfPelt"), ShowSnowForm),
-                Cell("Display", "Free Fly Camera", "Detach the camera for screenshots. Run it again to come back",
-                     SkIcons.First("FeatherCape", "Feathers"), () => SkRun.CmdNotify("freefly", "Toggled the free fly camera.")),
+                Cell("Exibição", "Campo de Visão", "Aumenta ou reduz o campo de visão da câmera", SkIcons.First("Torch"), ShowFovForm),
+                Cell("Exibição", "Limite de FPS", "Limita a taxa de quadros por segundo", SkIcons.First("Feathers"), ShowFpsForm),
+                Cell("Exibição", "Distância de Detalhes", "Define a que distância o jogo mantém os detalhes no máximo", SkIcons.First("Stone", "Wood"), ShowLodForm),
+                Cell("Exibição", "Acúmulo de Neve", "Adiciona ou remove neve nas peças de construção próximas", SkIcons.First("FreezeGland", "WolfPelt"), ShowSnowForm),
+                Cell("Exibição", "Câmera Livre", "Desacopla a câmera para capturar fotos de tela. Execute novamente para retornar",
+                     SkIcons.First("FeatherCape", "Feathers"), () => SkRun.CmdNotify("freefly", "Câmera livre alternada.")),
                 new SkMenuController.SkGridItem
                 {
-                    Name = "Debug Mode",
-                    Display = "Debug Mode",
-                    Tip = "Debug Mode  -  the game's own developer mode, which some other cheats rely on",
+                    Name = "Modo de Depuração",
+                    Display = "Modo de Depuração",
+                    Tip = "Modo de Depuração  -  o modo de desenvolvedor do próprio jogo, exigido por algumas trapaças",
                     Icon = SkIcons.First("Wishbone"),
-                    Section = "Display",
+                    Section = "Exibição",
                     Scope = SkMenuController.SkScope.Client,
-                    OnClick = (string ignored) => SkRun.CmdNotify("debugmode", "Toggled debug mode."),
+                    OnClick = (string ignored) => SkRun.CmdNotify("debugmode", "Modo de depuração alternado."),
                     IsOn = () => Player.m_debugMode,
                 },
 
-                Cell("Toolbox", "Reload Toolbox", "Unload and load the toolbox again", SkIcons.First("Hammer"), ReloadMenu),
-                Cell("Toolbox", "Unload Toolbox", "Shut the toolbox down until the next launch", SkIcons.First("Flint", "Stone"), UnloadMenu),
-                Cell("Toolbox", "Open Log Folder", "Open the folder holding the log files", SkIcons.First("Coins"), OpenLogFolder),
+                Cell("Caixa de Ferramentas", "Recarregar Toolbox", "Descarrega e carrega a caixa de ferramentas novamente", SkIcons.First("Hammer"), ReloadMenu),
+                Cell("Caixa de Ferramentas", "Descarregar Toolbox", "Encerra a caixa de ferramentas até a próxima inicialização", SkIcons.First("Flint", "Stone"), UnloadMenu),
+                Cell("Caixa de Ferramentas", "Abrir Pasta de Logs", "Abre a pasta que contém os arquivos de log", SkIcons.First("Coins"), OpenLogFolder),
             };
 
             SkMC.RequestGridMenu(grid, (List<SkMenuController.SkMenuSlider>)null, "System", showFilter: false);
@@ -144,23 +144,23 @@ namespace SkToolbox.SkModules
         {
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Field of View",
-                Note = "The game's default is 65. Higher shows more of the world and feels faster.",
+                Title = "Campo de Visão",
+                Note = "O padrão do jogo é 65. Valores mais altos mostram mais do mundo e dão sensação de maior velocidade.",
             };
             form.Fields.Add(new SkMenuController.SkFormField
             {
-                Id = "fov", Label = "Degrees", Kind = SkMenuController.SkFieldKind.IntSlider,
+                Id = "fov", Label = "Graus", Kind = SkMenuController.SkFieldKind.IntSlider,
                 Min = 40, Max = 120, IntValue = CurrentFov(),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
                 Label = "Apply",
-                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("fov " + f.Field("fov").IntValue, "Field of view: " + f.Field("fov").IntValue),
+                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("fov " + f.Field("fov").IntValue, "Campo de visão: " + f.Field("fov").IntValue),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Back to 65",
-                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("fov 65", "Field of view back to 65."),
+                Label = "Voltar para 65",
+                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("fov 65", "Campo de visão restaurado para 65."),
             });
             SkMC.ShowForm(form);
         }
@@ -175,23 +175,23 @@ namespace SkToolbox.SkModules
         {
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Frame Limit",
-                Note = "Caps the frame rate. This is saved with the graphics settings, the same as changing it in the options screen.",
+                Title = "Limite de FPS",
+                Note = "Limita a taxa de quadros por segundo. Salvo nas configurações de vídeo, igual a alterar na tela de opções.",
             };
             form.Fields.Add(new SkMenuController.SkFormField
             {
-                Id = "fps", Label = "Frames per second", Kind = SkMenuController.SkFieldKind.IntSlider,
+                Id = "fps", Label = "Quadros por segundo", Kind = SkMenuController.SkFieldKind.IntSlider,
                 Min = 30, Max = 360, IntValue = 60,
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
                 Label = "Apply",
-                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("maxfps " + f.Field("fps").IntValue, "Frame limit: " + f.Field("fps").IntValue),
+                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("maxfps " + f.Field("fps").IntValue, "Limite de FPS: " + f.Field("fps").IntValue),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Uncapped",
-                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("maxfps 0", "Frame limit removed."),
+                Label = "Sem Limite",
+                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("maxfps 0", "Limite de FPS removido."),
             });
             SkMC.ShowForm(form);
         }
@@ -200,18 +200,18 @@ namespace SkToolbox.SkModules
         {
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Detail Distance",
-                Note = "How far away the game keeps full detail. 1 is normal; higher looks better and costs performance.",
+                Title = "Distância de Detalhes",
+                Note = "Define a que distância o jogo mantém os detalhes no máximo. 1 is normal; higher looks better and costs performance.",
             };
             form.Fields.Add(new SkMenuController.SkFormField
             {
-                Id = "bias", Label = "Bias", Kind = SkMenuController.SkFieldKind.IntSlider,
+                Id = "bias", Label = "Nível (Bias)", Kind = SkMenuController.SkFieldKind.IntSlider,
                 Min = 1, Max = 10, IntValue = Mathf.Clamp(Mathf.RoundToInt(QualitySettings.lodBias), 1, 10),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
                 Label = "Apply",
-                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("lodbias " + f.Field("bias").IntValue, "Detail distance: " + f.Field("bias").IntValue),
+                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("lodbias " + f.Field("bias").IntValue, "Distância de detalhes: " + f.Field("bias").IntValue),
             });
             SkMC.ShowForm(form);
         }
@@ -220,30 +220,30 @@ namespace SkToolbox.SkModules
         {
             SkMenuController.SkForm form = new SkMenuController.SkForm
             {
-                Title = "Snow Buildup",
-                Note = "Adds or removes snow on every building piece nearby. Adding only affects pieces that can hold snow.",
+                Title = "Acúmulo de Neve",
+                Note = "Adiciona ou remove neve de todas as peças de construção próximas. Adicionar afeta apenas peças que podem conter neve.",
             };
             form.Fields.Add(new SkMenuController.SkFormField
             {
-                Id = "amount", Label = "Amount %", Kind = SkMenuController.SkFieldKind.IntSlider,
+                Id = "amount", Label = "Quantidade %", Kind = SkMenuController.SkFieldKind.IntSlider,
                 Min = 5, Max = 100, IntValue = 100,
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Add snow",
+                Label = "Adicionar neve",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     SkRun.Cmd("snow " + Fraction(f.Field("amount").IntValue));
-                    SkCommandProcessor.Notify("Added snow to nearby pieces.");
+                    SkCommandProcessor.Notify("Neve adicionada às peças próximas.");
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Clear snow",
+                Label = "Limpar neve",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     SkRun.Cmd("snow -1");
-                    SkCommandProcessor.Notify("Cleared snow from nearby pieces.");
+                    SkCommandProcessor.Notify("Neve removida das peças próximas.");
                 },
             });
             SkMC.ShowForm(form);
@@ -258,19 +258,19 @@ namespace SkToolbox.SkModules
 
         public void OpenLogFolder()
         {
-            SkUtilities.Logz(new string[] { "CMD", "REQ" }, new string[] { "Opening Log Directory" });
+            SkUtilities.Logz(new string[] { "CMD", "REQ" }, new string[] { "Abrindo Diretório de Logs" });
             Application.OpenURL(Application.persistentDataPath);
         }
 
         public void ReloadMenu()
         {
-            SkUtilities.Logz(new string[] { "BASE", "CMD", "REQ" }, new string[] { "UNLOADING CONTROLLERS AND MODULES...", "SKTOOLBOX RELOAD REQUESTED.", });
+            SkUtilities.Logz(new string[] { "BASE", "CMD", "REQ" }, new string[] { "DESCARREGANDO CONTROLADORES E MÓDULOS...", "RECARGA DA CAIXA DE FERRAMENTAS SOLICITADA.", });
             SkLoader.Reload();
         }
 
         public void UnloadMenu()
         {
-            SkUtilities.Logz(new string[] { "BASE", "CMD", "REQ" }, new string[] { "SKTOOLBOX UNLOAD REQUESTED.", "UNLOADING CONTROLLERS AND MODULES..." });
+            SkUtilities.Logz(new string[] { "BASE", "CMD", "REQ" }, new string[] { "DESCARREGAMENTO DA CAIXA DE FERRAMENTAS SOLICITADO.", "DESCARREGANDO CONTROLADORES E MÓDULOS..." });
             if (SkConfigEntry.CScrollable != null & SkConfigEntry.CScrollable.Value && Console.instance != null)
             {
                 Console.instance.m_output.gameObject.SetActive(true);
@@ -624,7 +624,7 @@ namespace SkToolbox.SkModules
                     }
                     catch (Exception Ex)
                     {
-                        SkUtilities.Logz(new string[] { "ERR" }, new string[] { "Failed to load something from the config.", Ex.Message }, LogType.Warning);
+                        SkUtilities.Logz(new string[] { "ERR" }, new string[] { "Falha ao carregar algo da configuração.", Ex.Message }, LogType.Warning);
                     }
 
                     
@@ -645,7 +645,7 @@ namespace SkToolbox.SkModules
                 }
                 catch (Exception Ex)
                 {
-                    SkUtilities.Logz(new string[] { "ERR" }, new string[] { "Failed to set when customizing console style.", Ex.Message }, LogType.Warning);
+                    SkUtilities.Logz(new string[] { "ERR" }, new string[] { "Falha ao definir ao personalizar o estilo do console.", Ex.Message }, LogType.Warning);
                 }
             } else
             {
@@ -669,12 +669,12 @@ namespace SkToolbox.SkModules
             {
                 if (SkCommandProcessor.bDetectEnemies && nearbyCharacters.Count > 0)
                 {
-                    EnemyWindow = GUILayout.Window(39999, rectEnemy, ProcessEnemies, "Enemy Information");
+                    EnemyWindow = GUILayout.Window(39999, rectEnemy, ProcessEnemies, "Informações dos Inimigos");
                 }
                 if (SkCommandProcessor.bCoords)
                 {
                     Vector3 plPos = Player.m_localPlayer.transform.position;
-                    GUI.Label(rectCoords, "Coords: " + Mathf.RoundToInt(plPos.x) + "/" + Mathf.RoundToInt(plPos.z));
+                    GUI.Label(rectCoords, "Coordenadas: " + Mathf.RoundToInt(plPos.x) + "/" + Mathf.RoundToInt(plPos.z));
                 }
             }
                 if (Console.instance != null && global::Console.IsVisible())
@@ -688,12 +688,12 @@ namespace SkToolbox.SkModules
                     };
                     if (SkVersionChecker.VersionCurrent())
                     {
-                        ConsoleOutput = GUILayout.Window(39979, rectConsoleOutput, ProcessConsoleOutput, " Speelo's Toolbox (" + SkVersionChecker.currentVersion + ") by Skrip (DS)", ConsoleOutputStyle);
+                        ConsoleOutput = GUILayout.Window(39979, rectConsoleOutput, ProcessConsoleOutput, " Speelo's Toolbox (" + SkVersionChecker.currentVersion + ") por Skrip (DS)", ConsoleOutputStyle);
                     }
                     else
                     {
                         ConsoleOutput = GUILayout.Window(39979, rectConsoleOutput, ProcessConsoleOutput, " Speelo's Toolbox, based on SkToolbox by Skrip ► " +
-                            "New Version Available on NexusMods!\t► Current: " + SkVersionChecker.currentVersion + " Latest: " + SkVersionChecker.latestVersion, ConsoleOutputStyle);
+                            "New Version Available on NexusMods!\t► Current: " + SkVersionChecker.currentVersion + " Última: " + SkVersionChecker.latestVersion, ConsoleOutputStyle);
                     }
                 }
         }
@@ -766,7 +766,7 @@ namespace SkToolbox.SkModules
             {
                 base.ModuleStatus = SkUtilities.Status.Error;
                 SkUtilities.Logz(new string[] { "ERR" }, new string[] { "Error detected!", Ex.Message, Ex.Source }, LogType.Warning);
-                SkCommandProcessor.PrintOut("An error was detected. You may need to restart your game.", SkCommandProcessor.LogTo.Console);
+                SkCommandProcessor.PrintOut("Um erro foi detectado. Pode ser necessário reiniciar o jogo.", SkCommandProcessor.LogTo.Console);
             }
 
 
@@ -833,7 +833,7 @@ namespace SkToolbox.SkModules
                         {
                             Vector3 targetLoc = hit.point;
                             Player.m_localPlayer.transform.position = targetLoc;
-                            Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Warp!", 0, null);
+                            Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, "Teletransporte!", 0, null);
                         }
                     }
                     catch (Exception)
@@ -891,7 +891,7 @@ namespace SkToolbox.SkModules
                     }
                     if (nearbyCharacters.Count > 0 && SkCommandProcessor.btDetectEnemiesSwitch)
                     {
-                        Player.m_localPlayer.Message(MessageHud.MessageType.Center, "Enemy nearby!", 0, null);
+                        Player.m_localPlayer.Message(MessageHud.MessageType.Center, "Inimigo próximo!", 0, null);
                         SkCommandProcessor.btDetectEnemiesSwitch = false;
                     }
                     else if (nearbyCharacters.Count == 0)
@@ -926,7 +926,7 @@ namespace SkToolbox.SkModules
                 }
                 catch (Exception ex)
                 {
-                    SkUtilities.Logz(new string[] { "CONSOLE", "UNPATCH" }, new string[] { "UnpatchSelf failed: " + ex.Message }, UnityEngine.LogType.Warning);
+                    SkUtilities.Logz(new string[] { "CONSOLE", "UNPATCH" }, new string[] { "Falha no UnpatchSelf: " + ex.Message }, UnityEngine.LogType.Warning);
                 }
                 finally
                 {
@@ -979,7 +979,7 @@ namespace SkToolbox.SkModules
             catch (Exception ex)
             {
                 typedChars.Clear();
-                SkUtilities.Logz(new string[] { "CONTROLLER", "HOTKEY" }, new string[] { "Hotkey failed: " + ex.Message },
+                SkUtilities.Logz(new string[] { "CONTROLLER", "HOTKEY" }, new string[] { "Falha no atalho: " + ex.Message },
                                  LogType.Warning);
             }
         }
@@ -1036,13 +1036,13 @@ namespace SkToolbox.SkModules
                         {
                             // Valheim 1.0: AutoRun re-enabled (the Hearth and Home stub only printed an apology); ProcessCommands is the same entry point HandleChat uses.
                             SkUtilities.Logz(new string[] { "CONTROLLER", "AUTORUN" }, new string[] { "Command List: " + SkConfigEntry.CAutoRunCommand.Value });
-                            SkCommandProcessor.PrintOut("==> AutoRun enabled! Command line: " + SkConfigEntry.CAutoRunCommand.Value, SkCommandProcessor.LogTo.Console);
+                            SkCommandProcessor.PrintOut("==> Execução Automática ativada! Linha de comando: " + SkConfigEntry.CAutoRunCommand.Value, SkCommandProcessor.LogTo.Console);
                             SkCommandProcessor.ProcessCommands(SkConfigEntry.CAutoRunCommand.Value, SkCommandProcessor.LogTo.Console);
                         }
                         catch (Exception)
                         {
-                            SkUtilities.Logz(new string[] { "CONTROLLER" }, new string[] { "AutoRun Failed. Something went wrong. Command line: " + SkConfigEntry.CAutoRunCommand.Value }, LogType.Warning);
-                            SkCommandProcessor.PrintOut("==> AutoRun Failed. Something went wrong. Command line: " + SkConfigEntry.CAutoRunCommand.Value, SkCommandProcessor.LogTo.Console);
+                            SkUtilities.Logz(new string[] { "CONTROLLER" }, new string[] { "Falha na Execução Automática. Algo deu errado. Linha de comando: " + SkConfigEntry.CAutoRunCommand.Value }, LogType.Warning);
+                            SkCommandProcessor.PrintOut("==> Falha na Execução Automática. Algo deu errado. Linha de comando: " + SkConfigEntry.CAutoRunCommand.Value, SkCommandProcessor.LogTo.Console);
                         }
                         finally
                         {
@@ -1099,26 +1099,26 @@ namespace SkToolbox.SkModules
                     if (keyPart.Length != 1)
                     {
                         RejectHotkey(slot, keyPart.Length == 0
-                            ? "has no key before the colon."
+                            ? "não possui uma tecla antes dos dois-pontos."
                             : "the key must be a single character, not \"" + keyPart + "\".");
                         continue;
                     }
                     char key = keyPart[0];
                     if (key < ' ' || key > '~')
                     {
-                        RejectHotkey(slot, "'" + key + "' is not a printable ASCII character.");
+                        RejectHotkey(slot, "'" + key + "' não é um caractere ASCII imprimível.");
                         continue;
                     }
                     if (command.Length == 0)
                     {
-                        RejectHotkey(slot, "has no command after the colon.");
+                        RejectHotkey(slot, "não possui um comando após os dois-pontos.");
                         continue;
                     }
                     if (hotkeys.ContainsKey(key))
                     {
                         // Dictionary.Add would throw here, and all fifteen slots used to share one try block, so
                         // a duplicate quietly discarded every hotkey after it.
-                        RejectHotkey(slot, "'" + key + "' is already bound; this slot is ignored.");
+                        RejectHotkey(slot, "'" + key + "' já está vinculado; este atalho será ignorado.");
                         continue;
                     }
 
@@ -1133,13 +1133,13 @@ namespace SkToolbox.SkModules
             if (hotkeys.Count > 0)
             {
                 SkUtilities.Logz(new string[] { "CONTROLLER", "HOTKEYS" },
-                                 new string[] { hotkeys.Count + " hotkey(s) bound." });
+                                 new string[] { hotkeys.Count + " atalho(s) vinculado(s)." });
             }
         }
 
         private static void RejectHotkey(int slot, string why)
         {
-            string message = "Hotkey " + slot + " ignored: " + why;
+            string message = "Atalho " + slot + " ignorado: " + why;
             SkUtilities.Logz(new string[] { "CONTROLLER", "HOTKEYS" }, new string[] { message }, LogType.Warning);
             SkCommandProcessor.PrintOut("==> " + message, SkCommandProcessor.LogTo.Console);
         }
@@ -1299,7 +1299,7 @@ namespace SkToolbox.SkModules
             }
             catch (Exception Ex)
             {
-                SkCommandProcessor.PrintOut("Something failed while loading command aliases! Check your config file. " + Ex.Message, SkCommandProcessor.LogTo.Console | SkCommandProcessor.LogTo.DebugConsole);
+                SkCommandProcessor.PrintOut("Falha ao carregar apelidos de comandos! Verifique seu arquivo de configuração. " + Ex.Message, SkCommandProcessor.LogTo.Console | SkCommandProcessor.LogTo.DebugConsole);
             }
         }
 
@@ -1336,9 +1336,9 @@ namespace SkToolbox.SkModules
                             }
                             GUILayout.BeginHorizontal();
 
-                            GUILayout.Label("Name: " + toon.GetHoverName());
-                            GUILayout.Label("HP: " + Mathf.RoundToInt(toon.GetHealth()) + "/" + toon.GetMaxHealth()
-                                + " | Level: " + toon.GetLevel()
+                            GUILayout.Label("Nome: " + toon.GetHoverName());
+                            GUILayout.Label("Vida: " + Mathf.RoundToInt(toon.GetHealth()) + "/" + toon.GetMaxHealth()
+                                + " | Nível: " + toon.GetLevel()
                                 + " | Dist: " + Mathf.RoundToInt(toonDist));
 
                             GUILayout.EndHorizontal();

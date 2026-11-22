@@ -6,15 +6,12 @@ using UnityEngine;
 namespace SkToolbox.SkModules
 {
     /// <summary>
-    /// Speelo's Toolbox: the Spawn tab. Every creature in the game as a grid, with sliders for how many and what
-    /// star level, and a toggle to spawn them tamed.
+    /// Speelo's Toolbox: a aba de Invocação/Criaturas. Cada criatura no jogo em uma grade, com controles deslizantes
+    /// para quantidade e nível de estrelas, e um alternador para gerá-las domesticadas.
     /// </summary>
     internal class ModSpawn : SkBaseModule, IModule
     {
-        private const int MaxCount = 20;   // more than this hitches badly when they all wake at once
-        // Level 1 is a plain creature, 2 is one star, 3 is two stars. SetLevel accepts more, and health, damage and
-        // loot all keep scaling, but LevelEffects.SetupLevelVisualization bails out when a creature has no art for
-        // the level, and creatures ship two setups. Above 3 you get an invisible buff, so the slider stops there.
+        private const int MaxCount = 20;   // mais do que isso causa travamentos quando acordam juntas
         private const int MaxLevel = 3;
 
         private int count = 1;
@@ -25,8 +22,7 @@ namespace SkToolbox.SkModules
         private int cachedFor = 0;
 
         /// <summary>
-        /// Creatures whose trophy is not named after the prefab. Everything else is tried as "Trophy" + prefab name,
-        /// and anything with no trophy at all simply shows its name instead of an icon.
+        /// Criaturas cujo troféu não tem o mesmo nome do prefab.
         /// </summary>
         private static readonly Dictionary<string, string> TrophyAliases = new Dictionary<string, string>
         {
@@ -52,10 +48,10 @@ namespace SkToolbox.SkModules
         public void Start()
         {
             BeginMenu();
-            base.Ready(); // Must be called when the module has completed initialization.
+            base.Ready(); // Deve ser chamado quando o módulo concluir a inicialização.
         }
 
-        /// <summary>This tab renders an icon grid rather than a list, so the normal item list stays empty.</summary>
+        /// <summary>Esta aba renderiza uma grade de ícones em vez de uma lista.</summary>
         public void BeginMenu()
         {
             MenuOptions = new SkMenu();
@@ -63,7 +59,7 @@ namespace SkToolbox.SkModules
 
         internal void ShowGrid()
         {
-            // ZNetScene is rebuilt per world load, so rebuild the list when it changes.
+            // ZNetScene é reconstruído ao carregar o mundo, portanto recria a lista quando ele muda.
             int key = ZNetScene.instance != null ? ZNetScene.instance.GetInstanceID() : 0;
             if (cache == null || cache.Count == 0 || cachedFor != key)
             {
@@ -72,7 +68,7 @@ namespace SkToolbox.SkModules
             }
             if (cache.Count == 0)
             {
-                SkCommandProcessor.Notify("Creature list is not available yet. Load into a world first.");
+                SkCommandProcessor.Notify("A lista de criaturas ainda não está disponível. Entre em um mundo primeiro.");
                 return;
             }
 
@@ -80,12 +76,12 @@ namespace SkToolbox.SkModules
             {
                 new SkMenuController.SkMenuSlider
                 {
-                    Label = "How many", Min = 1, Max = MaxCount,
+                    Label = "Quantidade", Min = 1, Max = MaxCount,
                     Get = () => count, Set = (int value) => count = value,
                 },
                 new SkMenuController.SkMenuSlider
                 {
-                    Label = "Level", Min = 1, Max = MaxLevel,
+                    Label = "Nível", Min = 1, Max = MaxLevel,
                     Get = () => level, Set = (int value) => level = value,
                 },
             };
@@ -94,15 +90,15 @@ namespace SkToolbox.SkModules
             {
                 new SkMenuController.SkMenuToggle
                 {
-                    Label = "Spawn tamed",
+                    Label = "Gerar domesticado",
                     Get = () => tamed, Set = (bool value) => tamed = value,
                 },
             };
 
-            SkMC.RequestGridMenu(cache, sliders, "Spawn", showFilter: true, toggles: toggles);
+            SkMC.RequestGridMenu(cache, sliders, "Criaturas", showFilter: true, toggles: toggles);
         }
 
-        /// <summary>Every prefab with a Character component, sorted by its localized name.</summary>
+        /// <summary>Cada prefab com um componente Character, ordenado pelo seu nome localizado.</summary>
         private List<SkMenuController.SkGridItem> BuildCreatures()
         {
             List<SkMenuController.SkGridItem> list = new List<SkMenuController.SkGridItem>();
@@ -143,7 +139,7 @@ namespace SkToolbox.SkModules
                 {
                     Name = prefab.name,
                     Display = display,
-                    Tip = display + "   (" + prefab.name + ")" + (character.m_boss ? "   [boss]" : ""),
+                    Tip = display + "   (" + prefab.name + ")" + (character.m_boss ? "   [chefe]" : ""),
                     Icon = TrophyIcon(prefab.name),
                     Scope = SkMenuController.SkScope.Server,
                     OnClick = Spawn,
@@ -155,7 +151,7 @@ namespace SkToolbox.SkModules
             return list;
         }
 
-        /// <summary>Creatures have no icon of their own, so borrow the trophy's where one exists.</summary>
+        /// <summary>Criaturas não possuem ícone próprio, portanto usam o do troféu quando existe.</summary>
         private static Sprite TrophyIcon(string prefabName)
         {
             string alias;
@@ -170,31 +166,53 @@ namespace SkToolbox.SkModules
             return SkIcons.Item("Trophy" + prefabName);
         }
 
-        /// <summary>Spawns the chosen creature in a small ring in front of the player.</summary>
+        /// <summary>Calcula a posição de geração: usa o ponto onde a câmera livre está apontando se ela estiver ativa.</summary>
+        private static Vector3 GetSpawnOrigin(Player player)
+        {
+            Vector3 defaultOrigin = player.transform.position + player.transform.forward * 2.5f + Vector3.up;
+            if (Camera.main == null) return defaultOrigin;
+
+            float camDist = Vector3.Distance(Camera.main.transform.position, player.transform.position);
+            if (camDist > 6f)
+            {
+                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                RaycastHit[] hits = Physics.RaycastAll(ray, 500f);
+                Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+                foreach (RaycastHit hit in hits)
+                {
+                    if (hit.collider != null && hit.collider.transform.root == player.transform) continue;
+                    return hit.point + Vector3.up * 0.5f;
+                }
+                return Camera.main.transform.position + Camera.main.transform.forward * 10f;
+            }
+            return defaultOrigin;
+        }
+
+        /// <summary>Gera a criatura escolhida na posição do jogador ou para onde a câmera livre está apontando.</summary>
         private void Spawn(string prefabName)
         {
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Nenhum jogador encontrado.");
                 return;
             }
             GameObject prefab = ZNetScene.instance != null ? ZNetScene.instance.GetPrefab(prefabName) : null;
             if (prefab == null)
             {
-                SkCommandProcessor.Notify("Creature not found: " + prefabName);
+                SkCommandProcessor.Notify("Criatura não encontrada: " + prefabName);
                 return;
             }
 
             int wanted = Mathf.Clamp(count, 1, MaxCount);
             int spawned = 0;
-            Vector3 origin = player.transform.position + player.transform.forward * 2.5f + Vector3.up;
+            Vector3 origin = GetSpawnOrigin(player);
 
             for (int i = 0; i < wanted; i++)
             {
                 try
                 {
-                    // Spread them around a ring so they do not all land inside each other.
                     float angle = (wanted <= 1) ? 0f : (360f / wanted) * i;
                     float radius = (wanted <= 1) ? 0f : Mathf.Clamp(wanted * 0.25f, 1f, 4f);
                     Vector3 offset = Quaternion.Euler(0f, angle, 0f) * Vector3.forward * radius;
@@ -213,7 +231,6 @@ namespace SkToolbox.SkModules
                     }
                     if (tamed)
                     {
-                        // MonsterAI.MakeTame sets the AI up as well, which Character.SetTamed alone does not.
                         MonsterAI ai = instance.GetComponent<MonsterAI>();
                         if (ai != null)
                         {
@@ -232,8 +249,8 @@ namespace SkToolbox.SkModules
             }
 
             SkCommandProcessor.Notify(spawned > 0
-                ? "Spawned " + spawned + "x " + prefabName + (level > 1 ? " (level " + level + ")" : "") + (tamed ? ", tamed" : "")
-                : "Could not spawn " + prefabName);
+                ? "Gerado(s) " + spawned + "x " + prefabName + (level > 1 ? " (nível " + level + ")" : "") + (tamed ? ", domesticado" : "")
+                : "Não foi possível gerar " + prefabName);
         }
     }
 }

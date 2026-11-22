@@ -5,9 +5,8 @@ using UnityEngine;
 namespace SkToolbox.SkModules
 {
     /// <summary>
-    /// Speelo's Toolbox: the Give tab. Shows every item in the game as a grid of icons with a search box and a
-    /// quantity slider, and puts the picked item straight into the player's inventory.
-    /// Split out of ModPlayer so it gets its own tab instead of being buried in a submenu.
+    /// Speelo's Toolbox: a aba de entrega de itens. Exibe cada item do jogo em uma grade de ícones com campo de busca
+    /// e controle deslizante de quantidade, colocando o item escolhido diretamente no inventário do jogador.
     /// </summary>
     internal class ModGive : SkBaseModule, IModule
     {
@@ -25,20 +24,19 @@ namespace SkToolbox.SkModules
         public void Start()
         {
             BeginMenu();
-            base.Ready(); // Must be called when the module has completed initialization.
+            base.Ready(); // Deve ser chamado quando o módulo concluir a inicialização.
         }
 
-        /// <summary>This tab renders a grid rather than a list, so the normal item list stays empty.</summary>
+        /// <summary>Esta aba renderiza uma grade em vez de uma lista, portanto a lista normal de itens permanece vazia.</summary>
         public void BeginMenu()
         {
             MenuOptions = new SkMenu();
         }
 
-        /// <summary>Entry point for the tab. Builds the grid once, then shows it.</summary>
+        /// <summary>Ponto de entrada da aba. Constrói a grade uma vez e depois a exibe.</summary>
         internal void ShowGrid()
         {
-            // ObjectDB is rebuilt on every world load, and mods register their items into it, so a cache built
-            // against a previous world would both miss new modded items and hold dead prefab references.
+            // O ObjectDB é reconstruído a cada carregamento de mundo e os mods registram seus itens nele.
             int key = ObjectDB.instance != null ? ObjectDB.instance.GetInstanceID() : 0;
             if (cache == null || cache.Count == 0 || cachedFor != key)
             {
@@ -47,28 +45,27 @@ namespace SkToolbox.SkModules
             }
             if (cache.Count == 0)
             {
-                SkCommandProcessor.Notify("Item list is not available yet. Load into a world first.");
+                SkCommandProcessor.Notify("A lista de itens ainda não está disponível. Entre em um mundo primeiro.");
                 return;
             }
             List<SkMenuController.SkMenuSlider> sliders = new List<SkMenuController.SkMenuSlider>
             {
                 new SkMenuController.SkMenuSlider
                 {
-                    Label = "Quantity", Min = 1, Max = 100,
+                    Label = "Quantidade", Min = 1, Max = 100,
                     Get = () => quantity, Set = (int value) => quantity = value,
                 },
                 new SkMenuController.SkMenuSlider
                 {
-                    // Four is the most any vanilla item upgrades to. Items with a lower ceiling are clamped to
-                    // their own when they are given, rather than being hidden from the slider.
-                    Label = "Level", Min = 1, Max = 4,
+                    // Quatro é o nível máximo de melhoria de qualquer item vanilla.
+                    Label = "Nível", Min = 1, Max = 4,
                     Get = () => level, Set = (int value) => level = value,
                 },
             };
             SkMC.RequestGridMenu(cache, sliders, "Give", showFilter: true);
         }
 
-        /// <summary>Every item prefab that has an ItemDrop, sorted by its display name.</summary>
+        /// <summary>Cada prefab de item que possui um ItemDrop, ordenado pelo nome de exibição.</summary>
         private List<SkMenuController.SkGridItem> BuildItems()
         {
             List<SkMenuController.SkGridItem> list = new List<SkMenuController.SkGridItem>();
@@ -83,7 +80,6 @@ namespace SkToolbox.SkModules
                 {
                     continue;
                 }
-                // ObjectDB holds entries without an ItemDrop; skip them rather than crash on their data.
                 ItemDrop drop = prefab.GetComponent<ItemDrop>();
                 if (drop == null || drop.m_itemData == null || drop.m_itemData.m_shared == null)
                 {
@@ -130,16 +126,14 @@ namespace SkToolbox.SkModules
         }
 
         /// <summary>
-        /// Adds the item to the player's inventory, in stacks the item actually allows.
-        /// Upstream instantiated the prefab on the ground and called SetLevel on a Character component that items
-        /// do not have, so every give threw a swallowed NullReferenceException.
+        /// Adiciona o item ao inventário do jogador nos pilhas (stacks) permitidos pelo item.
         /// </summary>
         private void Give(string prefabName)
         {
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Nenhum jogador encontrado.");
                 return;
             }
 
@@ -147,18 +141,15 @@ namespace SkToolbox.SkModules
             ItemDrop drop = prefab != null ? prefab.GetComponent<ItemDrop>() : null;
             if (drop == null || drop.m_itemData == null || drop.m_itemData.m_shared == null)
             {
-                SkCommandProcessor.Notify("Item not found: " + prefabName);
+                SkCommandProcessor.Notify("Item não encontrado: " + prefabName);
                 return;
             }
 
-            // Not every item upgrades as far as the slider goes; a level 4 request on a one-level item would
-            // otherwise produce an item the game has no stats for.
             int maxQuality = Mathf.Max(1, drop.m_itemData.m_shared.m_maxQuality);
             int quality = Mathf.Clamp(level, 1, maxQuality);
 
             int remaining = Mathf.Max(1, quantity);
             int maxStack = Mathf.Max(1, drop.m_itemData.m_shared.m_maxStackSize);
-            // Matches what the game does when it spawns items: only flag them as cheated when cheat checks are live.
             bool cheated = !PlayerProfile.s_bypassCheatChecks;
             int given = 0;
 
@@ -169,7 +160,7 @@ namespace SkToolbox.SkModules
                     prefabName, take, quality, drop.m_itemData.m_variant, 0L, "", cheated, true);
                 if (added == null)
                 {
-                    break; // no room left
+                    break; // sem espaço restante
                 }
                 given += take;
                 remaining -= take;
@@ -177,14 +168,14 @@ namespace SkToolbox.SkModules
 
             if (given > 0)
             {
-                SkCommandProcessor.Notify("Gave " + given + "x " + prefabName
-                    + (quality > 1 ? " (level " + quality + ")" : "")
-                    + (level > maxQuality ? ", the most this one goes to" : "")
-                    + (remaining > 0 ? " (inventory full)" : ""));
+                SkCommandProcessor.Notify("Entregue " + given + "x " + prefabName
+                    + (quality > 1 ? " (nível " + quality + ")" : "")
+                    + (level > maxQuality ? ", o máximo suportado por este item" : "")
+                    + (remaining > 0 ? " (inventário cheio)" : ""));
             }
             else
             {
-                SkCommandProcessor.Notify("Inventory full, could not give " + prefabName);
+                SkCommandProcessor.Notify("Inventário cheio, não foi possível entregar " + prefabName);
             }
         }
     }

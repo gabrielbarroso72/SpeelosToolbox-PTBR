@@ -7,9 +7,8 @@ using SkScope = SkToolbox.SkMenuController.SkScope;
 namespace SkToolbox.SkModules
 {
     /// <summary>
-    /// Speelo's Toolbox: the World tab. Grouped into sections rather than one flat grid, because the tab now covers
-    /// everything from terraforming to world rules, progression keys, travel, cleanup and server administration.
-    /// Anything that needs a value first opens a form; everything else runs straight away.
+    /// Speelo's Toolbox: a guia Mundo (World). Agrupada em seções para cobrir desde
+    /// terraformagem até regras de mundo, chaves de progressão, viagem, limpeza e administração do servidor.
     /// </summary>
     internal class ModWorld : SkBaseModule, IModule
     {
@@ -93,7 +92,7 @@ namespace SkToolbox.SkModules
         {
             if (!IsWorldHost())
             {
-                SkCommandProcessor.Notify("Only the host or the server can change events.");
+                SkCommandProcessor.Notify("Apenas o anfitrião ou o servidor pode alterar eventos.");
                 return;
             }
             SkRun.CmdNotify(command, done);
@@ -157,7 +156,7 @@ namespace SkToolbox.SkModules
             (SkMenuController.SkForm f) =>
             {
                 SkMenuController.SkFormField box = f.Field("confirm");
-                return (box != null && !box.BoolValue) ? "Switch the confirmation to ON first." : null;
+                return (box != null && !box.BoolValue) ? "Ative a chave de confirmação primeiro." : null;
             };
 
         private static List<string> EnumNames(Type type, params string[] skip)
@@ -181,141 +180,140 @@ namespace SkToolbox.SkModules
         {
             List<SkMenuController.SkGridItem> grid = new List<SkMenuController.SkGridItem>
             {
-                // -------- terrain
-                Cell("Terrain", "Terrain Tools", "Level, raise, dig or undo terrain around you",
+                // -------- terreno
+                Cell("Terreno", "Ferramentas de Terreno", "Nivelar, elevar, escavar ou desfazer alterações no terreno ao seu redor",
                      SkIcons.First("Hoe"), ShowTerrain, SkScope.Server),
-                Cell("Building", "Repair Nearby", "Repair every building piece around you",
+                Cell("Construção", "Reparar Próximos", "Repara todas as peças de construção ao seu redor",
                      SkIcons.First("Hammer"), ShowRepairForm, SkScope.Server),
-                Cell("Building", "Refuel Fires", "Top up every torch, fire and hearth around you",
+                Cell("Construção", "Reabastecer Fogo", "Reabastece tochas, fogueiras e lareiras ao seu redor",
                      SkIcons.First("Resin", "Coal"), ShowRefuelForm, SkScope.Server),
 
-                Cell("Terrain", "Optimize Terrain", "Compact old terrain edits to help performance",
+                Cell("Terreno", "Otimizar Terreno", "Compacta modificações antigas do terreno para melhorar o desempenho",
                      SkIcons.First("PickaxeIron", "PickaxeStone", "PickaxeAntler"), () => Run("/optterrain"), SkScope.Server),
 
-                // -------- time and weather
-                Cell("Time & Weather", "Weather", "Force a weather type, or hand control back to the game",
+                // -------- tempo e clima
+                Cell("Tempo e Clima", "Clima", "Força um tipo de clima ou devolve o controle ao jogo",
                      SkIcons.First("Thunderstone", "Ruby"), ShowWeather, SkScope.Client),
-                Cell("Time & Weather", "Time of Day", "Set and lock the time, or unlock it",
+                Cell("Tempo e Clima", "Hora do Dia", "Define e trava a hora do dia, ou a destrava",
                      SkIcons.First("SurtlingCore", "Coins"), ShowTime, SkScope.Client),
-                Cell("Time & Weather", "Wind", "Set wind direction and strength, or reset it",
+                Cell("Tempo e Clima", "Vento", "Define a direção e intensidade do vento, ou o reseta",
                      SkIcons.First("Feathers"), ShowWind, SkScope.Client),
-                Cell("Time & Weather", "Events", "Start or stop a random event",
+                Cell("Tempo e Clima", "Eventos", "Inicia ou interrompe um evento aleatório",
                      SkIcons.First("TrophyEikthyr", "Wishbone"), ShowEvents, SkScope.HostOnly),
-                Cell("Time & Weather", "Sleep", "Skip straight to the next morning",
-                     SkIcons.First("DeerHide", "LeatherScraps"), () => SkRun.CmdNotify("sleep", "Skipped to morning."), SkScope.Admin),
-                Cell("Time & Weather", "Skip Time", "Jump forward by a number of in-game hours",
+                Cell("Tempo e Clima", "Dormir", "Avança direto para a manhã seguinte",
+                     SkIcons.First("DeerHide", "LeatherScraps"), () => SkRun.CmdNotify("sleep", "Avançou para a manhã."), SkScope.Admin),
+                Cell("Tempo e Clima", "Avançar Tempo", "Avança no tempo por um número de horas do jogo",
                      SkIcons.First("Coins", "Ruby"), ShowSkipTimeForm, SkScope.Admin),
-                Cell("Time & Weather", "Game Speed", "Speed the whole world up or slow it down",
+                Cell("Tempo e Clima", "Velocidade do Jogo", "Acelera ou desacelera todo o mundo do jogo",
                      SkIcons.First("GreydwarfEye", "SurtlingCore"), ShowTimescaleForm, SkScope.Client),
 
-                // -------- rules
-                Cell("Rules", "Difficulty", "Scale enemies as if a set number of players were nearby",
+                // -------- regras
+                Cell("Regras", "Dificuldade", "Ajusta os inimigos como se houvesse uma quantidade definida de jogadores próximos",
                      SkIcons.First("TrophyDeer", "Coins"), ShowDifficultyForm, SkScope.Admin),
-                Toggle("Rules", "No Spawn", "Stop creatures spawning naturally",
+                Toggle("Regras", "Sem Inimigos (No Spawn)", "Impede que criaturas gerem naturalmente",
                        SkIcons.First("TrophyGreydwarf", "GreydwarfEye"),
-                       () => SkRun.CmdNotify("nospawn", "Toggled natural spawning."),
+                       () => SkRun.CmdNotify("nospawn", "Invocação natural alternada."),
                        () => SpawnSystem.m_nospawn, SkScope.Client),
-                Toggle("Rules", "No Map", "Disable the map for this character",
+                Toggle("Regras", "Sem Mapa", "Desativa o mapa para este personagem",
                        SkIcons.First("Chain", "LeatherScraps"),
-                       () => SkRun.CmdNotify("nomap", "Toggled the map."),
+                       () => SkRun.CmdNotify("nomap", "Mapa alternado."),
                        () => ZoneSystem.instance != null && ZoneSystem.instance.GetGlobalKey(GlobalKeys.NoMap), SkScope.Client),
-                Toggle("Rules", "No Portals", "Disable portals for the world",
+                Toggle("Regras", "Sem Portais", "Desativa portais para este mundo",
                        SkIcons.First("SurtlingCore"),
-                       () => SkRun.CmdNotify("noportals", "Toggled portals."),
+                       () => SkRun.CmdNotify("noportals", "Portais alternados."),
                        () => ZoneSystem.instance != null && ZoneSystem.instance.GetGlobalKey(GlobalKeys.NoPortals), SkScope.Server),
-                Cell("Rules", "World Modifier", "Change one world modifier, the same values the world settings screen offers",
+                Cell("Regras", "Modificador do Mundo", "Altera um modificador do mundo, com as mesmas opções da tela de configurações",
                      SkIcons.First("Bronze", "Copper"), ShowWorldModifierForm, SkScope.Admin),
-                Cell("Rules", "World Preset", "Apply a whole difficulty preset, replacing every modifier",
+                Cell("Regras", "Predefinição do Mundo", "Aplica uma predefinição completa de dificuldade, substituindo todos os modificadores",
                      SkIcons.First("Iron", "Bronze"), ShowWorldPresetForm, SkScope.Admin),
 
-                // -------- progression
-                Cell("Progression", "Set Key", "Mark a boss as defeated or set another world key",
+                // -------- progressao
+                Cell("Progressão", "Definir Chave", "Marca um chefe como derrotado ou define outra chave global",
                      SkIcons.First("CryptKey", "Wishbone"), ShowSetKeyForm, SkScope.Admin),
-                Cell("Progression", "Remove Key", "Clear a world key that is currently set",
+                Cell("Progressão", "Remover Chave", "Remove uma chave do mundo ativada",
                      SkIcons.First("Flint", "Stone"), ShowRemoveKeyForm, SkScope.Admin),
-                Cell("Progression", "List Keys", "Show every key set on this world and character",
-                     SkIcons.First("Coins"), () => SkRun.Show("World Keys", "listkeys", "No keys are set."), SkScope.Admin),
-                Cell("Progression", "Reset World Keys", "Put every world modifier back to its default",
+                Cell("Progressão", "Listar Chaves", "Exibe todas as chaves definidas neste mundo e personagem",
+                     SkIcons.First("Coins"), () => SkRun.Show("Chaves do Mundo", "listkeys", "Nenhuma chave definida."), SkScope.Admin),
+                Cell("Progressão", "Redefinir Chaves do Mundo", "Restaura todos os modificadores do mundo para o padrão",
                      SkIcons.First("Ruby"), ShowResetWorldKeysForm, SkScope.Admin),
-                Cell("Progression", "Player Keys", "Add or remove a key on your character rather than the world",
+                Cell("Progressão", "Chaves do Jogador", "Adiciona ou remove uma chave no seu personagem em vez do mundo",
                      SkIcons.First("Amber", "Coins"), ShowPlayerKeyForm, SkScope.Client),
 
-                // -------- travel
-                Cell("Travel", "Go To", "Teleport to a map coordinate",
+                // -------- viagem
+                Cell("Viagem", "Ir Para", "Teleporta para uma coordenada do mapa",
                      SkIcons.First("SurtlingCore", "Thunderstone"), ShowGoToForm, SkScope.HostOnly),
-                Cell("Travel", "Recall Players", "Pull every other player to you",
-                     SkIcons.First("Chain", "LeatherScraps"), () => SkRun.CmdNotify("recall", "Recalled other players."), SkScope.HostOnly),
-                Cell("Travel", "Find", "Ping loaded objects and locations on the map, or teleport to the closest",
+                Cell("Viagem", "Puxar Jogadores", "Puxa todos os outros jogadores para perto de você",
+                     SkIcons.First("Chain", "LeatherScraps"), () => SkRun.CmdNotify("recall", "Jogadores puxados."), SkScope.HostOnly),
+                Cell("Viagem", "Buscar", "Marca objetos e locais carregados no mapa, ou teleporta para o mais próximo",
                      SkIcons.First("Wishbone"), ShowFindForm, SkScope.Client),
-                Cell("Travel", "Find Biome", "Mark a biome on the map, or teleport to it",
+                Cell("Viagem", "Buscar Bioma", "Marca um bioma no mapa, ou teleporta para ele",
                      SkIcons.First("Raspberry", "Blueberries"), ShowFindBiomeForm, SkScope.Client),
-                Cell("Travel", "List Locations", "Show the loaded locations around you",
-                     SkIcons.First("Stone", "Wood"), () => SkRun.Show("Loaded Locations", "printlocations", "No locations are loaded."), SkScope.Client),
-                Cell("Travel", "Reveal Map", "Explore the entire minimap",
+                Cell("Viagem", "Listar Locais", "Exibe os locais carregados ao seu redor",
+                     SkIcons.First("Stone", "Wood"), () => SkRun.Show("Locais Carregados", "printlocations", "Nenhum local carregado."), SkScope.Client),
+                Cell("Viagem", "Revelar Mapa", "Explora o minimapa inteiro",
                      SkIcons.First("Torch"), () => Run("/revealmap"), SkScope.Client),
-                Cell("Travel", "Reveal Around Me", "Explore the map out to a distance you choose, rather than all of it",
+                Cell("Viagem", "Revelar ao Meu Redor", "Explora o mapa até uma distância escolhida, em vez dele todo",
                      SkIcons.First("Coal", "Resin"), ShowRevealForm, SkScope.Client),
-                Cell("Travel", "Reset Map", "Erase map exploration",
+                Cell("Viagem", "Redefinir Mapa", "Apaga a exploração do mapa",
                      SkIcons.First("Coins", "Ruby"), () => Run("/resetmap"), SkScope.Client),
-                Cell("Travel", "List Portals", "Print every portal tag",
+                Cell("Viagem", "Listar Portais", "Imprime todas as tags de portais",
                      SkIcons.First("GreydwarfEye", "SurtlingCore"), () => Run("/portals"), SkScope.Client),
-                Cell("Travel", "Show Seed", "Print the world seed",
+                Cell("Viagem", "Exibir Semente", "Imprime a semente do mundo",
                      SkIcons.First("Barley", "Carrot"), () => Run("/seed"), SkScope.Client),
 
-                // -------- cleanup
-                // killenemycreatures kills creatures and stops there. Its sibling killenemies also sweeps every
-                // SpawnArea in the scene with no distance test, which is why that one lives behind a confirmation.
-                Cell("Cleanup", "Kill Enemies", "Kill every hostile creature nearby. Leaves their nests alone",
-                     SkIcons.First("SwordIron", "SwordBronze", "AxeStone"), () => SkRun.CmdNotify("killenemycreatures", "Killed nearby enemies."), SkScope.Server),
-                Cell("Cleanup", "Kill Enemies & Nests", "Also destroys every creature spawner in every loaded zone, permanently",
+                // -------- limpeza
+                // killenemycreatures elimina criaturas e para por aí. killenemies também varre todas as SpawnArea.
+                Cell("Limpeza", "Eliminar Inimigos", "Elimina todas as criaturas hostis próximas. Mantém os ninhos intocados",
+                     SkIcons.First("SwordIron", "SwordBronze", "AxeStone"), () => SkRun.CmdNotify("killenemycreatures", "Inimigos próximos eliminados."), SkScope.Server),
+                Cell("Limpeza", "Eliminar Inimigos e Ninhos", "Também destrói todos os geradores de criaturas em todas as zonas carregadas, permanentemente",
                      SkIcons.First("PickaxeIron", "SledgeStagbreaker", "Club"), ShowKillSpawnersForm, SkScope.Server),
-                Cell("Cleanup", "Kill Tame", "Kill every tamed creature nearby",
-                     SkIcons.First("Carrot", "Raspberry"), () => SkRun.CmdNotify("killtame", "Killed nearby tame creatures."), SkScope.Server),
-                Cell("Cleanup", "Remove Drops", "Clear dropped items in the area",
+                Cell("Limpeza", "Eliminar Domesticados", "Elimina todas as criaturas domesticadas próximas",
+                     SkIcons.First("Carrot", "Raspberry"), () => SkRun.CmdNotify("killtame", "Criaturas domesticadas próximas eliminadas."), SkScope.Server),
+                Cell("Limpeza", "Remover Itens no Chão", "Limpa os itens caídos no chão na área",
                      SkIcons.First("Wood"), () => Run("/removedrops"), SkScope.Server),
-                Cell("Cleanup", "Remove Fish", "Clear fish in the area",
-                     SkIcons.First("FishRaw", "FishingRod"), () => SkRun.CmdNotify("removefish", "Removed nearby fish."), SkScope.Server),
-                Cell("Cleanup", "Remove Birds", "Clear birds in the area",
-                     SkIcons.First("Feathers"), () => SkRun.CmdNotify("removebirds", "Removed nearby birds."), SkScope.Server),
-                Cell("Cleanup", "Stop Fire", "Put out spreading fire and its smoke",
-                     SkIcons.First("Resin", "Coal"), () => SkRun.CmdNotify("stopfire", "Put out spreading fires."), SkScope.HostOnly),
-                Cell("Cleanup", "Stop Smoke", "Clear lingering smoke",
-                     SkIcons.First("Coal", "Resin"), () => SkRun.CmdNotify("stopsmoke", "Cleared smoke."), SkScope.HostOnly),
-                Cell("Cleanup", "Save World", "Force a save now and restart the save timer",
-                     SkIcons.First("Coins", "Ruby"), () => SkRun.CmdNotify("save", "World saved."), SkScope.Admin),
+                Cell("Limpeza", "Remover Peixes", "Limpa os peixes na área",
+                     SkIcons.First("FishRaw", "FishingRod"), () => SkRun.CmdNotify("removefish", "Pássaros próximos removidos."), SkScope.Server),
+                Cell("Limpeza", "Remover Pássaros", "Limpa os pássaros na área",
+                     SkIcons.First("Feathers"), () => SkRun.CmdNotify("removebirds", "Pássaros próximos removidos."), SkScope.Server),
+                Cell("Limpeza", "Apagar Fogo", "Apaga o fogo e a fumaça se espalhando",
+                     SkIcons.First("Resin", "Coal"), () => SkRun.CmdNotify("stopfire", "Fogo em propagação apagado."), SkScope.HostOnly),
+                Cell("Limpeza", "Apagar Fumaça", "Limpa a fumaça acumulada",
+                     SkIcons.First("Coal", "Resin"), () => SkRun.CmdNotify("stopsmoke", "Fumaça limpa."), SkScope.HostOnly),
+                Cell("Limpeza", "Salvar Mundo", "Força o salvamento do mundo agora",
+                     SkIcons.First("Coins", "Ruby"), () => SkRun.CmdNotify("save", "Mundo salvo."), SkScope.Admin),
 
-                // -------- server
-                Cell("Server", "Kick", "Disconnect a player",
-                     SkIcons.First("Club", "AxeStone"), () => ShowUserForm("Kick Player", "kick", "Kick"), SkScope.Admin),
-                Cell("Server", "Ban", "Ban a player from the world",
-                     SkIcons.First("SledgeStagbreaker", "Club"), () => ShowUserForm("Ban Player", "ban", "Ban"), SkScope.Admin),
-                Cell("Server", "Unban", "Lift a ban by IP or user ID",
+                // -------- servidor
+                Cell("Servidor", "Expulsar (Kick)", "Desconecta um jogador",
+                     SkIcons.First("Club", "AxeStone"), () => ShowUserForm("Expulsar Jogador", "kick", "Expulsar"), SkScope.Admin),
+                Cell("Servidor", "Banir", "Bane um jogador deste mundo",
+                     SkIcons.First("SledgeStagbreaker", "Club"), () => ShowUserForm("Banir Jogador", "ban", "Banir"), SkScope.Admin),
+                Cell("Servidor", "Desbanir", "Remove o banimento por IP ou ID de usuário",
                      SkIcons.First("MeadHealthMinor", "Honey"), ShowUnbanForm, SkScope.Admin),
-                Cell("Server", "Who's Online", "List the players connected right now",
-                     SkIcons.First("Amber", "Coins"), () => SkRun.Show("Players Online", "/whois", "Nobody else is connected."), SkScope.Client),
-                Cell("Server", "Banned List", "Show who is banned",
-                     SkIcons.First("Coins"), () => SkRun.Show("Banned Users", "banned", "Nobody is banned."), SkScope.Admin),
-                Cell("Server", "Ping", "Measure the round trip to the server",
-                     SkIcons.First("Feathers"), () => SkRun.CmdNotify("ping", "Ping sent. The reply prints in the console."), SkScope.Client),
+                Cell("Servidor", "Quem está Online", "Lista os jogadores conectados no momento",
+                     SkIcons.First("Amber", "Coins"), () => SkRun.Show("Jogadores Online", "/whois", "Ninguém mais está conectado."), SkScope.Client),
+                Cell("Servidor", "Lista de Banidos", "Exibe quem está banido",
+                     SkIcons.First("Coins"), () => SkRun.Show("Usuários Banidos", "banned", "Ninguém está banido."), SkScope.Admin),
+                Cell("Servidor", "Ping", "Mede o tempo de resposta até o servidor",
+                     SkIcons.First("Feathers"), () => SkRun.CmdNotify("ping", "Ping enviado. A resposta será exibida no console."), SkScope.Client),
             };
 
-            // Long enough now to be worth searching; the filter keeps the section boxes it matches.
+            // Long o suficiente para valer a busca; o filtro mantém as caixas de seção que combinam.
             SkMC.RequestGridMenu(grid, (List<SkMenuController.SkMenuSlider>)null, "World", showFilter: true);
         }
 
-        // ------------------------------------------------------------------ terrain
+        // ------------------------------------------------------------------ terreno
 
         private void ShowTerrain()
         {
             List<SkMenuController.SkGridItem> grid = new List<SkMenuController.SkGridItem>
             {
-                Cell("Level Terrain", "Flatten to your height, uses Radius", SkIcons.First("Hoe"),
+                Cell("Nivelar Terreno", "Nivela o terreno na sua altura, usando o Raio", SkIcons.First("Hoe"),
                      () => Run("/tl " + radius), SkScope.Server),
-                Cell("Raise Terrain", "Raise ground, uses Radius and Height", SkIcons.First("Stone", "Wood"),
+                Cell("Elevar Terreno", "Eleva o terreno, usando o Raio e a Altura", SkIcons.First("Stone", "Wood"),
                      () => Run("/tr " + radius + " " + height), SkScope.Server),
-                Cell("Dig Terrain", "Lower ground, uses Radius and Height", SkIcons.First("PickaxeIron", "PickaxeStone", "PickaxeAntler"),
+                Cell("Escavar Terreno", "Escava o terreno, usando o Raio e a Altura", SkIcons.First("PickaxeIron", "PickaxeStone", "PickaxeAntler"),
                      () => Run("/td " + radius + " " + height), SkScope.Server),
-                Cell("Undo Terrain Edits", "Revert player terraforming back to the original ground, uses Radius", SkIcons.First("Cultivator"),
+                Cell("Desfazer Edições de Terreno", "Reverte as modificações de terreno para o estado original, usando o Raio", SkIcons.First("Cultivator"),
                      () => Run("/tu " + radius), SkScope.Server),
             };
 
@@ -323,12 +321,12 @@ namespace SkToolbox.SkModules
             {
                 new SkMenuController.SkMenuSlider
                 {
-                    Label = "Radius", Min = 1, Max = 50,
+                    Label = "Raio", Min = 1, Max = 50,
                     Get = () => radius, Set = (int value) => radius = value,
                 },
                 new SkMenuController.SkMenuSlider
                 {
-                    Label = "Height", Min = 1, Max = 8,
+                    Label = "Altura", Min = 1, Max = 8,
                     Get = () => height, Set = (int value) => height = value,
                 },
             };
@@ -336,12 +334,12 @@ namespace SkToolbox.SkModules
             SkMC.RequestGridMenu(grid, sliders, "Terrain", showFilter: false);
         }
 
-        // ------------------------------------------------------------------ weather
+        // ------------------------------------------------------------------ clima
 
         private void ShowWeather()
         {
             SkMenu menu = new SkMenu();
-            menu.AddItem("Let the game control weather", new Action(() => Run("/env -1")), "Stop forcing a weather type");
+            menu.AddItem("Deixar o jogo controlar o clima", new Action(() => Run("/env -1")), "Para de forçar um tipo de clima");
 
             if (EnvMan.instance != null && EnvMan.instance.m_environments != null)
             {
@@ -357,36 +355,36 @@ namespace SkToolbox.SkModules
                 foreach (string name in names)
                 {
                     string captured = name;
-                    menu.AddItem(captured, new Action(() => Run("/env " + captured)), "Force weather: " + captured);
+                    menu.AddItem(captured, new Action(() => Run("/env " + captured)), "Forçar clima: " + captured);
                 }
             }
             else
             {
-                menu.AddItem("Weather list unavailable", new Action(() => { }), "Load into a world first");
+                menu.AddItem("Lista de climas indisponível", new Action(() => { }), "Entre em um mundo primeiro");
             }
 
             SkMC.RequestSubMenu(menu.FlushMenu());
         }
 
-        // ------------------------------------------------------------------ time of day
+        // ------------------------------------------------------------------ hora do dia
 
         private void ShowTime()
         {
             List<SkMenuController.SkGridItem> grid = new List<SkMenuController.SkGridItem>
             {
-                Cell("Apply Time", "Set and lock the time to the slider value", SkIcons.First("SurtlingCore"),
+                Cell("Aplicar Hora", "Define e trava a hora no valor do controle deslizante", SkIcons.First("SurtlingCore"),
                      () => Run("/tod " + Fraction(timeOfDay)), SkScope.Client),
-                Cell("Morning", "Set the time to sunrise", SkIcons.First("Coins"), () => Run("/tod 0.25"), SkScope.Client),
-                Cell("Noon", "Set the time to midday", SkIcons.First("Ruby"), () => Run("/tod 0.5"), SkScope.Client),
-                Cell("Night", "Set the time to midnight", SkIcons.First("Thunderstone"), () => Run("/tod 0"), SkScope.Client),
-                Cell("Unlock Time", "Hand the clock back to the game", SkIcons.First("Feathers"), () => Run("/tod -1"), SkScope.Client),
+                Cell("Manhã", "Define a hora para o nascer do sol", SkIcons.First("Coins"), () => Run("/tod 0.25"), SkScope.Client),
+                Cell("Meio-dia", "Define a hora para o meio-dia", SkIcons.First("Ruby"), () => Run("/tod 0.5"), SkScope.Client),
+                Cell("Noite", "Define a hora para a meia-noite", SkIcons.First("Thunderstone"), () => Run("/tod 0"), SkScope.Client),
+                Cell("Destravar Hora", "Devolve o controle do relógio ao jogo", SkIcons.First("Feathers"), () => Run("/tod -1"), SkScope.Client),
             };
 
             List<SkMenuController.SkMenuSlider> sliders = new List<SkMenuController.SkMenuSlider>
             {
                 new SkMenuController.SkMenuSlider
                 {
-                    Label = "Time %", Min = 0, Max = 100,
+                    Label = "Hora %", Min = 0, Max = 100,
                     Get = () => timeOfDay, Set = (int value) => timeOfDay = value,
                 },
             };
@@ -397,16 +395,16 @@ namespace SkToolbox.SkModules
         /// <summary>The game counts time in seconds, so the slider is converted using this world's day length.</summary>
         private void ShowSkipTimeForm()
         {
-            SkMenuController.SkForm form = NewForm("Skip Time", "Jumps the clock forward. Everything that depends on time moves with it, including crops, food and raids.");
-            form.Fields.Add(Slider("hours", "In-game hours", 1, 72, 12));
+            SkMenuController.SkForm form = NewForm("Avançar Tempo", "Avança o relógio do jogo. Tudo o que depende do tempo avança junto, incluindo plantações, comidas e invasões.");
+            form.Fields.Add(Slider("hours", "Horas do jogo", 1, 72, 12));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Skip",
+                Label = "Avançar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     long dayLength = EnvMan.instance != null ? EnvMan.instance.m_dayLengthSec : 1200L;
                     int seconds = Mathf.RoundToInt(f.Field("hours").IntValue * (dayLength / 24f));
-                    SkRun.CmdNotify("skiptime " + seconds, "Skipped " + f.Field("hours").IntValue + " hours.");
+                    SkRun.CmdNotify("skiptime " + seconds, "Avançou " + f.Field("hours").IntValue + " horas.");
                 },
             });
             SkMC.ShowForm(form);
@@ -414,50 +412,50 @@ namespace SkToolbox.SkModules
 
         private void ShowTimescaleForm()
         {
-            SkMenuController.SkForm form = NewForm("Game Speed", "Changes how fast the whole world runs. 100% is normal.");
-            form.Fields.Add(Slider("speed", "Speed %", 25, 500, 100));
+            SkMenuController.SkForm form = NewForm("Velocidade do Jogo", "Altera a velocidade de execução do mundo. 100% é o normal.");
+            form.Fields.Add(Slider("speed", "Velocidade %", 25, 500, 100));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Apply",
+                Label = "Aplicar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     SkRun.Cmd("timescale " + Fraction(f.Field("speed").IntValue) + " 1");
-                    SkCommandProcessor.Notify("Game speed: " + f.Field("speed").IntValue + "%");
+                    SkCommandProcessor.Notify("Velocidade do jogo: " + f.Field("speed").IntValue + "%");
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Back to normal",
+                Label = "Voltar ao normal",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     SkRun.Cmd("timescale 1 1");
-                    SkCommandProcessor.Notify("Game speed back to normal.");
+                    SkCommandProcessor.Notify("Velocidade do jogo voltou ao normal.");
                 },
             });
             SkMC.ShowForm(form);
         }
 
-        // ------------------------------------------------------------------ wind
+        // ------------------------------------------------------------------ vento
 
         private void ShowWind()
         {
             List<SkMenuController.SkGridItem> grid = new List<SkMenuController.SkGridItem>
             {
-                Cell("Apply Wind", "Set wind to the slider values", SkIcons.First("Feathers"),
+                Cell("Aplicar Vento", "Define o vento para os valores do controle deslizante", SkIcons.First("Feathers"),
                      () => Run("/wind " + windAngle + " " + Fraction(windIntensity)), SkScope.Client),
-                Cell("Reset Wind", "Hand the wind back to the game", SkIcons.First("Thunderstone"), () => Run("/resetwind"), SkScope.Client),
+                Cell("Resetar Vento", "Devolve o controle do vento ao jogo", SkIcons.First("Thunderstone"), () => Run("/resetwind"), SkScope.Client),
             };
 
             List<SkMenuController.SkMenuSlider> sliders = new List<SkMenuController.SkMenuSlider>
             {
                 new SkMenuController.SkMenuSlider
                 {
-                    Label = "Angle", Min = 0, Max = 360,
+                    Label = "Ângulo", Min = 0, Max = 360,
                     Get = () => windAngle, Set = (int value) => windAngle = value,
                 },
                 new SkMenuController.SkMenuSlider
                 {
-                    Label = "Strength %", Min = 0, Max = 100,
+                    Label = "Intensidade %", Min = 0, Max = 100,
                     Get = () => windIntensity, Set = (int value) => windIntensity = value,
                 },
             };
@@ -465,18 +463,13 @@ namespace SkToolbox.SkModules
             SkMC.RequestGridMenu(grid, sliders, "Wind", showFilter: false);
         }
 
-        // ------------------------------------------------------------------ events
+        // ------------------------------------------------------------------ eventos
 
-        /// <summary>
-        /// The raids. Each one is a named entry on RandEventSystem with its own spawn table, so the list comes from
-        /// the game rather than being hard-coded, and mods that add events show up here too. Starting a raid runs
-        /// the game's "event" command; the commands themselves are onlyServer, which RunEvent explains.
-        /// </summary>
         private void ShowEvents()
         {
             if (RandEventSystem.instance == null || RandEventSystem.instance.m_events == null)
             {
-                SkCommandProcessor.Notify("Event list is not available yet. Load into a world first.");
+                SkCommandProcessor.Notify("A lista de eventos ainda não está disponível. Entre em um mundo primeiro.");
                 return;
             }
 
@@ -490,39 +483,38 @@ namespace SkToolbox.SkModules
             }
             if (names.Count == 0)
             {
-                SkCommandProcessor.Notify("This world has no events registered.");
+                SkCommandProcessor.Notify("Este mundo não possui eventos registrados.");
                 return;
             }
             SortPairs(names, labels);
 
-            SkMenuController.SkForm form = NewForm("Events", IsWorldHost()
-                ? "Raids spawn around you and run for a set time. Starting one replaces whatever is already running."
-                : "Only the host or the server can change events, so these will be refused while you are a client.");
-            form.Fields.Add(Choice("event", "Event", names, labels, 220));
+            SkMenuController.SkForm form = NewForm("Eventos", IsWorldHost()
+                ? "Invasões surgem ao seu redor e duram um tempo definido. Iniciar uma substitui qualquer evento em andamento."
+                : "Apenas o anfitrião ou servidor pode alterar eventos. Estas opções serão recusadas se você for um cliente.");
+            form.Fields.Add(Choice("event", "Evento", names, labels, 220));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Start event",
+                Label = "Iniciar evento",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string name = f.Field("event").SelectedOption;
                     if (string.IsNullOrEmpty(name)) return;
-                    RunEvent("event " + name, "Started event: " + name);
+                    RunEvent("event " + name, "Evento iniciado: " + name);
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Random",
-                Run = (SkMenuController.SkForm f) => RunEvent("randomevent", "Started a random event."),
+                Label = "Aleatório",
+                Run = (SkMenuController.SkForm f) => RunEvent("randomevent", "Evento aleatório iniciado."),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Stop current",
-                Run = (SkMenuController.SkForm f) => RunEvent("stopevent", "Stopped the current event."),
+                Label = "Interromper atual",
+                Run = (SkMenuController.SkForm f) => RunEvent("stopevent", "Evento atual interrompido."),
             });
             SkMC.ShowForm(form);
         }
 
-        /// <summary>The banner the game shows when a raid starts, which reads better than the internal name.</summary>
         private static string EventBlurb(RandomEvent randomEvent)
         {
             try
@@ -542,7 +534,6 @@ namespace SkToolbox.SkModules
             return "";
         }
 
-        /// <summary>Sorts a value list and its label list together, so the two stay lined up.</summary>
         private static void SortPairs(List<string> values, List<string> labels)
         {
             int[] order = new int[values.Count];
@@ -562,50 +553,40 @@ namespace SkToolbox.SkModules
             labels.AddRange(sortedLabels);
         }
 
-        /// <summary>
-        /// The game's killenemies runs a FindObjectsByType&lt;SpawnArea&gt; sweep with no distance check, so it wipes out
-        /// every greydwarf nest and draugr pile in every loaded zone, for everyone, with no way back. That is a long
-        /// way from what a button called "kill nearby enemies" implies, so it asks first.
-        /// </summary>
         private void ShowKillSpawnersForm()
         {
-            SkMenuController.SkForm form = NewForm("Kill Enemies & Nests",
-                "Spawners do not regenerate. Everyone on this world loses them, and the only way back is a world with those zones never loaded.");
-            form.Warning = "This DESTROYS every creature spawner in every loaded zone.";
-            form.Fields.Add(ConfirmBox("Destroy the spawners too"));
+            SkMenuController.SkForm form = NewForm("Eliminar Inimigos e Ninhos",
+                "Geradores não regeneram. Todos neste mundo os perderão, e a única forma de recuperar é usando um mundo onde essas zonas nunca foram carregadas.");
+            form.Warning = "Isso DESTRÓI todos os geradores de criaturas em todas as zonas carregadas.";
+            form.Fields.Add(ConfirmBox("Destruir os geradores também"));
             form.Validate = ConfirmRequired;
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Kill and destroy",
-                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("killenemies", "Killed nearby enemies and their spawners."),
+                Label = "Eliminar e destruir",
+                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("killenemies", "Inimigos e geradores próximos eliminados."),
             });
             SkMC.ShowForm(form);
         }
 
-        /// <summary>
-        /// Repairs every building piece in range. WearNTear.Repair refuses a piece that is already whole and
-        /// rate-limits itself to once a second per piece, so the count reported is genuinely what needed work.
-        /// The repair goes out as an RPC to whoever owns the piece, so it works on someone else's build too.
-        /// </summary>
         private void ShowRepairForm()
         {
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Nenhum jogador encontrado.");
                 return;
             }
 
-            SkMenuController.SkForm form = NewForm("Repair Nearby",
-                "Repairs worn and damaged building pieces around you. Pieces that are already whole are left alone.");
-            form.Fields.Add(Slider("radius", "Radius", 5, 100, 30));
+            SkMenuController.SkForm form = NewForm("Reparar Próximos",
+                "Repara estruturas desgastadas e danificadas ao seu redor. Peças intactas são ignoradas.");
+            form.Fields.Add(Slider("radius", "Raio", 5, 100, 30));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Repair",
+                Label = "Reparar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     Player lp = Player.m_localPlayer;
-                    if (lp == null) { SkCommandProcessor.Notify("No player yet."); return; }
+                    if (lp == null) { SkCommandProcessor.Notify("Nenhum jogador encontrado."); return; }
 
                     float radius = f.Field("radius").IntValue;
                     Vector3 origin = lp.transform.position;
@@ -626,42 +607,33 @@ namespace SkToolbox.SkModules
                     }
 
                     SkCommandProcessor.Notify(repaired > 0
-                        ? "Repaired " + repaired + " pieces."
-                        : "Nothing nearby needed repairing.");
+                        ? "Reparou " + repaired + " peças."
+                        : "Nada próximo precisava de reparos.");
                 },
             });
             SkMC.ShowForm(form);
         }
 
-        /// <summary>
-        /// Fills every fireplace in range to its own maximum, whatever fuel it burns - resin for torches, wood for
-        /// hearths and bonfires.
-        ///
-        /// Calls Fireplace.SetFuel rather than the setfuel command for three reasons: setfuel has no radius and
-        /// hits every fireplace in the world, it sets a flat number so it would drain a bonfire while filling a
-        /// torch, and it is admin-gated so a client on someone else's server is refused. SetFuel clamps to each
-        /// piece's own maximum and RPCs the owner, so it works on other people's fires too.
-        /// </summary>
         private void ShowRefuelForm()
         {
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Nenhum jogador encontrado.");
                 return;
             }
 
-            SkMenuController.SkForm form = NewForm("Refuel Fires",
-                "Tops up torches, fires, hearths and bonfires around you, each to its own maximum. Ones already full are left alone.");
-            form.Fields.Add(Slider("radius", "Radius", 5, 100, 30));
+            SkMenuController.SkForm form = NewForm("Reabastecer Fogo",
+                "Reabastece tochas, fogueiras e lareiras ao seu redor até o máximo. As que já estão cheias são mantidas.");
+            form.Fields.Add(Slider("radius", "Raio", 5, 100, 30));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Fill nearby",
+                Label = "Reabastecer próximos",
                 Run = (SkMenuController.SkForm f) => Refuel(f.Field("radius").IntValue, true),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Put out",
+                Label = "Apagar",
                 Run = (SkMenuController.SkForm f) => Refuel(f.Field("radius").IntValue, false),
             });
             SkMC.ShowForm(form);
@@ -670,7 +642,7 @@ namespace SkToolbox.SkModules
         private static void Refuel(float radius, bool fill)
         {
             Player lp = Player.m_localPlayer;
-            if (lp == null) { SkCommandProcessor.Notify("No player yet."); return; }
+            if (lp == null) { SkCommandProcessor.Notify("Nenhum jogador encontrado."); return; }
 
             Vector3 origin = lp.transform.position;
             int changed = 0;
@@ -682,8 +654,6 @@ namespace SkToolbox.SkModules
                 if (Vector3.Distance(fire.transform.position, origin) > radius) continue;
                 try
                 {
-                    // Reading the current level keeps the count honest: SetFuel quietly does nothing when the
-                    // value already matches, so counting every fire in range would overstate it.
                     ZNetView view = SkUtilities.GetPrivateField<ZNetView>(fire, "m_nview");
                     if (view == null || !view.IsValid()) continue;
                     float now = view.GetZDO().GetFloat(ZDOVars.s_fuel);
@@ -699,41 +669,34 @@ namespace SkToolbox.SkModules
 
             if (changed > 0)
             {
-                SkCommandProcessor.Notify((fill ? "Filled " : "Put out ") + changed + " nearby.");
+                SkCommandProcessor.Notify((fill ? "Reabasteceu " : "Apagou ") + changed + " próximos.");
             }
             else
             {
-                SkCommandProcessor.Notify(fill ? "Nothing nearby needed fuel." : "Nothing nearby was lit.");
+                SkCommandProcessor.Notify(fill ? "Nada próximo precisava de combustível." : "Nada próximo estava aceso.");
             }
         }
 
-        /// <summary>
-        /// Uncovers the map around the player out to a chosen distance, for anyone who wants the fog gone locally
-        /// without handing themselves the whole world.
-        ///
-        /// Minimap does the work in a private Explore(Vector3, float), so it comes in by reflection. The explicit
-        /// signature matters: Explore is overloaded, and the other one takes two ints.
-        /// </summary>
         private static System.Reflection.MethodInfo exploreAround;
 
         private void ShowRevealForm()
         {
             if (Player.m_localPlayer == null || Minimap.instance == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Nenhum jogador encontrado.");
                 return;
             }
 
-            SkMenuController.SkForm form = NewForm("Reveal Around Me",
-                "Uncovers the map out to this distance from where you are standing. The whole world is about 10000 across, so a few hundred is a comfortable walk.");
-            form.Fields.Add(Slider("radius", "Distance", 50, 3000, 500));
+            SkMenuController.SkForm form = NewForm("Revelar ao Meu Redor",
+                "Revela o mapa até esta distância a partir de onde você está. O mundo inteiro tem cerca de 10000m de extensão, então algumas centenas é uma boa distância.");
+            form.Fields.Add(Slider("radius", "Distância", 50, 3000, 500));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Reveal",
+                Label = "Revelar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     Player lp = Player.m_localPlayer;
-                    if (lp == null || Minimap.instance == null) { SkCommandProcessor.Notify("No player yet."); return; }
+                    if (lp == null || Minimap.instance == null) { SkCommandProcessor.Notify("Nenhum jogador encontrado."); return; }
 
                     if (exploreAround == null)
                     {
@@ -746,43 +709,43 @@ namespace SkToolbox.SkModules
                     }
                     if (exploreAround == null)
                     {
-                        SkCommandProcessor.Notify("This build of the game does not expose a partial map reveal.");
+                        SkCommandProcessor.Notify("Esta versão do jogo não suporta revelação parcial de mapa.");
                         return;
                     }
 
                     int radius = f.Field("radius").IntValue;
                     exploreAround.Invoke(Minimap.instance, new object[] { lp.transform.position, (float)radius });
-                    SkCommandProcessor.Notify("Revealed the map within " + radius + "m.");
+                    SkCommandProcessor.Notify("Mapa revelado dentro de " + radius + "m.");
                 },
             });
             SkMC.ShowForm(form);
         }
 
-        // ------------------------------------------------------------------ rules
+        // ------------------------------------------------------------------ regras
 
         private void ShowDifficultyForm()
         {
-            SkMenuController.SkForm form = NewForm("Force Difficulty",
-                "Scales enemy health and damage as if this many players were nearby. 0 hands it back to the game.");
-            form.Fields.Add(Slider("players", "Players", 0, 10, 1));
+            SkMenuController.SkForm form = NewForm("Forçar Dificuldade",
+                "Ajusta a vida e dano dos inimigos como se houvesse essa quantidade de jogadores próximos. 0 devolve o controle ao jogo.");
+            form.Fields.Add(Slider("players", "Jogadores", 0, 10, 1));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Apply",
+                Label = "Aplicar",
                 Run = (SkMenuController.SkForm f) =>
-                    SkRun.CmdNotify("players " + f.Field("players").IntValue, "Difficulty set."),
+                    SkRun.CmdNotify("players " + f.Field("players").IntValue, "Dificuldade definida."),
             });
             SkMC.ShowForm(form);
         }
 
         private void ShowWorldModifierForm()
         {
-            SkMenuController.SkForm form = NewForm("World Modifier",
-                "The same settings the world options screen offers. They apply to everyone on this world.");
-            form.Fields.Add(Choice("modifier", "Modifier", EnumNames(typeof(WorldModifiers), "Default"), null, 120));
-            form.Fields.Add(Choice("value", "Value", EnumNames(typeof(WorldModifierOption)), null, 120));
+            SkMenuController.SkForm form = NewForm("Modificador do Mundo",
+                "As mesmas opções fornecidas na tela de configurações do mundo. Afetam a todos neste mundo.");
+            form.Fields.Add(Choice("modifier", "Modificador", EnumNames(typeof(WorldModifiers), "Default"), null, 120));
+            form.Fields.Add(Choice("value", "Valor", EnumNames(typeof(WorldModifierOption)), null, 120));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Apply",
+                Label = "Aplicar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string modifier = f.Field("modifier").SelectedOption;
@@ -797,31 +760,27 @@ namespace SkToolbox.SkModules
 
         private void ShowWorldPresetForm()
         {
-            SkMenuController.SkForm form = NewForm("World Preset",
-                "Replaces every world modifier with the preset's values. Anything you set by hand is lost.");
-            form.Fields.Add(Choice("preset", "Preset", EnumNames(typeof(WorldPresets), "Custom"), null, 150));
-            form.Fields.Add(ConfirmBox("Replace all current modifiers"));
+            SkMenuController.SkForm form = NewForm("Predefinição do Mundo",
+                "Substitui todos os modificadores do mundo pelos valores da predefinição. Ajustes manuais anteriores serão perdidos.");
+            form.Fields.Add(Choice("preset", "Predefinição", EnumNames(typeof(WorldPresets), "Custom"), null, 150));
+            form.Fields.Add(ConfirmBox("Substituir todos os modificadores atuais"));
             form.Validate = ConfirmRequired;
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Apply preset",
+                Label = "Aplicar predefinição",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string preset = f.Field("preset").SelectedOption;
                     if (string.IsNullOrEmpty(preset)) return;
                     SkRun.Cmd("setworldpreset " + preset);
-                    SkCommandProcessor.Notify("World preset: " + preset);
+                    SkCommandProcessor.Notify("Predefinição do mundo: " + preset);
                 },
             });
             SkMC.ShowForm(form);
         }
 
-        // ------------------------------------------------------------------ progression keys
+        // ------------------------------------------------------------------ chaves de progressao
 
-        /// <summary>
-        /// Every key the game knows about. The enum covers world modifiers and the five original boss keys; later
-        /// bosses carry theirs on the prefab instead (Character.m_defeatSetGlobalKey), so those are collected too.
-        /// </summary>
         private static List<string> KnownKeys()
         {
             List<string> keys = EnumNames(typeof(GlobalKeys), "NonServerOption", "Count", "Preset");
@@ -843,7 +802,7 @@ namespace SkToolbox.SkModules
         {
             if (ZoneSystem.instance == null)
             {
-                SkCommandProcessor.Notify("Load into a world first.");
+                SkCommandProcessor.Notify("Entre em um mundo primeiro.");
                 return;
             }
 
@@ -853,22 +812,22 @@ namespace SkToolbox.SkModules
             {
                 bool already = false;
                 try { already = ZoneSystem.instance.GetGlobalKey(key); } catch (Exception) { }
-                labels.Add(already ? key + "     <color=#7CFC00>already set</color>" : key);
+                labels.Add(already ? key + "     <color=#7CFC00>já definida</color>" : key);
             }
 
-            SkMenuController.SkForm form = NewForm("Set World Key",
-                "Boss keys unlock crafting and change what spawns. This is the whole world, for everyone on it.");
-            form.Fields.Add(Choice("key", "Key", keys, labels, 200));
-            form.Fields.Add(ConfirmBox("Change this world for everyone"));
+            SkMenuController.SkForm form = NewForm("Definir Chave do Mundo",
+                "Chaves de chefes desbloqueiam criação e alteram inimigos gerados. Isso afeta o mundo inteiro para todos.");
+            form.Fields.Add(Choice("key", "Chave", keys, labels, 200));
+            form.Fields.Add(ConfirmBox("Alterar este mundo para todos"));
             form.Validate = ConfirmRequired;
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Set key",
+                Label = "Definir chave",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string key = f.Field("key").SelectedOption;
                     if (string.IsNullOrEmpty(key)) return;
-                    SkRun.CmdNotify("setkey " + key, "Set key: " + key);
+                    SkRun.CmdNotify("setkey " + key, "Chave definida: " + key);
                 },
             });
             SkMC.ShowForm(form);
@@ -879,20 +838,20 @@ namespace SkToolbox.SkModules
             List<string> keys = ZoneSystem.instance != null ? ZoneSystem.instance.GetGlobalKeys() : null;
             if (keys == null || keys.Count == 0)
             {
-                SkCommandProcessor.Notify("No world keys are set.");
+                SkCommandProcessor.Notify("Nenhuma chave do mundo está definida.");
                 return;
             }
 
-            SkMenuController.SkForm form = NewForm("Remove World Key", "Only keys currently set on this world are listed.");
-            form.Fields.Add(Choice("key", "Key", keys, null, 220));
+            SkMenuController.SkForm form = NewForm("Remover Chave do Mundo", "Apenas as chaves ativadas neste mundo estão listadas.");
+            form.Fields.Add(Choice("key", "Chave", keys, null, 220));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Remove key",
+                Label = "Remover chave",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string key = f.Field("key").SelectedOption;
                     if (string.IsNullOrEmpty(key)) return;
-                    SkRun.CmdNotify("removekey " + key, "Removed key: " + key);
+                    SkRun.CmdNotify("removekey " + key, "Chave removida: " + key);
                 },
             });
             SkMC.ShowForm(form);
@@ -900,14 +859,14 @@ namespace SkToolbox.SkModules
 
         private void ShowResetWorldKeysForm()
         {
-            SkMenuController.SkForm form = NewForm("Reset World Keys",
-                "Puts every world modifier back to its default. Boss progress set through the world keys goes with it.");
-            form.Fields.Add(ConfirmBox("Reset the world modifiers"));
+            SkMenuController.SkForm form = NewForm("Redefinir Chaves do Mundo",
+                "Restaura todos os modificadores do mundo para o padrão. O progresso de chefes associado será redefinido.");
+            form.Fields.Add(ConfirmBox("Redefinir os modificadores do mundo"));
             form.Validate = ConfirmRequired;
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Reset",
-                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("resetworldkeys", "World keys reset."),
+                Label = "Redefinir",
+                Run = (SkMenuController.SkForm f) => SkRun.CmdNotify("resetworldkeys", "Chaves do mundo redefinidas.")
             });
             SkMC.ShowForm(form);
         }
@@ -917,7 +876,7 @@ namespace SkToolbox.SkModules
             Player player = Player.m_localPlayer;
             if (player == null)
             {
-                SkCommandProcessor.Notify("No player yet.");
+                SkCommandProcessor.Notify("Nenhum jogador encontrado.");
                 return;
             }
 
@@ -935,36 +894,36 @@ namespace SkToolbox.SkModules
             foreach (string key in keys)
             {
                 bool has = owned != null && owned.Contains(key);
-                labels.Add(has ? key + "     <color=#7CFC00>on your character</color>" : key);
+                labels.Add(has ? key + "     <color=#7CFC00>no seu personagem</color>" : key);
             }
 
-            SkMenuController.SkForm form = NewForm("Player Keys",
-                "Keys stored on your character rather than the world. They are saved with the character.");
-            form.Fields.Add(Choice("key", "Key", keys, labels, 220));
+            SkMenuController.SkForm form = NewForm("Chaves do Jogador",
+                "Chaves armazenadas no seu personagem em vez do mundo. Elas são salvas no arquivo do personagem.");
+            form.Fields.Add(Choice("key", "Chave", keys, labels, 220));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Add to player",
+                Label = "Adicionar ao jogador",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string key = f.Field("key").SelectedOption;
                     if (string.IsNullOrEmpty(key)) return;
-                    SkRun.CmdNotify("setkeyplayer " + key, "Added player key: " + key);
+                    SkRun.CmdNotify("setkeyplayer " + key, "Chave do jogador adicionada: " + key);
                 },
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Remove from player",
+                Label = "Remover do jogador",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string key = f.Field("key").SelectedOption;
                     if (string.IsNullOrEmpty(key)) return;
-                    SkRun.CmdNotify("removekeyplayer " + key, "Removed player key: " + key);
+                    SkRun.CmdNotify("removekeyplayer " + key, "Chave do jogador removida: " + key);
                 },
             });
             SkMC.ShowForm(form);
         }
 
-        // ------------------------------------------------------------------ travel
+        // ------------------------------------------------------------------ viagem
 
         private void ShowGoToForm()
         {
@@ -976,24 +935,24 @@ namespace SkToolbox.SkModules
                 z = Mathf.RoundToInt(player.transform.position.z).ToString(System.Globalization.CultureInfo.InvariantCulture);
             }
 
-            SkMenuController.SkForm form = NewForm("Go To", "Map coordinates, the same pair the position readout shows. Starts on where you are now.");
+            SkMenuController.SkForm form = NewForm("Ir Para", "Coordenadas do mapa, o mesmo par exibido na leitura de posição. Inicia na sua localização atual.");
             form.Fields.Add(TextBox("x", "X", x));
             form.Fields.Add(TextBox("z", "Z", z));
             form.Validate = (SkMenuController.SkForm f) =>
             {
                 int ignored;
-                if (!int.TryParse((f.Field("x").TextValue ?? "").Trim(), out ignored)) return "X has to be a whole number.";
-                if (!int.TryParse((f.Field("z").TextValue ?? "").Trim(), out ignored)) return "Z has to be a whole number.";
+                if (!int.TryParse((f.Field("x").TextValue ?? "").Trim(), out ignored)) return "X precisa ser um número inteiro.";
+                if (!int.TryParse((f.Field("z").TextValue ?? "").Trim(), out ignored)) return "Z precisa ser um número inteiro.";
                 return null;
             };
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Teleport",
+                Label = "Teleportar",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string target = (f.Field("x").TextValue ?? "").Trim() + " " + (f.Field("z").TextValue ?? "").Trim();
                     SkRun.Cmd("goto " + target);
-                    SkCommandProcessor.Notify("Teleporting to " + target);
+                    SkCommandProcessor.Notify("Teleportando para " + target);
                 },
             });
             SkMC.ShowForm(form);
@@ -1001,49 +960,48 @@ namespace SkToolbox.SkModules
 
         private void ShowFindForm()
         {
-            SkMenuController.SkForm form = NewForm("Find",
-                "Searches loaded objects and known locations by name. Pinging marks them on the map; teleporting takes you to the closest.");
-            form.Fields.Add(TextBox("text", "Search for", ""));
-            form.Fields.Add(Slider("pings", "Most pins to place", 1, 20, 1));
+            SkMenuController.SkForm form = NewForm("Buscar",
+                "Busca objetos e locais conhecidos pelo nome. Pinar marca no mapa; teleportar leva você para o mais próximo.");
+            form.Fields.Add(TextBox("text", "Buscar por", ""));
+            form.Fields.Add(Slider("pings", "Máximo de marcações", 1, 20, 1));
             form.Validate = (SkMenuController.SkForm f) =>
-                string.IsNullOrEmpty((f.Field("text").TextValue ?? "").Trim()) ? "Type something to search for." : null;
+                string.IsNullOrEmpty((f.Field("text").TextValue ?? "").Trim()) ? "Digite algo para buscar." : null;
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Pin on map",
+                Label = "Marcar no mapa",
                 Run = (SkMenuController.SkForm f) =>
-                    SkRun.CmdNotify("find " + (f.Field("text").TextValue ?? "").Trim() + " " + f.Field("pings").IntValue, "Searched the map."),
+                    SkRun.CmdNotify("find " + (f.Field("text").TextValue ?? "").Trim() + " " + f.Field("pings").IntValue, "Mapa pesquisado."),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Teleport to closest",
+                Label = "Teleportar para o mais próximo",
                 Run = (SkMenuController.SkForm f) =>
-                    SkRun.CmdNotify("findtp " + (f.Field("text").TextValue ?? "").Trim(), "Looking for the closest match."),
+                    SkRun.CmdNotify("findtp " + (f.Field("text").TextValue ?? "").Trim(), "Buscando a correspondência mais próxima."),
             });
             SkMC.ShowForm(form);
         }
 
         private void ShowFindBiomeForm()
         {
-            SkMenuController.SkForm form = NewForm("Find Biome", "Marks every sector of that biome on the map, or takes you to the closest one.");
-            form.Fields.Add(Choice("biome", "Biome", EnumNames(typeof(Heightmap.Biome), "None", "All", "Land"), null, 180));
+            SkMenuController.SkForm form = NewForm("Buscar Bioma", "Marca cada setor desse bioma no mapa, ou leva você ao mais próximo.");
+            form.Fields.Add(Choice("biome", "Bioma", EnumNames(typeof(Heightmap.Biome), "None", "All", "Land"), null, 180));
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Pin on map",
+                Label = "Marcar no mapa",
                 Run = (SkMenuController.SkForm f) =>
-                    SkRun.CmdNotify("findbiome " + f.Field("biome").SelectedOption, "Marked that biome."),
+                    SkRun.CmdNotify("findbiome " + f.Field("biome").SelectedOption, "Bioma marcado."),
             });
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Teleport there",
+                Label = "Teleportar até lá",
                 Run = (SkMenuController.SkForm f) =>
-                    SkRun.CmdNotify("findbiometp " + f.Field("biome").SelectedOption, "Looking for that biome."),
+                    SkRun.CmdNotify("findbiometp " + f.Field("biome").SelectedOption, "Buscando esse bioma."),
             });
             SkMC.ShowForm(form);
         }
 
-        // ------------------------------------------------------------------ server
+        // ------------------------------------------------------------------ servidor
 
-        /// <summary>Names of everyone else connected, for the kick and ban pickers.</summary>
         private static List<string> ConnectedPlayers()
         {
             List<string> names = new List<string>();
@@ -1060,23 +1018,22 @@ namespace SkToolbox.SkModules
             return names;
         }
 
-        /// <summary>Kick and ban differ only in the command they send, so they share one form.</summary>
         private void ShowUserForm(string title, string command, string actionLabel)
         {
             List<string> players = ConnectedPlayers();
             SkMenuController.SkForm form = NewForm(title, players.Count > 0
-                ? "Pick someone who is connected, or type a name, IP or user ID instead."
-                : "Nobody else is connected. Type a name, IP or user ID.");
+                ? "Escolha alguém conectado ou digite um nome, IP ou ID de usuário."
+                : "Ninguém mais está conectado. Digite um nome, IP ou ID de usuário.");
 
             if (players.Count > 0)
             {
-                form.Fields.Add(Choice("peer", "Connected players", players, null, 130));
+                form.Fields.Add(Choice("peer", "Jogadores conectados", players, null, 130));
             }
-            form.Fields.Add(TextBox("name", "Or type a name / IP / user ID", ""));
-            form.Fields.Add(ConfirmBox(actionLabel + " this player"));
+            form.Fields.Add(TextBox("name", "Ou digite nome / IP / ID de usuário", ""));
+            form.Fields.Add(ConfirmBox(actionLabel + " este jogador"));
             form.Validate = (SkMenuController.SkForm f) =>
             {
-                if (string.IsNullOrEmpty(UserTarget(f))) return "Pick a player or type a name.";
+                if (string.IsNullOrEmpty(UserTarget(f))) return "Escolha um jogador ou digite um nome.";
                 return ConfirmRequired(f);
             };
             form.Actions.Add(new SkMenuController.SkFormAction
@@ -1091,7 +1048,6 @@ namespace SkToolbox.SkModules
             SkMC.ShowForm(form);
         }
 
-        /// <summary>A typed name wins over the picker, so an offline player can still be named.</summary>
         private static string UserTarget(SkMenuController.SkForm form)
         {
             SkMenuController.SkFormField typed = form.Field("name");
@@ -1103,17 +1059,17 @@ namespace SkToolbox.SkModules
 
         private void ShowUnbanForm()
         {
-            SkMenuController.SkForm form = NewForm("Unban", "Lifts a ban. The banned list shows what to type here.");
-            form.Fields.Add(TextBox("name", "IP or user ID", ""));
+            SkMenuController.SkForm form = NewForm("Desbanir", "Remove um banimento. A lista de banidos mostra o que digitar aqui.");
+            form.Fields.Add(TextBox("name", "IP ou ID de usuário", ""));
             form.Validate = (SkMenuController.SkForm f) =>
-                string.IsNullOrEmpty((f.Field("name").TextValue ?? "").Trim()) ? "Type an IP or user ID." : null;
+                string.IsNullOrEmpty((f.Field("name").TextValue ?? "").Trim()) ? "Digite um IP ou ID de usuário." : null;
             form.Actions.Add(new SkMenuController.SkFormAction
             {
-                Label = "Unban",
+                Label = "Desbanir",
                 Run = (SkMenuController.SkForm f) =>
                 {
                     string target = (f.Field("name").TextValue ?? "").Trim();
-                    SkRun.CmdNotify("unban " + target, "Unbanned " + target);
+                    SkRun.CmdNotify("unban " + target, "Desbanido " + target);
                 },
             });
             SkMC.ShowForm(form);
